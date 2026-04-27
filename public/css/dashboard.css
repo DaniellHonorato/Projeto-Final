@@ -1,0 +1,254 @@
+/* ══════════════════════════════════════════════════════════════
+   Painel — CaminhoNinja
+   Cores: Naruto (#FB7D02), Haikyuu (#ffffff), Clover (#5c0410)
+   ══════════════════════════════════════════════════════════════ */
+
+:root {
+    --fundo-principal: #0f0f11;
+    --fundo-cartao: #1c1c21;
+    --texto-claro: #f8fafc;
+    --texto-secundario: #94a3b8;
+    --laranja-naruto: #FB7D02;
+    --laranja-hover: #ff9933;
+    --branco-haikyuu: #ffffff;
+    --vermelho-clover: #5c0410;
+    --vermelho-clover-claro: #8b1a2b;
+    --vermelho-clover-brilho: #a82035;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: var(--fundo-principal);
+    color: var(--texto-claro);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* ── Cabeçalho ──────────────────────────────────────────────── */
+header {
+    background: rgba(15, 15, 17, 0.85);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 8%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.logo h1 {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--texto-claro);
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.logo h1:hover {
+    opacity: 0.8;
+}
+
+.logo h1 span {
+    color: var(--laranja-naruto);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+    align-items: center;
+}
+
+nav a {
+    color: var(--texto-secundario);
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--texto-claro);
+}
+
+/* ── Área principal ─────────────────────────────────────────── */
+.conteudo-painel {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 5% 60px;
+}
+
+/* ── Boas-vindas ────────────────────────────────────────────── */
+.secao-boas-vindas {
+    margin-bottom: 35px;
+}
+
+.secao-boas-vindas h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--texto-claro);
+}
+
+.secao-boas-vindas h2 span {
+    color: var(--laranja-naruto);
+    font-weight: 700;
+}
+
+.secao-boas-vindas p {
+    color: var(--texto-secundario);
+    font-size: 0.95rem;
+    margin-top: 4px;
+}
+
+/* ── Cartões de indicadores ─────────────────────────────────── */
+.grade-indicadores {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    margin-bottom: 35px;
+}
+
+.cartao-indicador {
+    background-color: var(--fundo-cartao);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+
+
+.cartao-indicador .rotulo {
+    font-size: 0.85rem;
+    color: var(--texto-secundario);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: 600;
+}
+
+.cartao-indicador .valor {
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.cartao-indicador .descricao {
+    font-size: 0.82rem;
+    color: var(--texto-secundario);
+}
+
+/* Variantes de cores por anime */
+.cartao-indicador.naruto {
+    border-top: 3px solid var(--laranja-naruto);
+}
+
+.cartao-indicador.naruto .valor {
+    color: var(--laranja-naruto);
+}
+
+.cartao-indicador.clover {
+    border-top: 3px solid var(--vermelho-clover-brilho);
+}
+
+.cartao-indicador.clover .valor {
+    color: var(--vermelho-clover-brilho);
+}
+
+.cartao-indicador.haikyuu {
+    border-top: 3px solid var(--branco-haikyuu);
+}
+
+.cartao-indicador.haikyuu .valor {
+    color: var(--branco-haikyuu);
+}
+
+/* ── Gráficos ───────────────────────────────────────────────── */
+.grade-graficos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
+    gap: 24px;
+    margin-bottom: 35px;
+}
+
+.grade-graficos {
+    grid-template-columns: 1fr 1fr;
+}
+
+.cartao-grafico {
+    background-color: var(--fundo-cartao);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    padding: 28px;
+}
+
+.cartao-grafico h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--texto-secundario);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+}
+
+.area-grafico {
+    position: relative;
+    width: 100%;
+    max-height: 350px;
+}
+
+/* ── Botão Sair ─────────────────────────────────────────────── */
+.area-acoes {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 10px;
+}
+
+.botao-sair {
+    padding: 12px 28px;
+    background-color: rgba(92, 4, 16, 0.2);
+    color: var(--vermelho-clover-brilho);
+    border: 1px solid rgba(92, 4, 16, 0.4);
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.botao-sair:hover {
+    background-color: var(--vermelho-clover);
+    color: var(--branco-haikyuu);
+}
+
+/* ── Responsivo ─────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    header {
+        padding: 16px 5%;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .grade-graficos,
+    .grade-graficos.dois-graficos {
+        grid-template-columns: 1fr;
+    }
+
+    .secao-boas-vindas h2 {
+        font-size: 1.4rem;
+    }
+}

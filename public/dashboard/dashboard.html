@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>CaminhoNinja | Painel</title>
+
+  <script src="../js/sessao.js"></script>
+
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="icon" href="../assets/icon/favicon2.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+</head>
+
+<body onload="validarSessao(); carregarPainel()">
+
+  <!-- Cabeçalho -->
+  <header>
+    <div class="logo">
+      <a href="../index.html">
+        <h1>Caminho<span>Ninja</span></h1>
+      </a>
+    </div>
+    <nav>
+      <ul id="nav-list">
+        <li><a href="../index.html">Início</a></li>
+        <li><a href="#">Painel</a></li>
+      </ul>
+    </nav>
+  </header>
+
+
+  <div class="conteudo-painel">
+
+
+    <div class="secao-boas-vindas">
+      <h2>Olá, <span id="b_usuario">Ninja</span>!</h2>
+      <p>Aqui estão os dados da comunidade CaminhoNinja.</p>
+    </div>
+
+
+    <div class="grade-indicadores">
+      <div class="cartao-indicador naruto">
+        <span class="rotulo">Já assistiram anime</span>
+        <span class="valor" id="indicador_viram">—</span>
+        <span class="descricao">Ninjas que já entraram no mundo dos animes</span>
+      </div>
+
+      <div class="cartao-indicador clover">
+        <span class="rotulo">Nunca assistiram</span>
+        <span class="valor" id="indicador_nao_viram">—</span>
+        <span class="descricao">Ninjas prontos para descobrir esse universo</span>
+      </div>
+
+      <div class="cartao-indicador haikyuu">
+        <span class="rotulo">Total de ninjas</span>
+        <span class="valor" id="indicador_total">—</span>
+        <span class="descricao">Todos os cadastrados na vila</span>
+      </div>
+    </div>
+
+
+    <div class="grade-graficos">
+      <div class="cartao-grafico">
+        <h3>Proporção — Já assistiu anime?</h3>
+        <div class="area-grafico">
+          <canvas id="grafico_pizza"></canvas>
+        </div>
+      </div>
+      <div class="cartao-grafico">
+        <h3>Crescimento da indústria de anime no mundo (em bilhões US$)</h3>
+        <div class="area-grafico">
+          <canvas id="grafico_crescimento"></canvas>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="area-acoes">
+      <button class="botao-sair" onclick="limparSessao()">Sair da Vila</button>
+    </div>
+  </div>
+
+  <script>
+
+    var qtdViram = 0;
+    var qtdNaoViram = 0;
+    var qtdTotal = 0;
+
+    function carregarPainel() {
+      buscarViram();
+      buscarNaoViram();
+      buscarTotal();
+      obterDadosGrafico();
+    }
+
+    function buscarViram() {
+      fetch("/usuarios/kpi-animes")
+        .then(function (resposta) {
+          if (resposta.ok) return resposta.json();
+          return [];
+        })
+        .then(function (json) {
+          if (json.length > 0) qtdViram = json[0].qtdUsuarios;
+          document.getElementById("indicador_viram").innerText = qtdViram;
+          tentarMontarGraficos();
+        })
+        .catch(function (erro) {
+          console.error("Erro ao buscar quem viu anime:", erro);
+          document.getElementById("indicador_viram").innerText = "Erro";
+        });
+    }
+
+    function buscarNaoViram() {
+      fetch("/usuarios/kpi-sem-anime")
+        .then(function (resposta) {
+          if (resposta.ok) return resposta.json();
+          return [];
+        })
+        .then(function (json) {
+          if (json.length > 0) qtdNaoViram = json[0].qtdUsuarios;
+          document.getElementById("indicador_nao_viram").innerText = qtdNaoViram;
+          tentarMontarGraficos();
+        })
+        .catch(function (erro) {
+          console.error("Erro ao buscar quem não viu anime:", erro);
+          document.getElementById("indicador_nao_viram").innerText = "Erro";
+        });
+    }
+
+    function buscarTotal() {
+      fetch("/usuarios/kpi-total")
+        .then(function (resposta) {
+          if (resposta.ok) return resposta.json();
+          return [];
+        })
+        .then(function (json) {
+          if (json.length > 0) qtdTotal = json[0].qtdUsuarios;
+          document.getElementById("indicador_total").innerText = qtdTotal;
+        })
+        .catch(function (erro) {
+          console.error("Erro ao buscar total:", erro);
+          document.getElementById("indicador_total").innerText = "Erro";
+        });
+    }
+
+    var dadosProntos = 0;
+    function tentarMontarGraficos() {
+      dadosProntos++;
+      if (dadosProntos >= 2) {
+        montarGraficoPizza();
+      }
+    }
+
+    function montarGraficoPizza() {
+      var ctx = document.getElementById("grafico_pizza").getContext("2d");
+
+      new Chart(ctx, {
+        type: "doughnut",
+        data: {
+          labels: ["Já assistiram", "Nunca assistiram"],
+          datasets: [{
+            data: [qtdViram, qtdNaoViram],
+            backgroundColor: ["#FB7D02", "#5c0410"],
+            borderColor: ["#FB7D02", "#5c0410"],
+            borderWidth: 2,
+            hoverOffset: 8
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+            legend: {
+              position: "bottom",
+              labels: {
+                color: "#94a3b8",
+                font: { family: "Poppins", size: 13 },
+                padding: 20
+              }
+            }
+          }
+        }
+      });
+    }
+
+
+
+    function obterDadosGrafico() {
+      fetch(`/medidas/ultimas`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+          response.json().then(function (resposta) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+            plotarGrafico(resposta);
+          });
+        } else {
+          console.error('Nenhum dado encontrado ou erro na API');
+        }
+      })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+      });
+    }
+
+    function plotarGrafico(resposta) {
+      console.log('iniciando plotagem do gráfico...');
+
+      let labels = [];
+      let dados = {
+        labels: labels,
+        datasets: [{
+          label: "Receita global (bilhões US$)",
+          data: [],
+          fill: false,
+          borderColor: "#FB7D02",
+          borderWidth: 3,
+          pointBackgroundColor: "#ffffff",
+          pointBorderColor: "#FB7D02",
+          pointBorderWidth: 2,
+          pointRadius: 5,
+          pointHoverRadius: 7,
+          tension: 0.3
+        }]
+      };
+
+      for (i = 0; i < resposta.length; i++) {
+        var registro = resposta[i];
+        labels.push(registro.momento_grafico);
+        dados.datasets[0].data.push(registro.receita);
+      }
+
+      const config = {
+        type: 'line',
+        data: dados,
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          scales: {
+            y: {
+              beginAtZero: false,
+              min: 10,
+              ticks: {
+                color: "#94a3b8",
+                font: { family: "Poppins" },
+                callback: function (valor) {
+                  return "US$ " + valor + "B";
+                }
+              },
+              grid: { color: "rgba(255, 255, 255, 0.05)" }
+            },
+            x: {
+              ticks: {
+                color: "#94a3b8",
+                font: { family: "Poppins" }
+              },
+              grid: { display: false }
+            }
+          },
+          plugins: {
+            legend: {
+              labels: {
+                color: "#94a3b8",
+                font: { family: "Poppins", size: 13 }
+              }
+            },
+            tooltip: {
+              callbacks: {
+                label: function (contexto) {
+                  return "US$ " + contexto.parsed.y + " bilhões";
+                }
+              }
+            }
+          }
+        }
+      };
+
+      var ctx = document.getElementById("grafico_crescimento").getContext("2d");
+      new Chart(ctx, config);
+    }
+  </script>
+</body>
+
+</html>

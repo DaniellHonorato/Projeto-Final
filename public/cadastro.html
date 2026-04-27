@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>CaminhoNinja | Cadastro</title>
+
+  <script src="./js/sessao.js"></script>
+
+  <link rel="stylesheet" href="css/auth.css" />
+  <link rel="icon" href="./assets/icon/favicon2.ico" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+</head>
+
+<body onload="gerarCaptcha()">
+  <header>
+    <div class="logo">
+      <a href="index.html"><h1>Caminho<span>Ninja</span></h1></a>
+    </div>
+    <nav>
+      <ul id="nav-list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#vida">Sobre Mim</a></li>
+        <li><a href="index.html">Animes</a></li>
+        <li class="auth-link"><a href="login.html">Login</a></li>
+        <li class="auth-link"><a href="cadastro.html">Cadastro</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="login">
+    <div class="alerta_erro">
+      <div class="card_erro" id="cardErro">
+        <span id="mensagem_erro"></span>
+      </div>
+    </div>
+    <div class="container">
+      <div class="card card-cadastro">
+        <h2>Bem-vindo!</h2>
+        <div class="formulario">
+
+          <div class="campo">
+            <span>Nome:</span>
+            <input id="nome_input" type="text" placeholder="Seu nome" />
+          </div>
+          <div class="campo">
+            <span>E-mail:</span>
+            <input id="email_input" type="text" placeholder="meuemail@provedor.com" />
+          </div>
+          <div class="campo">
+            <span>Senha:</span>
+            <input id="senha_input" type="password" placeholder="******" />
+          </div>
+          <div class="campo">
+            <span>Confirmação da Senha:</span>
+            <input id="confirmacao_senha_input" type="password" placeholder="******" />
+          </div>
+          <div class="campo">
+            <span>Você já assistiu algum anime antes?</span>
+            <select id="ipt_anime">
+              <option value="">-- Selecione --</option>
+              <option value="1">Sim</option>
+              <option value="0">Não</option>
+            </select>
+          </div>
+
+          <!-- CAPTCHA: usuário digita em decimal, JS converte para binário e valida -->
+          <div class="campo">
+            <span id="captcha_pergunta">Carregando...</span>
+            <input id="captcha_input" type="number" placeholder="Digite o resultado" />
+          </div>
+
+          <button class="botao" onclick="cadastrar()">Cadastrar</button>
+        </div>
+
+        <div id="div_aguardar" class="loading-div">
+          <img src="./assets/circle-loading.gif" id="loading-gif" />
+        </div>
+
+        <div id="div_erros_login"></div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
+
+<script>
+  var captchaRespostaDecimal = 0;
+
+  function gerarCaptcha() {
+    var a = Math.floor(Math.random() * 14) + 2;
+    var b = Math.floor(Math.random() * 14) + 2;
+    captchaRespostaDecimal = a * b;
+
+    document.getElementById("captcha_pergunta").innerHTML =
+      "Verificação: quanto é <strong>" + a + " x " + b + "</strong>?";
+  }
+
+  function validarCaptcha() {
+    var respostaUsuario = parseInt(document.getElementById("captcha_input").value);
+
+    // Usuário digitou em decimal converte ambos para binário e compara
+    var respostaUsuarioBinario = respostaUsuario.toString(2);
+    var gabaritoBinario        = captchaRespostaDecimal.toString(2);
+
+    console.log("Usuário digitou (decimal):", respostaUsuario);
+    console.log("Convertido para binário:", respostaUsuarioBinario);
+    console.log("Gabarito em binário:", gabaritoBinario);
+
+    return respostaUsuarioBinario === gabaritoBinario;
+  }
+
+  function cadastrar() {
+    var nomeVar             = document.getElementById("nome_input").value.trim();
+    var emailVar            = document.getElementById("email_input").value.trim();
+    var senhaVar            = document.getElementById("senha_input").value;
+    var confirmacaoSenhaVar = document.getElementById("confirmacao_senha_input").value;
+    var jaViuAnimeVar       = document.getElementById("ipt_anime").value;
+
+    // Campos em branco
+    if (!nomeVar || !emailVar || !senhaVar || !confirmacaoSenhaVar || !jaViuAnimeVar) {
+      exibirErro("Por favor, preencha todos os campos antes de continuar.");
+      return false;
+    }
+
+    // Senhas
+    if (senhaVar !== confirmacaoSenhaVar) {
+      exibirErro("As senhas não coincidem. Verifique e tente novamente.");
+      return false;
+    }
+
+    // Captcha
+    if (!validarCaptcha()) {
+      exibirErro("Resposta incorreta. Tente novamente.");
+      gerarCaptcha();
+      document.getElementById("captcha_input").value = "";
+      return false;
+    }
+
+    // Envio
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        nomeServer:       nomeVar,
+        emailServer:      emailVar,
+        senhaServer:      senhaVar,
+        jaViuAnimeServer: jaViuAnimeVar  // "1" ou "0"
+      }),
+    })
+      .then(function (resposta) {
+        if (resposta.ok) {
+          exibirErro("Vai Palmeiras! Redirecionando para o Login...", "sucesso");
+          setTimeout(function () { window.location = "login.html"; }, 2000);
+          limparFormulario();
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (erro) {
+        console.log("#ERRO: " + erro);
+        exibirErro("Erro ao cadastrar. Tente novamente.");
+      });
+
+    return false;
+  }
+
+  // ── Helpers ───────────────────────────────────────────────────
+  function exibirErro(mensagem, tipo = "erro") {
+    var cardErro     = document.getElementById("cardErro");
+    var mensagemErro = document.getElementById("mensagem_erro");
+    
+    if (tipo === "sucesso") {
+      cardErro.classList.remove("card_erro");
+      cardErro.classList.add("card_sucesso");
+    } else {
+      cardErro.classList.remove("card_sucesso");
+      cardErro.classList.add("card_erro");
+    }
+    
+    cardErro.style.display = "block";
+    mensagemErro.innerHTML = mensagem;
+    setTimeout(function () { cardErro.style.display = "none"; }, 5000);
+  }
+
+  function limparFormulario() {
+    document.getElementById("nome_input").value              = "";
+    document.getElementById("email_input").value             = "";
+    document.getElementById("senha_input").value             = "";
+    document.getElementById("confirmacao_senha_input").value = "";
+    document.getElementById("ipt_anime").value               = "";
+    document.getElementById("captcha_input").value           = "";
+  }
+</script>

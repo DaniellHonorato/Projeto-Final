@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>CaminhoNinja | Login</title>
+
+  <script src="./js/sessao.js"></script>
+
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="icon" href="./assets/icon/favicon2.ico">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <a href="index.html"><h1>Caminho<span>Ninja</span></h1></a>
+    </div>
+    <nav>
+      <ul id="nav-list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html">Sobre Mim</a></li>
+        <li><a href="index.html">Animes</a></li>
+        <li class="auth-link active"><a href="login.html">Login</a></li>
+        <li class="auth-link"><a href="cadastro.html">Cadastro</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="login">
+    <div class="alerta_erro">
+      <div class="card_erro" id="cardErro">
+        <span id="mensagem_erro"></span>
+      </div>
+    </div>
+    <div class="container">
+      <div class="card card-login">
+        <h2>Olá de volta!</h2>
+        <div class="formulario">
+          <div class="campo">
+            <span>E-mail:</span>
+            <input id="email_input" type="text" placeholder="meuemail@provedor.com">
+          </div>
+          <div class="campo">
+            <span>Senha:</span>
+            <input id="senha_input" type="password" placeholder="******">
+          </div>
+          <button class="botao" onclick="entrar()">Entrar</button>
+        </div>
+
+        <div id="div_aguardar" class="loading-div">
+          <img src="./assets/circle-loading.gif" id="loading-gif">
+        </div>
+
+        <div id="div_erros_login"></div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
+
+<script>
+  function entrar() {
+    aguardar();
+
+    var emailVar = document.getElementById("email_input").value.trim();
+    var senhaVar = document.getElementById("senha_input").value;
+
+    if (!emailVar || !senhaVar) {
+      exibirErro("Por favor, preencha o e-mail e a senha antes de continuar.");
+      finalizarAguardar();
+      return false;
+    }
+
+    fetch("/usuarios/autenticar", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        emailServer: emailVar,
+        senhaServer: senhaVar
+      })
+    })
+      .then(function (resposta) {
+        if (resposta.ok) {
+          resposta.json().then(function (json) {
+            sessionStorage.EMAIL_USUARIO  = json.email;
+            sessionStorage.NOME_USUARIO   = json.nome;
+            sessionStorage.ID_USUARIO     = json.id;
+            sessionStorage.JA_VIU_ANIME   = json.jaViuAnime;
+
+            setTimeout(function () {
+              window.location = "./dashboard/dashboard.html";
+            }, 1000);
+          });
+        } else {
+          resposta.text().then(function (texto) {
+            finalizarAguardar(texto);
+            exibirErro("E-mail ou senha inválidos. Tente novamente.");
+          });
+        }
+      })
+      .catch(function (erro) {
+        console.log(erro);
+        finalizarAguardar();
+        exibirErro("Erro de conexão. Tente novamente.");
+      });
+
+    return false;
+  }
+
+  function exibirErro(mensagem) {
+    var cardErro     = document.getElementById("cardErro");
+    var mensagemErro = document.getElementById("mensagem_erro");
+    cardErro.style.display = "block";
+    mensagemErro.innerHTML = mensagem;
+    setTimeout(function () { cardErro.style.display = "none"; }, 5000);
+  }
+</script>

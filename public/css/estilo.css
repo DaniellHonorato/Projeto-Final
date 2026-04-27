@@ -1,0 +1,344 @@
+
+:root {
+    --escuridao: #0f0f11;         
+    --cards-escuro: #1c1c21;      
+    --textos-principais: #f8fafc; 
+    --textos-sec: #94a3b8;        
+    --botoes-naruto: #0000;            
+    --sombra-naruto: #FB7D02;
+    --botoes-haikyuu: #0000;            
+    --sombra-haikyuu: #ffff; 
+    --botoes-clover: #0000;            
+    --sombra-clover: #5c0410;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: var(--escuridao);
+    color: var(--textos-principais);
+    line-height: 1.6;
+}
+
+.container {
+    padding: 80px 10%;
+}
+
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    background-color: (var(--escuridao));
+    font-weight: 700;
+}
+
+
+header {
+    background: rgba(15, 15, 17, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+h1 {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+h1 span { 
+    color: var(--botoes); 
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    align-items: center;
+}
+
+nav a {
+    color: var(--textos-sec);
+    text-decoration: none;
+    font-weight: 400;
+    transition: all 0.3s ease;
+}
+
+nav a:hover { 
+    color: var(--textos-principais); 
+}
+
+/* SESSÃO HERO */
+.hero-anime {
+    display: flex;            
+    align-items: center;      
+    justify-content: space-between; 
+    min-height: 80vh;          
+    padding: 0 10%;          
+    gap: 40px;                 
+}
+
+.hero-img {
+    flex: 1;                 
+    display: flex;
+    justify-content: center;
+}
+
+.personagem-img img {
+    max-width: 100%;          
+    height: auto;             
+    border-radius: 20px;     
+}
+
+.hero-conteudo {
+    flex: 1;                  
+}
+
+.hero-conteudo h2 {
+    font-size: 2.5rem;       
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.hero-conteudo p {
+    font-size: 1.2rem;
+    color: var(--textos-sec);
+}
+
+
+/* VALORES E TECNOLOGIA */
+.container {
+    padding: 80px 10%;
+}
+
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.card-naruto, .card-haikyuu, .card-clover {
+    background-color: var(--cards-escuro);
+    padding: 40px 30px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 3%); /* 0.03 = 3% */
+    transition: all 400ms ease; /* 0.4s = 400ms */
+}
+
+.card-naruto h3, .card-haikyuu h3, .card-clover h3 { 
+    font-size: 24px; /* Convertido de 1.5rem */
+    margin-bottom: 10px; 
+}
+
+.card-naruto h4, .card-haikyuu h4, .card-clover h4 { 
+    font-size: 16px; /* Tamanho padrão em px */
+    font-weight: 400;
+    margin-bottom: 20px; 
+    color: var(--botoes);
+}
+
+.card-naruto p, .card-haikyuu p, .card-clover p {
+    font-size: 16px;
+    color: var(--textos-sec);
+    line-height: 26px;
+}
+
+
+.card-naruto:hover { transform: translateY(-10px); box-shadow: 0px 20px 40px var(--sombra-naruto); }
+.card-haikyuu:hover { transform: translateY(-10px); box-shadow: 0px 20px 40px var(--sombra-haikyuu); }
+.card-clover:hover { transform: translateY(-10px); box-shadow: 0px 20px 40px var(--sombra-clover); }
+
+
+
+
+/*  CARDS DE VALORES  */
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.card-naruto {
+    background-color: var(--cards-escuro);
+    padding: 40px 30px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: all 0.4s ease;
+}
+
+.card-haikyuu {
+    background-color: var(--cards-escuro);
+    padding: 40px 30px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: all 0.4s ease;
+}
+
+.card-clover {
+    background-color: var(--cards-escuro);
+    padding: 40px 30px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: all 0.4s ease;
+}
+
+.card-naruto:hover {
+    transform: translateY(-10px);
+    border-color: var(--botoes-clover);
+    box-shadow: 0 20px 40px var(--sombra-naruto);
+}
+
+.card-haikyuu:hover {
+    transform: translateY(-10px);
+    border-color: var(--botoes-clover);
+    box-shadow: 0 20px 40px var(--sombra-haikyuu);
+}
+
+.card-clover:hover {
+    transform: translateY(-10px);
+    border-color: var(--botoes-clover);
+    box-shadow: 0 20px 40px var(--sombra-clover);
+}
+
+.card-naruto h3 { 
+    font-size: 1.5rem;
+    margin-bottom: 10px; 
+}
+
+.card-haikyuu h3 { 
+    font-size: 1.5rem;
+    margin-bottom: 10px; 
+}
+
+.card-clover h3 { 
+    font-size: 1.5rem;
+    margin-bottom: 10px; 
+}
+
+.card-naruto h4 { 
+    color: var(--botoes); 
+    font-weight: 400;
+    margin-bottom: 20px; 
+}
+
+.card-haikyuu h4 { 
+    color: var(--botoes); 
+    font-weight: 400;
+    margin-bottom: 20px; 
+}
+
+.card-clover h4 { 
+    color: var(--botoes); 
+    font-weight: 400;
+    margin-bottom: 20px; 
+}
+
+.card-naruto p {
+    color: var(--textos-sec);
+}
+
+.card-haikyuu p {
+    color: var(--textos-sec);
+}
+
+.card-clover p {
+    color: var(--textos-sec);
+}
+
+/*  ANIME BOXES  */
+.naruto-box {
+    background-color: var(--cards-escuro);
+    margin-bottom: 30px;
+    padding: 40px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    transition: transform 0.3s;
+}
+
+.naruto-box:hover {
+    transform: scale(1.01);
+    box-shadow: (--sombra-naruto);
+}
+
+.naruto-box-info h3 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: var(--textos-principais);
+}
+
+.naruto-box-info p {
+    color: var(--textos-sec);
+    font-size: 1.1rem;
+}
+
+
+.haikyuu-box {
+    background-color: var(--cards-escuro);
+    margin-bottom: 30px;
+    padding: 40px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    transition: transform 0.3s;
+}
+
+.haikyuu-box:hover {
+    transform: scale(1.01);
+}
+
+.haikyuu-box-info h3 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: var(--textos-principais);
+}
+
+.haikyuu-box-info p {
+    color: var(--textos-sec);
+    font-size: 1.1rem;
+}
+
+
+.clover-box {
+    background-color: var(--cards-escuro);
+    margin-bottom: 30px;
+    padding: 40px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    transition: transform 0.3s;
+}
+
+.clover-box:hover {
+    transform: scale(1.01);
+}
+
+.clover-box-info h3 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: var(--textos-principais);
+}
+
+.clover-box-info p {
+    color: var(--textos-sec);
+    font-size: 1.1rem;
+}
+
+.paragrafo-final p{
+    text-align: center;
+    padding: 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--textos-sec);
+}

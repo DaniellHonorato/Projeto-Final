@@ -1,0 +1,219 @@
+:root {
+    --escuridao: #0f0f11;         
+    --cards-escuro: #1c1c21;      
+    --textos-principais: #f8fafc; 
+    --textos-sec: #94a3b8;        
+    --botoes-naruto: #0000;            
+    --sombra-naruto: #FB7D02;
+    --botoes-haikyuu: #0000;            
+    --sombra-haikyuu: #ffff; 
+    --botoes-clover: #0000;            
+    --sombra-clover: #5c0410;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: var(--escuridao);
+    color: var(--textos-principais);
+    line-height: 1.6;
+}
+
+header {
+    background: rgba(15, 15, 17, 0.7);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+h1 {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.logo a {
+    text-decoration: none;
+    color: inherit;
+}
+
+h1 span { 
+    color: var(--botoes); 
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    align-items: center;
+}
+
+nav a {
+    color: var(--textos-sec);
+    text-decoration: none;
+    font-weight: 400;
+    transition: all 0.3s ease;
+}
+
+nav a:hover { 
+    color: var(--textos-principais); 
+}
+
+
+.login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 100px); 
+    padding: 40px 5%;
+}
+
+.container{
+    width: 450px;
+}
+
+.card-cadastro, .card-login {
+    background-color: rgba(28, 28, 33, 0.65);
+    padding: 40px 50px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 40px rgba(251, 125, 2, 0.05);
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+
+}
+
+.card-cadastro {
+    max-width: 500px;
+}
+
+
+
+/* Título de Boas-Vindas */
+.card-cadastro h2, .card-login h2 {
+    text-align: center;
+    color: var(--textos-principais);
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+/* Espaçamento entre as caixas de texto */
+.formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Organização de cada rótulo e caixa de texto */
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.campo span {
+    color: var(--textos-sec);
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+/* Estilo das caixas de texto (Inputs) e Select */
+.campo input, .campo select {
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 14px 16px;
+    border-radius: 10px;
+    color: var(--textos-principais);
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
+}
+
+.campo input:focus, .campo select:focus {
+    border-color: #FB7D02;
+    box-shadow: 0 0 12px rgba(251, 125, 2, 0.3);
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.campo select option {
+    background-color: var(--cards-escuro);
+    color: var(--textos-principais);
+}
+
+/* Estilo do Botão Principal */
+.botao {
+    background: linear-gradient(90deg, #FB7D02, #e06d00);
+    color: #ffffff;
+    padding: 16px 40px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: block;
+    margin: 25px auto 0 auto; 
+    width: 100%;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(251, 125, 2, 0.3);
+}
+
+/* Efeito ao passar o rato no botão */
+.botao:hover {
+    background: linear-gradient(90deg, #ff9933, #FB7D02);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(251, 125, 2, 0.5);
+}
+
+/* --- Alertas e Carregamento --- */
+.loading-div {
+    display: none; 
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.loading-div img {
+    width: 40px;
+}
+
+.alerta_erro {
+    display: flex;
+    justify-content: flex-end;
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 9999;
+}
+
+    .card_erro {
+        background-color: #5c0410; /* Vermelho para erro */
+        color: white;
+        padding: 15px 25px;
+        border-radius: 8px;
+        display: none;
+        font-weight: 600;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .card_sucesso {
+        background-color: #0a7a0a; /* Verde para sucesso */
+        color: white;
+        padding: 15px 25px;
+        border-radius: 8px;
+        display: none;
+        font-weight: 600;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
