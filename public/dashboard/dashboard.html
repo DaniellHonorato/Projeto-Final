@@ -11,7 +11,7 @@
   <script src="../js/sessao.js"></script>
 
   <link rel="stylesheet" href="../css/dashboard.css">
-  <link rel="icon" href="../assets/icon/favicon2.ico">
+  <link rel="icon" href="../assets/icon/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -21,29 +21,43 @@
 
 <body onload="validarSessao(); carregarPainel()">
 
-  <!-- Cabeçalho -->
-  <header>
-    <div class="logo">
-      <a href="../index.html">
-        <h1>Caminho<span>Ninja</span></h1>
-      </a>
-    </div>
-    <nav>
-      <ul id="nav-list">
-        <li><a href="../index.html">Início</a></li>
-        <li><a href="#">Painel</a></li>
+  <div class="dashboard-container">
+    
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <div class="sidebar-logo" style="text-align: center; margin-bottom: 20px;">
+        <img src="../assets/icon/logo.png" alt="Caminho Ninja" style="max-width: 100%; height: auto; max-height: 80px;" />
+      </div>
+      <div class="sidebar-user">
+        Olá, <span id="b_usuario">Ninja</span>!
+      </div>
+      <hr class="sidebar-divider">
+      <ul class="sidebar-menu">
+        <li>
+          <a href="#" class="active">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            Dashboard
+          </a>
+        </li>
+        <li>
+          <a href="recomendacoes.html">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            Recomendações
+          </a>
+        </li>
       </ul>
+      <div class="sidebar-bottom">
+        <button class="botao-sair" onclick="limparSessao()">Sair da vila</button>
+      </div>
     </nav>
-  </header>
 
+    <!-- Conteúdo Principal -->
+    <div class="conteudo-painel">
 
-  <div class="conteudo-painel">
-
-
-    <div class="secao-boas-vindas">
-      <h2>Olá, <span id="b_usuario">Ninja</span>!</h2>
-      <p>Aqui estão os dados da comunidade CaminhoNinja.</p>
-    </div>
+      <div class="secao-boas-vindas">
+        <h2>Visão Geral</h2>
+        <p>Aqui estão os dados da comunidade CaminhoNinja.</p>
+      </div>
 
 
     <div class="grade-indicadores">
@@ -79,14 +93,12 @@
         <div class="area-grafico">
           <canvas id="grafico_crescimento"></canvas>
         </div>
-      </div>
-    </div>
+      </div> <!-- Fim grade-graficos -->
+
+    </div> <!-- Fim conteudo-painel -->
+  </div> <!-- Fim do dashboard-container -->
 
 
-    <div class="area-acoes">
-      <button class="botao-sair" onclick="limparSessao()">Sair da Vila</button>
-    </div>
-  </div>
 
   <script>
 
@@ -230,7 +242,7 @@
         }]
       };
 
-      for (i = 0; i < resposta.length; i++) {
+      for (var i = 0; i < resposta.length; i++) {
         var registro = resposta[i];
         labels.push(registro.momento_grafico);
         dados.datasets[0].data.push(registro.receita);

@@ -30,64 +30,87 @@ body {
     min-height: 100vh;
 }
 
-/* ── Cabeçalho ──────────────────────────────────────────────── */
-header {
-    background: rgba(15, 15, 17, 0.85);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+/* ── Layout ─────────────────────────────────────────────────── */
+.dashboard-container {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 8%;
+    min-height: 100vh;
+}
+
+/* ── Sidebar ────────────────────────────────────────────────── */
+.sidebar {
+    width: 260px;
+    background-color: #121215;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+    padding: 30px 20px;
+    height: 100vh;
     position: sticky;
     top: 0;
-    z-index: 1000;
 }
 
-.logo a {
-    text-decoration: none;
-    color: inherit;
-}
-
-.logo h1 {
-    font-weight: 700;
-    font-size: 1.5rem;
+.sidebar-user {
+    font-size: 1.2rem;
+    font-weight: 600;
     color: var(--texto-claro);
-    cursor: pointer;
-    transition: opacity 0.3s ease;
+    margin-bottom: 20px;
+    padding-left: 10px;
 }
 
-.logo h1:hover {
-    opacity: 0.8;
-}
-
-.logo h1 span {
+.sidebar-user span {
     color: var(--laranja-naruto);
 }
 
-nav ul {
-    display: flex;
+.sidebar-divider {
+    border: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    margin-bottom: 20px;
+}
+
+.sidebar-menu {
     list-style: none;
-    gap: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+
+.sidebar-menu a {
+    display: flex;
     align-items: center;
-}
-
-nav a {
-    color: var(--texto-secundario);
+    gap: 15px;
     text-decoration: none;
-    font-weight: 400;
+    color: var(--texto-claro);
+    font-weight: 500;
     font-size: 0.95rem;
-    transition: color 0.3s ease;
+    padding: 12px 15px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
 }
 
-nav a:hover {
-    color: var(--texto-claro);
+.sidebar-menu a:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.sidebar-menu a.active {
+    background-color: #1a1a1f;
+    color: var(--laranja-naruto);
+}
+
+.sidebar-menu a.active svg {
+    stroke: var(--laranja-naruto);
+}
+
+.sidebar-bottom {
+    margin-top: auto;
 }
 
 /* ── Área principal ─────────────────────────────────────────── */
 .conteudo-painel {
-    max-width: 1100px;
-    margin: 0 auto;
+    flex: 1;
+    max-width: 100%;
     padding: 40px 5% 60px;
+    overflow-y: auto;
 }
 
 /* ── Boas-vindas ────────────────────────────────────────────── */
@@ -211,28 +234,24 @@ nav a:hover {
 }
 
 /* ── Botão Sair ─────────────────────────────────────────────── */
-.area-acoes {
-    display: flex;
-    justify-content: flex-end;
-    padding-top: 10px;
-}
-
 .botao-sair {
-    padding: 12px 28px;
-    background-color: rgba(92, 4, 16, 0.2);
-    color: var(--vermelho-clover-brilho);
-    border: 1px solid rgba(92, 4, 16, 0.4);
-    border-radius: 10px;
+    width: 100%;
+    padding: 12px;
+    background-color: transparent;
+    color: var(--texto-secundario);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 0.95rem;
-    font-weight: 600;
+    font-size: 0.9rem;
+    font-weight: 500;
     font-family: 'Poppins', sans-serif;
     transition: all 0.3s ease;
+    text-align: center;
 }
 
 .botao-sair:hover {
-    background-color: var(--vermelho-clover);
-    color: var(--branco-haikyuu);
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--texto-claro);
 }
 
 /* ── Responsivo ─────────────────────────────────────────────── */
@@ -251,4 +270,198 @@ nav a:hover {
     .secao-boas-vindas h2 {
         font-size: 1.4rem;
     }
+}
+
+/* ── Página de Recomendações (Grid 4 colunas) ───────────────── */
+.grid-animes {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.card-anime {
+    background-color: var(--fundo-cartao);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 15px;
+    cursor: pointer;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    text-align: center;
+}
+
+.card-anime:hover {
+    transform: translateY(-5px);
+    border-color: var(--laranja-naruto);
+}
+
+.capa-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+
+.capa-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.card-anime:hover .capa-wrapper img {
+    transform: scale(1.05);
+}
+
+.capa-wrapper .overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(15, 15, 17, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card-anime:hover .capa-wrapper .overlay {
+    opacity: 1;
+}
+
+.overlay span {
+    background: var(--laranja-naruto);
+    color: var(--branco-haikyuu);
+    padding: 8px 15px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.card-anime h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--texto-claro);
+    line-height: 1.3;
+}
+
+/* ── Modal Detalhes Anime ───────────────────────────────────── */
+.modal-overlay {
+    display: none; 
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: var(--fundo-cartao);
+    width: 90%;
+    max-width: 700px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 1.8rem;
+    color: var(--texto-secundario);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+    color: var(--laranja-naruto);
+}
+
+.modal-body {
+    display: flex;
+    gap: 25px;
+}
+
+.modal-body img {
+    width: 220px;
+    height: 330px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.modal-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modal-info h2 {
+    font-size: 1.6rem;
+    color: var(--laranja-naruto);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.modal-genero {
+    font-size: 0.9rem;
+    color: var(--texto-secundario);
+}
+
+.modal-genero span {
+    color: var(--texto-claro);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 3px 8px;
+    border-radius: 4px;
+}
+
+.modal-recomendacao {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--texto-claro);
+    background: rgba(251, 125, 2, 0.1);
+    border-left: 3px solid var(--laranja-naruto);
+    padding: 10px 15px;
+    border-radius: 0 6px 6px 0;
+}
+
+.modal-sinopse strong {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--texto-claro);
+}
+
+.modal-sinopse p {
+    font-size: 0.9rem;
+    color: var(--texto-secundario);
+    line-height: 1.6;
+    text-align: justify;
+}
+
+/* Responsivo para o grid de animes e modal */
+@media (max-width: 1024px) {
+    .grid-animes { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 768px) {
+    .grid-animes { grid-template-columns: repeat(2, 1fr); }
+    .modal-body { flex-direction: column; align-items: center; }
+    .modal-body img { width: 180px; height: 270px; }
+}
+
+@media (max-width: 480px) {
+    .grid-animes { grid-template-columns: 1fr; }
 }

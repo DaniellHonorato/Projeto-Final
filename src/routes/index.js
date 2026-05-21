@@ -1,8 +1,7 @@
 var express = require("express");
 var router = express.Router();
 
-router.get("/", function (req, res) {
-    res.render("index");
-});
+// Rota raiz não é necessária aqui:
+// o express.static configurado no app.js já serve o public/index.html automaticamente.
 
 module.exports = router;

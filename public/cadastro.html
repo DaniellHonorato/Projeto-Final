@@ -11,19 +11,19 @@
   <script src="./js/sessao.js"></script>
 
   <link rel="stylesheet" href="css/auth.css" />
-  <link rel="icon" href="./assets/icon/favicon2.ico" />
+  <link rel="icon" href="./assets/icon/logo.png" />
   <link rel="preconnect" href="https://fonts.gstatic.com" />
 </head>
 
 <body onload="gerarCaptcha()">
   <header>
     <div class="logo">
-      <a href="index.html"><h1>Caminho<span>Ninja</span></h1></a>
+      <a href="index.html"><img src="./assets/icon/logo.png" alt="Caminho Ninja" style="height: 55px; width: auto;" /></a>
     </div>
     <nav>
       <ul id="nav-list">
         <li><a href="index.html">Home</a></li>
-        <li><a href="#vida">Sobre Mim</a></li>
+        <li><a href="index.html#vida">Sobre Mim</a></li>
         <li><a href="index.html">Animes</a></li>
         <li class="auth-link"><a href="login.html">Login</a></li>
         <li class="auth-link"><a href="cadastro.html">Cadastro</a></li>
@@ -93,8 +93,8 @@
   var captchaRespostaDecimal = 0;
 
   function gerarCaptcha() {
-    var a = Math.floor(Math.random() * 14) + 2;
-    var b = Math.floor(Math.random() * 14) + 2;
+    var a = Math.floor(Math.random() * 10) + 1;
+    var b = Math.floor(Math.random() * 10) + 1;
     captchaRespostaDecimal = a * b;
 
     document.getElementById("captcha_pergunta").innerHTML =
@@ -159,12 +159,15 @@
           setTimeout(function () { window.location = "login.html"; }, 2000);
           limparFormulario();
         } else {
-          throw "Houve um erro ao tentar realizar o cadastro!";
+          return resposta.text().then(texto => {
+              console.error(texto);
+              throw texto.replace(/\"/g, ''); // Remove as aspas do JSON
+          });
         }
       })
       .catch(function (erro) {
         console.log("#ERRO: " + erro);
-        exibirErro("Erro ao cadastrar. Tente novamente.");
+        exibirErro(typeof erro === 'string' ? erro : "Erro ao cadastrar. Tente novamente.");
       });
 
     return false;

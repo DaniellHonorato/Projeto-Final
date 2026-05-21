@@ -48,12 +48,23 @@ function cadastrar(req, res) {
     } else if (jaViuAnime == undefined) {
         res.status(400).send("O campo 'já viu anime' está undefined!");
     } else {
-        usuarioModel.cadastrar(nome, email, senha, parseInt(jaViuAnime))
-            .then(function (resultado) {
-                res.status(200).json(resultado);
+        usuarioModel.buscarPorNomeOuEmail(nome, email)
+            .then(function (resultadoBusca) {
+                if (resultadoBusca.length > 0) {
+                    res.status(409).json("Este email ou nome de usuário já está cadastrado!");
+                } else {
+                    usuarioModel.cadastrar(nome, email, senha, parseInt(jaViuAnime))
+                        .then(function (resultado) {
+                            res.status(200).json(resultado);
+                        })
+                        .catch(function (erro) {
+                            console.log("\nErro ao realizar cadastro:", erro.sqlMessage);
+                            res.status(500).json(erro.sqlMessage);
+                        });
+                }
             })
             .catch(function (erro) {
-                console.log("\nErro ao realizar cadastro:", erro.sqlMessage);
+                console.log("\nErro ao verificar email:", erro.sqlMessage);
                 res.status(500).json(erro.sqlMessage);
             });
     }

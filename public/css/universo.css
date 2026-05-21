@@ -1,0 +1,372 @@
+/* ==========================================
+   UNIVERSO.CSS — Páginas de Universo dos Animes
+   ========================================== */
+
+:root {
+  --bg: #0a0a0c;
+  --card: #141418;
+  --card-border: rgba(255,255,255,0.06);
+  --text: #f0f2f5;
+  --text-sec: #8a95a8;
+  --radius: 18px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+}
+
+/* ── HEADER ─────────────────────── */
+.universo-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 6%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10,10,12,0.85);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--card-border);
+}
+
+.header-logo {
+  height: 80px;
+  width: auto;
+}
+
+.voltar-btn {
+  color: var(--text-sec);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: all 0.3s;
+  padding: 8px 0;
+  border: none;
+}
+.voltar-btn:hover {
+  color: var(--text);
+}
+
+/* ── HERO ─────────────────────────── */
+.universo-hero {
+  position: relative;
+  padding: 80px 6% 60px;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 8px 22px;
+  border-radius: 50px;
+  margin-bottom: 24px;
+  border: none;
+  color: var(--text-sec);
+}
+
+.badge-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.universo-hero h1 {
+  font-size: clamp(1.8rem, 4.5vw, 3rem);
+  font-weight: 800;
+  line-height: 1.15;
+  max-width: 780px;
+  margin-bottom: 16px;
+}
+
+.hero-sub {
+  font-size: 1.05rem;
+  color: var(--text-sec);
+  max-width: 560px;
+}
+
+.hero-accent {
+  display: none; /* Fundo colorido removido a pedido */
+}
+
+/* ── TEMAS ─────────────────────── */
+.tema-naruto .hero-badge { border-color: rgba(251,125,2,0.4); color: #FB7D02; }
+.tema-naruto .bloco-label { color: #FB7D02; }
+.tema-naruto .citacao { border-left-color: #FB7D02; }
+.tema-naruto .filosofia-frase::before { color: #FB7D02; }
+
+.tema-haikyuu .hero-badge { border-color: rgba(200,200,200,0.35); color: #d0d0d0; }
+.tema-haikyuu .bloco-label { color: #d0d0d0; }
+.tema-haikyuu .citacao { border-left-color: #c8c8c8; }
+.tema-haikyuu .filosofia-frase::before { color: #c8c8c8; }
+
+.tema-clover .hero-badge { border-color: rgba(230,0,0,0.4); color: #e60000; }
+.tema-clover .bloco-label { color: #e60000; }
+.tema-clover .citacao { border-left-color: #e60000; }
+.tema-clover .filosofia-frase::before { color: #e60000; }
+
+/* ── CONTEÚDO PRINCIPAL ──────────── */
+.universo-conteudo {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 4% 80px;
+}
+
+/* LAYOUT 3 COLUNAS: anime | protagonista | filosofias */
+.conteudo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.bloco-anime,
+.bloco-personagem,
+.bloco-filosofias {
+  padding: 36px;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+}
+
+.bloco-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.bloco-anime h2,
+.bloco-personagem h2,
+.bloco-filosofias h2 {
+  font-size: 1.45rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  line-height: 1.25;
+}
+
+.bloco-anime p,
+.bloco-personagem p {
+  color: var(--text-sec);
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+  line-height: 1.7;
+}
+
+.bloco-anime p:last-of-type { margin-bottom: 0; }
+
+/* ── INFO GRID ──────────────────── */
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.info-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-sec);
+  font-weight: 600;
+}
+
+.info-valor {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ── PERSONAGEM ──────────────── */
+.personagem-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.personagem-icon {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
+  flex-shrink: 0;
+}
+
+.personagem-titulo {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--text-sec);
+  margin-top: 3px;
+  font-style: italic;
+}
+
+/* ── CITAÇÃO PRINCIPAL ──────────── */
+.citacao {
+  border-left: 3px solid var(--text-sec);
+  margin: 22px 0 18px;
+  padding: 14px 22px;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--text);
+  background: rgba(255,255,255,0.025);
+  border-radius: 0 10px 10px 0;
+}
+
+.citacao cite {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.78rem;
+  color: var(--text-sec);
+  font-style: normal;
+  font-weight: 600;
+}
+
+/* ── ATRIBUTOS ──────────────────── */
+.atributos {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.atributo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.atributo-nome {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-sec);
+  min-width: 140px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.atributo-barra {
+  flex: 1;
+  height: 6px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.atributo-fill {
+  height: 100%;
+  border-radius: 99px;
+  animation: fillBar 1.2s ease forwards;
+}
+
+@keyframes fillBar {
+  from { width: 0 !important; }
+}
+
+/* ── FILOSOFIAS (3ª coluna) ──────── */
+.bloco-filosofias h2 {
+  font-size: 1.3rem;
+}
+
+.filosofia-item {
+  margin-bottom: 22px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.filosofia-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.filosofia-frase {
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--text);
+  margin-bottom: 10px;
+  line-height: 1.5;
+  position: relative;
+  padding-left: 18px;
+}
+
+.filosofia-frase::before {
+  content: """;
+  position: absolute;
+  left: 0;
+  top: -4px;
+  font-size: 1.6rem;
+  font-weight: 800;
+  opacity: 0.3;
+  font-style: normal;
+}
+
+.filosofia-contexto {
+  font-size: 0.82rem;
+  color: var(--text-sec);
+  line-height: 1.6;
+  padding-left: 18px;
+}
+
+.tema-naruto .filosofia-frase::before { color: #FB7D02; }
+.tema-haikyuu .filosofia-frase::before { color: #c8c8c8; }
+.tema-clover .filosofia-frase::before { color: #c9365a; }
+
+/* ── FOOTER ──────────────────── */
+.universo-footer {
+  text-align: center;
+  padding: 32px;
+  border-top: 1px solid var(--card-border);
+  color: var(--text-sec);
+  font-size: 0.85rem;
+}
+
+/* ── RESPONSIVO ──────────────── */
+@media (max-width: 1100px) {
+  .conteudo-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .bloco-filosofias {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 700px) {
+  .conteudo-grid {
+    grid-template-columns: 1fr;
+  }
+  .universo-hero { padding: 60px 5% 50px; }
+  .universo-conteudo { padding: 0 5% 60px; }
+  .bloco-anime, .bloco-personagem, .bloco-filosofias { padding: 26px 20px; }
+  .personagem-header { flex-direction: column; align-items: flex-start; }
+  .atributo-nome { min-width: 110px; font-size: 0.75rem; }
+  .info-grid { grid-template-columns: 1fr; }
+}

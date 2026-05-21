@@ -18,6 +18,24 @@ function cadastrar(nome, email, senha, jaViuAnime) {
     return database.executar(instrucaoSql);
 }
 
+function buscarPorEmail(email) {
+    console.log("ACESSEI O USUARIO MODEL - function buscarPorEmail()");
+    var instrucaoSql = `
+        SELECT id FROM usuario WHERE email = '${email}';
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarPorNomeOuEmail(nome, email) {
+    console.log("ACESSEI O USUARIO MODEL - function buscarPorNomeOuEmail()");
+    var instrucaoSql = `
+        SELECT id FROM usuario WHERE email = '${email}' OR nome = '${nome}';
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 function kpiAnimes() {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function kpiAnimes()");
     var instrucaoSql = `
@@ -48,6 +66,8 @@ function kpiTotal() {
 module.exports = {
     autenticar,
     cadastrar,
+    buscarPorEmail,
+    buscarPorNomeOuEmail,
     kpiAnimes,
     kpiSemAnime,
     kpiTotal

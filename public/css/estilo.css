@@ -336,7 +336,84 @@ nav a:hover {
     font-size: 1.1rem;
 }
 
-.paragrafo-final p{
+/* ÍCONES DOS ANIMES (imagem) — seção Explorando os Universos */
+.anime-icon-img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    vertical-align: middle;
+    margin-right: 10px;
+    display: inline-block;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.45));
+}
+
+/* ÍCONES nas cards de VALORES */
+.valor-icon-img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    vertical-align: middle;
+    margin-right: 8px;
+    display: inline-block;
+    filter: drop-shadow(0 1px 3px rgba(0,0,0,0.35));
+}
+
+/* H4 cores temáticas nos cards de valor */
+.card-naruto h4 { color: #FB7D02 !important; }
+.card-haikyuu h4 { color: #e8e8e8 !important; }
+.card-clover h4 { color: #e60000 !important; }
+
+/* BOTÕES "EXPLORAR UNIVERSO" */
+.btn-explorar {
+    display: inline-block;
+    margin-top: 28px;
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.btn-explorar-naruto {
+    color: #FB7D02;
+    border-color: #FB7D02;
+    background: rgba(251, 125, 2, 0.08);
+}
+.btn-explorar-naruto:hover {
+    background: #FB7D02;
+    color: #0f0f11;
+    box-shadow: 0 0 20px rgba(251, 125, 2, 0.4);
+    transform: translateX(4px);
+}
+
+.btn-explorar-haikyuu {
+    color: #e8e8e8;
+    border-color: #e8e8e8;
+    background: rgba(232, 232, 232, 0.06);
+}
+.btn-explorar-haikyuu:hover {
+    background: #e8e8e8;
+    color: #0f0f11;
+    box-shadow: 0 0 20px rgba(232, 232, 232, 0.3);
+    transform: translateX(4px);
+}
+
+.btn-explorar-clover {
+    color: #e60000;
+    border-color: #e60000;
+    background: rgba(230, 0, 0, 0.08);
+}
+.btn-explorar-clover:hover {
+    background: #e60000;
+    color: #fff;
+    box-shadow: 0 0 20px rgba(230, 0, 0, 0.4);
+    transform: translateX(4px);
+}
+
+.paragrafo-final p {
     text-align: center;
     padding: 40px;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
