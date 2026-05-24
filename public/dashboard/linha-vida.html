@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>CaminhoNinja | Linha da Vida</title>
+
+  <script src="../js/sessao.js"></script>
+
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="icon" href="../assets/icon/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body onload="validarSessao()">
+
+  <div class="dashboard-container">
+    
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <div class="sidebar-logo" style="text-align: center; margin-bottom: 20px;">
+        <a href="../index.html"><img src="../assets/icon/logo.png" alt="Caminho Ninja" style="max-width: 100%; height: auto; max-height: 80px; cursor: pointer; transition: opacity 0.3s;" /></a>
+      </div>
+      <div class="sidebar-user">
+        Olá, <span id="b_usuario">Ninja</span>!
+      </div>
+      <hr class="sidebar-divider">
+      <ul class="sidebar-menu">
+        <li>
+          <a href="dashboard.html">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            Dashboard
+          </a>
+        </li>
+        <li>
+          <a href="recomendacoes.html">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            Recomendações
+          </a>
+        </li>
+        <li>
+          <a href="linha-vida.html" class="active">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+            Linha da Vida
+          </a>
+        </li>
+      </ul>
+      <div class="sidebar-bottom">
+        <button class="botao-sair" onclick="limparSessao()">Sair da vila</button>
+      </div>
+    </nav>
+
+    <!-- Conteúdo Principal -->
+    <div class="conteudo-painel">
+
+      <!-- ── Linha da Vida ─────────────────────────── -->
+      <div class="secao-boas-vindas" id="linha-da-vida" style="scroll-margin-top: 30px;">
+        <h2>Linha da Vida</h2>
+        <p>A jornada que me trouxe até aqui — momento a momento.</p>
+      </div>
+
+      <div class="linha-vida-container">
+        
+        <!-- 2019 -->
+        <div class="linha-vida-item">
+          <div class="linha-vida-card">
+            <span class="linha-vida-ano">2019</span>
+            <h3>🍜 O Começo de Tudo</h3>
+            <p>Foi aqui que tudo começou. Naruto Clássico entrou na minha vida e eu descobri que animes não eram só desenho — eram histórias que te pegavam pela alma. O ninja que queria ser Hokage me ensinou que determinação vence qualquer obstáculo.</p>
+          </div>
+        </div>
+
+        <!-- 2020 Pandemia -->
+        <div class="linha-vida-item">
+          <div class="linha-vida-card">
+            <span class="linha-vida-ano">2020 — Pandemia</span>
+            <h3>📺 A Maratona Histórica</h3>
+            <p>O mundo parou. Eu não. Na pandemia vi muitos animes e revi Naruto do início ao fim, agora com outro olhar. Foi um período que solidificou meu amor pelo universo anime de vez.</p>
+          </div>
+        </div>
+
+        <!-- 2021/2022 -->
+        <div class="linha-vida-item">
+          <div class="linha-vida-card">
+            <span class="linha-vida-ano">2021 — 2022</span>
+            <h3>🍀🏐 Dois Universos, Uma Pancada Só</h3>
+            <p>Black Clover me mostrou que quem não tem magia pode ter mais garra que qualquer mago. Haikyuu!! entrou na vida e nunca mais saiu. Asta e Hinata — dois personagens sem talento nato que chegaram ao topo na força da vontade.</p>
+          </div>
+        </div>
+
+        <!-- 2023 -->
+        <div class="linha-vida-item">
+          <div class="linha-vida-card">
+            <span class="linha-vida-ano">2023</span>
+            <h3>🔥 Kimetsu no Yaiba me impressionou</h3>
+            <p>Demon Slayer chegou com animação absurda e personagens que você não consegue largar. Tanjiro provando que gentileza e força podem andar juntas foi algo que ficou marcado em 2023.</p>
+          </div>
+        </div>
+
+        <!-- 2024 -->
+        <div class="linha-vida-item">
+          <div class="linha-vida-card">
+            <span class="linha-vida-ano">2024 — O Ápice</span>
+            <h3>⚡🏐 Solo Leveling + Haikyuu: Certeza Absoluta</h3>
+            <p>Solo Leveling entregou um protagonista over-powered incrível. Kaijuu No. 8 marcou pela originalidade. Mas foi em 2024 que tive a certeza definitiva: independente de qualquer anime que eu assista, <strong style="color: var(--laranja-naruto);">Haikyuu!! sempre será o favorito.</strong></p>
+          </div>
+        </div>
+
+        <!-- 2025 -->
+        <div class="linha-vida-item">
+          <div class="linha-vida-card">
+            <span class="linha-vida-ano">2025</span>
+            <h3>🎮 Shangri-La Frontier e Wistoria</h3>
+            <p>Não estava vendo tantos animes, mas os que escolhi valeram cada minuto. Shangri-La Frontier mostrou que um gamer dedicado pode virar lenda em qualquer mundo. Wistoria chegou junto e também deixou sua marca.</p>
+          </div>
+        </div>
+
+        <!-- 2026 -->
+        <div class="linha-vida-item">
+          <div class="linha-vida-card">
+            <span class="linha-vida-ano">2026 — Hoje</span>
+            <h3>⚔️ Wistoria e a Chama Que Não Apaga</h3>
+            <p>2026 tem Wistoria e outros animes, mas uma coisa não mudou: o amor por Haikyuu!! continua inabalável. A jornada segue — mesmo que em ritmo mais calmo, a paixão é a mesma.</p>
+          </div>
+        </div>
+
+        <!-- Mensagem Final -->
+        <div class="linha-vida-fim">
+          <div class="linha-vida-ponto-fim">❤️</div>
+          <p class="linha-vida-mensagem-final">
+            Por mais que eu não veja mais tantos animes como antes, eles fizeram parte de uma grande parte da minha vida.<br>
+            Cada personagem, cada história e cada momento marcante me moldaram de alguma forma.<br>
+            <strong>E isso, nenhum fim de temporada apaga.</strong>
+          </p>
+        </div>
+
+      </div>
+
+    </div> <!-- Fim conteudo-painel -->
+  </div> <!-- Fim dashboard-container -->
+
+</body>
+
+</html>

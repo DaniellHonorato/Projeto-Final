@@ -179,13 +179,31 @@ nav a:hover {
 
 /* --- Alertas e Carregamento --- */
 .loading-div {
-    display: none; 
+    display: none;
     justify-content: center;
+    align-items: center;
     margin-top: 20px;
 }
 
+/* Spinner CSS puro — sem gif */
+.loading-div::after {
+    content: '';
+    display: block;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 4px solid rgba(251, 125, 2, 0.2);
+    border-top-color: #FB7D02;
+    animation: spin 0.8s linear infinite;
+}
+
+/* Esconde o img caso ainda exista no HTML */
 .loading-div img {
-    width: 40px;
+    display: none;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
 }
 
 .alerta_erro {

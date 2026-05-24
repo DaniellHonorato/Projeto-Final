@@ -24,7 +24,7 @@
     <!-- Sidebar -->
     <nav class="sidebar">
       <div class="sidebar-logo" style="text-align: center; margin-bottom: 20px;">
-        <img src="../assets/icon/logo.png" alt="Caminho Ninja" style="max-width: 100%; height: auto; max-height: 80px;" />
+        <a href="../index.html"><img src="../assets/icon/logo.png" alt="Caminho Ninja" style="max-width: 100%; height: auto; max-height: 80px; cursor: pointer; transition: opacity 0.3s;" /></a>
       </div>
       <div class="sidebar-user">
         Olá, <span id="b_usuario">Ninja</span>!
@@ -41,6 +41,12 @@
           <a href="recomendacoes.html" class="active">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
             Recomendações
+          </a>
+        </li>
+        <li>
+          <a href="linha-vida.html">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+            Linha da Vida
           </a>
         </li>
       </ul>
@@ -88,93 +94,38 @@
 
   <script>
     // Dados dos Animes
-    const listaAnimes = [
-      {
-        titulo: "Wistoria: Wand and Sword",
-        imagem: "../assets/imgs/animes/wistoria.jpg",
-        generos: "Ação, Fantasia, Aventura",
-        recomendacao: "Recomendado caso goste de lutas, magia e superação.",
-        sinopse: "Will Serfort ingressa na Academia de Magia Rigarden para cumprir uma promessa feita a uma amiga de infância. O único problema é que ele não possui nenhuma aptidão para magia. Em um mundo onde magia é tudo, ele precisará usar sua espada e força física para subir até o topo e se tornar uma Magia Vande."
-      },
-      {
-        titulo: "Haikyu!!",
-        imagem: "../assets/imgs/animes/haikyuu.jpg",
-        generos: "Esportes, Comédia, Drama",
-        recomendacao: "Recomendado caso goste de torneios, espírito de equipe e desenvolvimento de personagens.",
-        sinopse: "Shoyo Hinata quer provar que no vôlei não é preciso ser alto para voar. Ele entra no clube da escola Karasuno e precisa aprender a trabalhar em equipe, fazendo dupla com seu antigo rival, o gênio levantador Tobio Kageyama."
-      },
-      {
-        titulo: "Black Clover",
-        imagem: "../assets/imgs/animes/clover.jpg",
-        generos: "Ação, Fantasia, Magia",
-        recomendacao: "Recomendado caso goste de lutas mágicas intensas, shounen clássico e persistência infinita.",
-        sinopse: "Asta e Yuno são órfãos criados juntos numa igreja. Num mundo onde magia é tudo, Yuno é um prodígio incrivelmente forte, enquanto Asta nasceu totalmente sem poder mágico. Asta recebe um raro grimório de cinco trevos antimagia e começa sua jornada para se tornar o Rei Mago."
-      },
-      {
-        titulo: "Naruto",
-        imagem: "../assets/imgs/animes/naruto.jpg",
-        generos: "Ação, Aventura, Artes Marciais",
-        recomendacao: "Recomendado caso goste de lutas com ninjas, jutsus e uma longa e clássica jornada do herói.",
-        sinopse: "A Vila Oculta da Folha é o lar do jovem ninja Naruto Uzumaki. Rejeitado pelos aldeões por carregar a raposa demônio de nove caudas dentro de si, ele treina incansavelmente para se tornar o Hokage, o líder supremo de sua vila."
-      },
-      {
-        titulo: "Shangri-La Frontier",
-        imagem: "../assets/imgs/animes/shangrila.jpg",
-        generos: "Ação, Aventura, Fantasia, Videogame",
-        recomendacao: "Recomendado caso goste de lutas épicas contra chefões, MMORPGs e pro players mitando.",
-        sinopse: "Rakuro Hizutome é um especialista em zerar 'jogos lixo' cheios de bugs. Buscando um novo desafio, ele decide encarar o aclamado jogo divino 'Shangri-La Frontier' com 30 milhões de jogadores, usando apenas suas habilidades surreais e reflexos de gamer veterano."
-      },
-      {
-        titulo: "The Fragrant Flower Blooms With Dignity",
-        imagem: "../assets/imgs/animes/fragrant.jpg",
-        generos: "Romance, Escolar, Slice of Life",
-        recomendacao: "Recomendado caso goste de romances fofos, personagens cativantes e histórias leves.",
-        sinopse: "Rintaro, um estudante de uma escola conhecida por abrigar garotos delinquentes com notas baixas, conhece e se aproxima de Kaoruko, uma garota doce da prestigiada e rigorosa escola de garotas vizinha. Um belo romance sobre não julgar pelas aparências."
-      },
-      {
-        titulo: "Solo Leveling",
-        imagem: "../assets/imgs/animes/solo.jpg",
-        generos: "Ação, Fantasia, RPG",
-        recomendacao: "Recomendado caso goste de lutas insanas, protagonista over-powered e evolução de status.",
-        sinopse: "Sung Jinwoo é conhecido como o caçador mais fraco de toda a humanidade. Porém, após quase morrer ao sobreviver a uma masmorra dupla mortal, ele acorda em um hospital e recebe uma tela de missões secreta que permite que ele suba de nível, tornando-o capaz de alcançar poderes absurdos."
-      },
-      {
-        titulo: "Mob Psycho 100",
-        imagem: "../assets/imgs/animes/mob.jpg",
-        generos: "Ação, Comédia, Sobrenatural",
-        recomendacao: "Recomendado caso goste de lutas com poderes telecinéticos, animação espetacular e muito humor.",
-        sinopse: "Shigeo Kageyama, apelidado de 'Mob', é um jovem com imensos poderes psíquicos. Ele reprime suas emoções para não perder o controle, mas toda vez que seu nível de estresse emocional atinge a marca de 100%, seus poderes psíquicos explodem de forma espetacular."
-      },
-      {
-        titulo: "Hell's Paradise (Jigokuraku)",
-        imagem: "../assets/imgs/animes/hells.jpg",
-        generos: "Ação, Fantasia Sombria, Gore",
-        recomendacao: "Recomendado caso goste de lutas intensas e sangrentas, mistérios obscuros e suspense.",
-        sinopse: "Gabimaru, o Vazio, um ninja assustador e condenado à morte, recebe a chance de ser perdoado se conseguir encontrar o Elixir da Vida Eterna em uma ilha bizarra recém-descoberta. Porém, a ilha está infestada de monstros assassinos e seres perturbadores."
-      },
-      {
-        titulo: "Hajime no Ippo",
-        imagem: "../assets/imgs/animes/ippo.jpg",
-        generos: "Esportes, Comédia, Artes Marciais",
-        recomendacao: "Recomendado caso goste de lutas corpo a corpo focadas em boxe realista e superação pura.",
-        sinopse: "Makunouchi Ippo sofre bullying constantemente até ser salvo por acaso pelo experiente boxeador Takamura. Inspirado pela força e resiliência dos lutadores, Ippo decide treinar intensamente no ginásio Kamogawa para descobrir, afinal, 'o que significa ser forte'."
-      }
-    ];
+    let listaAnimes = [];
 
     function renderizarAnimes() {
       const container = document.getElementById("container_animes");
-      
-      listaAnimes.forEach((anime, index) => {
-        container.innerHTML += `
-          <div class="card-anime" onclick="abrirModal(${index})">
-            <div class="capa-wrapper">
-              <img src="${anime.imagem}" alt="${anime.titulo}">
-              <div class="overlay"><span>Ver Detalhes</span></div>
-            </div>
-            <h3>${anime.titulo}</h3>
-          </div>
-        `;
-      });
+      container.innerHTML = "Carregando recomendações da vila...";
+
+      fetch("/animes/listar")
+        .then(function (resposta) {
+          if (resposta.ok) {
+            resposta.json().then(function (animesBanco) {
+              listaAnimes = animesBanco;
+              container.innerHTML = "";
+              listaAnimes.forEach((anime, index) => {
+                container.innerHTML += `
+                  <div class="card-anime" onclick="abrirModal(${index})">
+                    <div class="capa-wrapper">
+                      <img src="${anime.imagem}" alt="${anime.titulo}">
+                    </div>
+                    <h3>${anime.titulo}</h3>
+                  </div>
+                `;
+              });
+            });
+          } else {
+            console.error("Nenhum dado encontrado ou erro na API");
+            container.innerHTML = "Falha ao carregar as recomendações.";
+          }
+        })
+        .catch(function (error) {
+          console.error(`Erro na obtenção dos animes: ${error.message}`);
+          container.innerHTML = "Erro ao conectar com o servidor.";
+        });
     }
 
     function abrirModal(index) {

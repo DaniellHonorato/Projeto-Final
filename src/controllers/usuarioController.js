@@ -28,7 +28,7 @@ function autenticar(req, res) {
             })
             .catch(function (erro) {
                 console.log("\nErro ao realizar login:", erro.sqlMessage);
-                res.status(500).json(erro.sqlMessage);
+                res.status(500).json({ mensagem: "Erro interno no servidor ao tentar realizar login. Tente novamente mais tarde." });
             });
     }
 }
@@ -59,13 +59,13 @@ function cadastrar(req, res) {
                         })
                         .catch(function (erro) {
                             console.log("\nErro ao realizar cadastro:", erro.sqlMessage);
-                            res.status(500).json(erro.sqlMessage);
+                            res.status(500).json({ mensagem: "Erro interno ao cadastrar usuário. Tente novamente." });
                         });
                 }
             })
             .catch(function (erro) {
                 console.log("\nErro ao verificar email:", erro.sqlMessage);
-                res.status(500).json(erro.sqlMessage);
+                res.status(500).json({ mensagem: "Erro interno ao validar dados. Tente novamente." });
             });
     }
 }
@@ -81,7 +81,7 @@ function kpiAnimes(req, res) {
         }).catch(function (erro) {
             console.log(erro);
             console.log("Houve um erro ao buscar os kpis: ", erro.sqlMessage);
-            res.status(500).json(erro.sqlMessage);
+            res.status(500).json({ mensagem: "Erro interno ao buscar KPIs." });
         });
 }
 
@@ -96,7 +96,7 @@ function kpiSemAnime(req, res) {
         }).catch(function (erro) {
             console.log(erro);
             console.log("Houve um erro ao buscar os kpis sem anime: ", erro.sqlMessage);
-            res.status(500).json(erro.sqlMessage);
+            res.status(500).json({ mensagem: "Erro interno ao buscar dados de dashboard." });
         });
 }
 
@@ -111,7 +111,7 @@ function kpiTotal(req, res) {
         }).catch(function (erro) {
             console.log(erro);
             console.log("Houve um erro ao buscar o total: ", erro.sqlMessage);
-            res.status(500).json(erro.sqlMessage);
+            res.status(500).json({ mensagem: "Erro interno ao buscar dados totais." });
         });
 }
 
