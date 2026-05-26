@@ -99,10 +99,9 @@
         <div class="area-grafico">
           <canvas id="grafico_crescimento"></canvas>
         </div>
-      </div> <!-- Fim grade-graficos -->
-
-    </div> <!-- Fim conteudo-painel -->
-  </div> <!-- Fim do dashboard-container -->
+    </div>
+  </div>
+  </div>
 
 
 
@@ -215,7 +214,6 @@
       fetch(`/medidas/ultimas`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {
           response.json().then(function (resposta) {
-            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
             plotarGrafico(resposta);
           });
         } else {
@@ -228,7 +226,6 @@
     }
 
     function plotarGrafico(resposta) {
-      console.log('iniciando plotagem do gráfico...');
 
       let labels = [];
       let dados = {

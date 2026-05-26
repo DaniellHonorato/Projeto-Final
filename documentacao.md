@@ -1,57 +1,129 @@
 # Documentação do Projeto: Caminho Ninja
 
 ## 1. Visão Geral do Projeto
-O **Caminho Ninja** é um projeto individual desenvolvido no contexto da matéria de WebDataViz (SPTech). O objetivo é conectar a paixão por tecnologia com a essência de três grandes animes Shounen: **Naruto**, **Haikyuu!!** e **Black Clover**. O projeto possui páginas interativas e dinâmicas que explicam a filosofia dos protagonistas de cada anime e como esses valores (resiliência, colaboração e dedicação) se aplicam na área de tecnologia e desenvolvimento de software.
+O **Caminho Ninja** é um projeto individual desenvolvido na SPTech (WebDataViz). O objetivo é conectar a paixão por tecnologia com os valores dos protagonistas de três grandes animes shounen: **Naruto**, **Haikyuu!!** e **Black Clover**. O projeto possui páginas interativas que explicam a filosofia de cada protagonista e como os valores de resiliência, colaboração e dedicação se aplicam à vida na área de tecnologia.
 
-O sistema conta com um Front-End rico e responsivo (HTML, CSS e JS Vanilla) e um Back-End robusto construído em Node.js com banco de dados MySQL para controle de usuários e dashboard com métricas reais (Chart.js).
+O sistema conta com um Front-End rico e responsivo (HTML, CSS e JS Vanilla) e um Back-End em Node.js com banco de dados MySQL para controle de usuários, recomendações dinâmicas de animes e uma dashboard com métricas reais (Chart.js).
 
-## 2. Estrutura do Sistema (Arquitetura)
-A aplicação segue a arquitetura de **MVC** (Model-View-Controller) simplificada e recomendada pelo padrão SPTech:
-- **`public/` (View):** Contém todas as páginas HTML, arquivos CSS (`estilo.css`, `universo.css`, `auth.css`, `dashboard.css`), imagens e o client-side JavaScript (`sessao.js`).
-- **`src/routes/`:** Define as rotas (Endpoints) para API RESTful.
-- **`src/controllers/`:** Responsável pela lógica de requisição e resposta do servidor (validações).
-- **`src/models/`:** Contém as Queries (instruções SQL) para conectar e manipular o banco de dados.
-- **`src/database/`:** Arquivo `config.js` que gerencia a conexão direta com o MySQL, separando ambientes de desenvolvimento e produção através do arquivo `.env`.
+### Objetivos de Desenvolvimento Sustentável (ODS) da ONU
+O projeto se conecta diretamente a três ODS:
+- **ODS 3 (Saúde e Bem-Estar):** Aborda a saúde mental do programador iniciante, usando hobbies e valores de animes como ferramenta de resiliência emocional.
+- **ODS 4 (Educação de Qualidade):** Promove a ideia de que dedicação e esforço contínuo superam barreiras educacionais, inspirado na história do Asta (Black Clover).
+- **ODS 8 (Trabalho Decente e Crescimento Econômico):** Fomenta profissionais colaborativos e resilientes, valores essenciais para um mercado de trabalho de TI saudável.
 
-## 3. Funcionalidades Desenvolvidas
+---
+
+## 2. Arquitetura do Sistema (MVC)
+A aplicação segue a arquitetura **MVC** (Model-View-Controller) recomendada pela SPTech:
+
+- **`public/` (View):** Páginas HTML, arquivos CSS, imagens e JavaScript client-side (`sessao.js`).
+- **`src/routes/`:** Define os endpoints da API RESTful.
+- **`src/controllers/`:** Lógica de requisição e resposta (validações de campos, regras de negócio).
+- **`src/models/`:** Queries SQL que se comunicam diretamente com o banco de dados MySQL.
+- **`src/database/config.js`:** Gerencia a conexão com o banco, separando ambientes de desenvolvimento (`.env.dev`) e produção (`.env`).
+
+---
+
+## 3. Funcionalidades
 
 ### 3.1. Landing Page (Home)
-- **Apresentação Hero:** Banner central focado em tecnologia com estética de animes.
-- **Valores Ninja:** Cards interativos que relacionam valores profissionais (Resiliência, Colaboração, Dedicação) aos animes (Naruto, Haikyuu, Black Clover).
-- **Explorando Universos:** Seção de redirecionamento para as páginas específicas de cada anime, destacando as filosofias dos protagonistas.
+- **Hero:** Banner central com frase inspiracional.
+- **Valores Ninja:** Cards interativos relacionando Resiliência (Naruto), Colaboração (Haikyuu) e Dedicação (Black Clover) à área de TI.
+- **Protagonistas:** Seção de redirecionamento para as páginas de universo de cada anime.
+- **Call-to-Action:** Botão animado "Explore mais universos" direcionando para o cadastro.
 
-### 3.2. Páginas de Universo (Naruto, Haikyuu, Black Clover)
-- **Layout de 3 Colunas Responsivo:** 
-  - *Esquerda:* Informações do Anime (gênero, episódios, autor).
-  - *Centro:* Protagonista (história, barras animadas de atributos).
-  - *Direita:* Filosofias (3 frases célebres de cada protagonista e o contexto da lição aplicável na vida real).
-- **Design Temático:** A cor e os ícones mudam dependendo do universo acessado (Laranja para Naruto, Prata para Haikyuu e Vermelho Intenso para Black Clover).
+### 3.2. Páginas de Universo (Naruto, Haikyuu!!, Black Clover)
+- Layout de 3 colunas: informações do anime, protagonista com barras de atributos animadas e frases filosóficas com contexto.
 
 ### 3.3. Autenticação (Login e Cadastro)
-- **Cadastro Seguro:** O usuário precisa fornecer nome, e-mail e senha. Há validação para garantir que as senhas coincidem e os campos não estão em branco.
-- **Anti-Duplicidade:** O Back-End verifica o banco de dados e impede a criação de uma conta se o *Nome* ou o *E-mail* já estiverem cadastrados.
-- **Validação CAPTCHA (Binário/Matemático):** Durante o cadastro, o sistema gera uma conta de multiplicação de números de 1 a 10. O usuário insere a resposta em formato decimal, mas por trás dos panos, o JavaScript a converte para número binário para validar a integridade.
-- **Login com Sessão:** O sistema armazena os dados básicos de identificação (Session Storage) e mantém as rotas da Dashboard seguras.
+- **Cadastro:** Validação de campos em branco, verificação de senhas iguais e anti-duplicidade (nome/email já cadastrado).
+- **CAPTCHA Matemático/Binário:** O sistema gera uma multiplicação aleatória. O usuário responde em decimal, e o JavaScript converte ambos os valores para **Binário** (`toString(2)`) para comparar — aplicação direta de lógica computacional e operações matemáticas.
+- **Login com Sessão:** Dados do usuário (id, nome, email) armazenados em `sessionStorage` para proteger as rotas da Dashboard.
+- **Loading:** GIF animado exibido durante o processamento da requisição.
 
-### 3.4. Dashboard e Recomendações
-- **KPIs (Indicadores-chave):** Mostra dinamicamente quantos usuários da plataforma já assistiram a animes e quantos nunca assistiram.
-- **Gráfico de Pizza:** Exibe visualmente a proporção do perfil do público cadastrado.
-- **Gráfico de Linha:** Chart.js configurado para buscar de forma assíncrona dados da receita global da indústria de animes.
-- **Recomendações:** Uma grade de 10 recomendações com "Modais" personalizados, contendo imagens (`.jpg` na pasta local), gêneros e sinopses dinâmicas via JS.
+### 3.4. Dashboard (Painel do Usuário)
+- **KPIs:** Quantos usuários já assistiram anime e quantos nunca assistiram.
+- **Gráfico de Rosca (Doughnut):** Proporção do perfil do público cadastrado.
+- **Gráfico de Linha:** Receita global da indústria de animes (2015–2024) em bilhões US$, buscada dinamicamente do banco de dados.
+
+### 3.5. Recomendações de Animes
+- Grade de 13 animes com modal de detalhes (sinopse, gênero, recomendação).
+- Dados carregados **dinamicamente** via `fetch("/animes/listar")` — a lista vem do banco de dados, não do código-fonte.
+
+### 3.6. Linha da Vida
+- Timeline pessoal documentando a jornada com animes desde 2019, com os marcos mais importantes de cada ano.
+
+---
 
 ## 4. Banco de Dados (MySQL)
-O banco de dados armazena as seguintes informações essenciais:
-- `id` (INT PRIMARY KEY AUTO_INCREMENT)
-- `nome` (VARCHAR)
-- `email` (VARCHAR UNIQUE)
-- `senha` (VARCHAR)
-- `ja_viu_anime` (TINYINT - 1 ou 0)
+
+### Tabelas
+| Tabela | Descrição |
+|---|---|
+| `usuario` | Armazena os usuários cadastrados no site |
+| `anime` | Lista de animes recomendados (migrada do front para o banco) |
+| `crescimento_anime` | Dados históricos da receita global da indústria de animes (2015–2024) |
+
+### Relacionamentos
+`usuario` e `crescimento_anime` são tabelas independentes. `anime` é independente e serve a lista de recomendações de forma dinâmica.
+
+### Comandos SQL utilizados
+- `SELECT` com `COUNT`, `WHERE`, `ORDER BY`
+- `INSERT INTO`
+
+---
 
 ## 5. Tecnologias Utilizadas
-- **Front-End:** HTML5, CSS3, JavaScript (Vanilla), Chart.js
-- **Back-End:** Node.js, Express, Cors
+- **Front-End:** HTML5, CSS3, JavaScript Vanilla, Chart.js
+- **Back-End:** Node.js, Express.js, Cors, Dotenv
 - **Banco de Dados:** MySQL
 - **Controle de Versão:** Git / GitHub
 
 ---
-*Projeto 95% concluído, focado na entrega da sprint final da SPTech com layout completamente otimizado.*
+
+## 6. Estrutura de Pastas
+```
+Projeto-Individual/
+├── app.js                    # Servidor principal (Node.js/Express)
+├── public/                   # Front-End (View)
+│   ├── index.html
+│   ├── login.html
+│   ├── cadastro.html
+│   ├── universo-naruto.html
+│   ├── universo-haikyuu.html
+│   ├── universo-blackclover.html
+│   ├── dashboard/
+│   │   ├── dashboard.html
+│   │   ├── recomendacoes.html
+│   │   └── linha-vida.html
+│   ├── css/
+│   │   ├── estilo.css
+│   │   ├── universo.css
+│   │   ├── auth.css
+│   │   └── dashboard.css
+│   ├── js/
+│   │   └── sessao.js
+│   └── assets/
+│       ├── icon/
+│       └── imgs/
+└── src/                      # Back-End (MVC)
+    ├── routes/
+    │   ├── usuarios.js
+    │   ├── medidas.js
+    │   └── animes.js
+    ├── controllers/
+    │   ├── usuarioController.js
+    │   ├── medidaController.js
+    │   └── animeController.js
+    ├── models/
+    │   ├── usuarioModel.js
+    │   ├── medidaModel.js
+    │   └── animeModel.js
+    └── database/
+        ├── config.js
+        └── script-tabelas.sql
+```
+
+---
+
+*Projeto desenvolvido por Daniel Honorato — SPTech, 2026.*
