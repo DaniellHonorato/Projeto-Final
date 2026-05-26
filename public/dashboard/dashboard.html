@@ -125,12 +125,12 @@
         })
         .then(function (json) {
           if (json.length > 0) qtdViram = json[0].qtdUsuarios;
-          document.getElementById("indicador_viram").innerText = qtdViram;
+          document.getElementById("indicador_viram").innerHTML = qtdViram;
           tentarMontarGraficos();
         })
         .catch(function (erro) {
           console.error("Erro ao buscar quem viu anime:", erro);
-          document.getElementById("indicador_viram").innerText = "Erro";
+          document.getElementById("indicador_viram").innerHTML = "Erro";
         });
     }
 
@@ -142,17 +142,20 @@
         })
         .then(function (json) {
           if (json.length > 0) qtdNaoViram = json[0].qtdUsuarios;
-          document.getElementById("indicador_nao_viram").innerText = qtdNaoViram;
+          document.getElementById("indicador_nao_viram").innerHTML = qtdNaoViram;
           tentarMontarGraficos();
         })
         .catch(function (erro) {
           console.error("Erro ao buscar quem não viu anime:", erro);
-          document.getElementById("indicador_nao_viram").innerText = "Erro";
+          document.getElementById("indicador_nao_viram").innerHTML = "Erro";
         });
     }
 
 
     function buscarMaisFavoritado() {
+      var spanFavoritado = document.getElementById("indicador_mais_favoritado");
+      var spanDescricao  = document.getElementById("descricao_mais_favoritado");
+
       fetch("/favoritos/mais-favoritado")
         .then(function (resposta) {
           if (resposta.ok) return resposta.json();
@@ -161,18 +164,18 @@
         .then(function (dados) {
           if (dados && dados.titulo && dados.total !== undefined) {
             if (dados.total > 0) {
-              document.getElementById("indicador_mais_favoritado").innerText = dados.titulo;
-              document.getElementById("indicador_mais_favoritado").title = dados.titulo;
-              document.getElementById("descricao_mais_favoritado").innerText = `Favoritado por ${dados.total} ninja(s)`;
+              spanFavoritado.innerHTML = dados.titulo;
+              spanFavoritado.title    = dados.titulo;
+              spanDescricao.innerHTML = "Favoritado por " + dados.total + " ninja(s)";
             } else {
-              document.getElementById("indicador_mais_favoritado").innerText = "Nenhum ainda";
-              document.getElementById("descricao_mais_favoritado").innerText = "Sem votos registrados";
+              spanFavoritado.innerHTML = "Nenhum ainda";
+              spanDescricao.innerHTML  = "Sem votos registrados";
             }
           }
         })
         .catch(function (erro) {
           console.error("Erro ao buscar mais favoritado:", erro);
-          document.getElementById("indicador_mais_favoritado").innerText = "Erro";
+          spanFavoritado.innerHTML = "Erro";
         });
     }
 
@@ -185,7 +188,8 @@
     }
 
     function montarGraficoPizza() {
-      var ctx = document.getElementById("grafico_pizza").getContext("2d");
+      var canvasPizza = document.getElementById("grafico_pizza");
+      var ctx = canvasPizza.getContext("2d");
 
       new Chart(ctx, {
         type: "doughnut",
@@ -304,7 +308,8 @@
         }
       };
 
-      var ctx = document.getElementById("grafico_crescimento").getContext("2d");
+      var canvasCrescimento = document.getElementById("grafico_crescimento");
+      var ctx = canvasCrescimento.getContext("2d");
       new Chart(ctx, config);
     }
   </script>

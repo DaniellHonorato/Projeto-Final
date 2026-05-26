@@ -104,7 +104,7 @@
     let idAnimeAtual = null;
 
     function renderizarAnimes() {
-      const container = document.getElementById("container_animes");
+      var container = document.getElementById("container_animes");
       container.innerHTML = "Carregando recomendações da vila...";
 
       fetch("/animes/listar")
@@ -113,7 +113,7 @@
             resposta.json().then(function (animesBanco) {
               listaAnimes = animesBanco;
               container.innerHTML = "";
-              listaAnimes.forEach((anime, index) => {
+              listaAnimes.forEach(function (anime, index) {
                 container.innerHTML += `
                   <div class="card-anime" onclick="abrirModal(${index})">
                     <div class="capa-wrapper">
@@ -130,59 +130,71 @@
           }
         })
         .catch(function (error) {
-          console.error(`Erro na obtenção dos animes: ${error.message}`);
+          console.error("Erro na obtenção dos animes: " + error.message);
           container.innerHTML = "Erro ao conectar com o servidor.";
         });
     }
 
     function abrirModal(index) {
-      const anime = listaAnimes[index];
+      var anime = listaAnimes[index];
       idAnimeAtual = anime.id;
-      document.getElementById("modal_img").src = anime.imagem;
-      document.getElementById("modal_titulo").innerText = anime.titulo;
-      document.getElementById("modal_generos").innerText = anime.generos;
-      document.getElementById("modal_recomendacao").innerText = anime.recomendacao;
-      document.getElementById("modal_texto_sinopse").innerText = anime.sinopse;
+
+      // Referencia todos os elementos do modal de uma vez
+      var imgModal       = document.getElementById("modal_img");
+      var tituloModal    = document.getElementById("modal_titulo");
+      var generosModal   = document.getElementById("modal_generos");
+      var recomModal     = document.getElementById("modal_recomendacao");
+      var sinopseModal   = document.getElementById("modal_texto_sinopse");
+      var overlayModal   = document.getElementById("modal_anime");
+
+      // Preenche o modal com os dados do anime
+      imgModal.src            = anime.imagem;
+      tituloModal.innerHTML   = anime.titulo;
+      generosModal.innerHTML  = anime.generos;
+      recomModal.innerHTML    = anime.recomendacao;
+      sinopseModal.innerHTML  = anime.sinopse;
 
       // Reseta coração para o padrão antes de verificar
       atualizarVisualCoracao(false);
 
-      const idUsuario = sessionStorage.ID_USUARIO;
+      var idUsuario = sessionStorage.ID_USUARIO;
       if (idUsuario && idAnimeAtual) {
-        fetch(`/favoritos/verificar/${idUsuario}/${idAnimeAtual}`)
-          .then(resposta => {
+        fetch("/favoritos/verificar/" + idUsuario + "/" + idAnimeAtual)
+          .then(function (resposta) {
             if (resposta.ok) {
-              resposta.json().then(dados => {
+              resposta.json().then(function (dados) {
                 atualizarVisualCoracao(dados.favoritado);
               });
             }
           })
-          .catch(erro => console.error("Erro ao verificar favorito:", erro));
+          .catch(function (erro) {
+            console.error("Erro ao verificar favorito:", erro);
+          });
       }
 
-      document.getElementById("modal_anime").style.display = "flex";
+      overlayModal.style.display = "flex";
     }
 
     function atualizarVisualCoracao(favoritado) {
-      const coracao = document.getElementById("coracao_svg");
-      const texto = document.getElementById("texto_favorito");
-      const btn = document.getElementById("btn_favorito");
+      var coracao = document.getElementById("coracao_svg");
+      var texto   = document.getElementById("texto_favorito");
+      var btn     = document.getElementById("btn_favorito");
       
       if (favoritado) {
-        coracao.style.fill = "#f43f5e";
+        coracao.style.fill   = "#f43f5e";
         coracao.style.stroke = "#f43f5e";
-        texto.innerText = "Favoritado!";
-        btn.style.color = "#f43f5e";
+        texto.innerHTML      = "Favoritado!";
+        btn.style.color      = "#f43f5e";
       } else {
-        coracao.style.fill = "none";
+        coracao.style.fill   = "none";
         coracao.style.stroke = "#94a3b8";
-        texto.innerText = "Favoritar";
-        btn.style.color = "#94a3b8";
+        texto.innerHTML      = "Favoritar";
+        btn.style.color      = "#94a3b8";
       }
     }
 
     function toggleFavorito() {
-      const idUsuario = sessionStorage.ID_USUARIO;
+      var idUsuario = sessionStorage.ID_USUARIO;
       if (!idUsuario) {
         alert("Você precisa estar logado para favoritar!");
         return;
@@ -196,19 +208,19 @@
         },
         body: JSON.stringify({
           idUsuarioServer: idUsuario,
-          idAnimeServer: idAnimeAtual
+          idAnimeServer:   idAnimeAtual
         })
       })
-      .then(resposta => {
+      .then(function (resposta) {
         if (resposta.ok) {
-          resposta.json().then(dados => {
+          resposta.json().then(function (dados) {
             atualizarVisualCoracao(dados.favoritado);
           });
         } else {
           console.error("Erro ao alternar favorito");
         }
       })
-      .catch(erro => {
+      .catch(function (erro) {
         console.error("Erro ao conectar com servidor para favoritar:", erro);
       });
     }
@@ -219,7 +231,7 @@
 
     // Fechar ao clicar fora do conteúdo
     window.onclick = function(event) {
-      const modal = document.getElementById("modal_anime");
+      var modal = document.getElementById("modal_anime");
       if (event.target == modal) {
         modal.style.display = "none";
       }

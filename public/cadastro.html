@@ -107,9 +107,10 @@
   }
 
   function validarCaptcha() {
-    var respostaUsuario = parseInt(document.getElementById("captcha_input").value);
+    var inputCaptcha     = document.getElementById("captcha_input");
+    var respostaUsuario  = parseInt(inputCaptcha.value);
 
-    // Usuário digitou em decimal converte ambos para binário e compara
+    // Usuário digitou em decimal — converte ambos para binário e compara
     var respostaUsuarioBinario = respostaUsuario.toString(2);
     var gabaritoBinario        = captchaRespostaDecimal.toString(2);
 
@@ -121,11 +122,19 @@
   }
 
   function cadastrar() {
-    var nomeVar             = document.getElementById("nome_input").value.trim();
-    var emailVar            = document.getElementById("email_input").value.trim();
-    var senhaVar            = document.getElementById("senha_input").value;
-    var confirmacaoSenhaVar = document.getElementById("confirmacao_senha_input").value;
-    var jaViuAnimeVar       = document.getElementById("ipt_anime").value;
+    // Referencia todos os inputs de uma vez
+    var inputNome      = document.getElementById("nome_input");
+    var inputEmail     = document.getElementById("email_input");
+    var inputSenha     = document.getElementById("senha_input");
+    var inputConfSenha = document.getElementById("confirmacao_senha_input");
+    var inputAnime     = document.getElementById("ipt_anime");
+    var inputCaptcha   = document.getElementById("captcha_input");
+
+    var nomeVar             = inputNome.value.trim();
+    var emailVar            = inputEmail.value.trim();
+    var senhaVar            = inputSenha.value;
+    var confirmacaoSenhaVar = inputConfSenha.value;
+    var jaViuAnimeVar       = inputAnime.value;
 
     // Campos em branco
     if (!nomeVar || !emailVar || !senhaVar || !confirmacaoSenhaVar || !jaViuAnimeVar) {
@@ -143,7 +152,7 @@
     if (!validarCaptcha()) {
       exibirErro("Resposta incorreta. Tente novamente.");
       gerarCaptcha();
-      document.getElementById("captcha_input").value = "";
+      inputCaptcha.value = "";
       return false;
     }
 
@@ -155,18 +164,18 @@
         nomeServer:       nomeVar,
         emailServer:      emailVar,
         senhaServer:      senhaVar,
-        jaViuAnimeServer: jaViuAnimeVar  // "1" ou "0"
+        jaViuAnimeServer: jaViuAnimeVar
       }),
     })
       .then(function (resposta) {
         if (resposta.ok) {
           exibirErro("Vai Palmeiras! Redirecionando para o Login...", "sucesso");
           setTimeout(function () { window.location = "login.html"; }, 2000);
-          limparFormulario();
+          limparFormulario(inputNome, inputEmail, inputSenha, inputConfSenha, inputAnime, inputCaptcha);
         } else {
-          return resposta.text().then(texto => {
+          return resposta.text().then(function (texto) {
               console.error(texto);
-              throw texto.replace(/\"/g, ''); // Remove as aspas do JSON
+              throw texto.replace(/\"/g, '');
           });
         }
       })
@@ -178,8 +187,8 @@
     return false;
   }
 
-  // ── Helpers ───────────────────────────────────────────────────
-  function exibirErro(mensagem, tipo = "erro") {
+  // ── Helpers ───────────────────────────────────────────────
+  function exibirErro(mensagem, tipo) {
     var cardErro     = document.getElementById("cardErro");
     var mensagemErro = document.getElementById("mensagem_erro");
     
@@ -191,17 +200,17 @@
       cardErro.classList.add("card_erro");
     }
     
-    cardErro.style.display = "block";
-    mensagemErro.innerHTML = mensagem;
+    cardErro.style.display  = "block";
+    mensagemErro.innerHTML  = mensagem;
     setTimeout(function () { cardErro.style.display = "none"; }, 5000);
   }
 
-  function limparFormulario() {
-    document.getElementById("nome_input").value              = "";
-    document.getElementById("email_input").value             = "";
-    document.getElementById("senha_input").value             = "";
-    document.getElementById("confirmacao_senha_input").value = "";
-    document.getElementById("ipt_anime").value               = "";
-    document.getElementById("captcha_input").value           = "";
+  function limparFormulario(inputNome, inputEmail, inputSenha, inputConfSenha, inputAnime, inputCaptcha) {
+    inputNome.value      = "";
+    inputEmail.value     = "";
+    inputSenha.value     = "";
+    inputConfSenha.value = "";
+    inputAnime.value     = "";
+    inputCaptcha.value   = "";
   }
 </script>

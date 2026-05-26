@@ -66,8 +66,11 @@
   function entrar() {
     aguardar();
 
-    var emailVar = document.getElementById("email_input").value.trim();
-    var senhaVar = document.getElementById("senha_input").value;
+    var inputEmail = document.getElementById("email_input");
+    var inputSenha = document.getElementById("senha_input");
+
+    var emailVar = inputEmail.value.trim();
+    var senhaVar = inputSenha.value;
 
     if (!emailVar || !senhaVar) {
       exibirErro("Por favor, preencha o e-mail e a senha antes de continuar.");
@@ -114,8 +117,8 @@
   function exibirErro(mensagem) {
     var cardErro     = document.getElementById("cardErro");
     var mensagemErro = document.getElementById("mensagem_erro");
-    cardErro.style.display = "block";
-    mensagemErro.innerHTML = mensagem;
+    cardErro.style.display  = "block";
+    mensagemErro.innerHTML  = mensagem;
     setTimeout(function () { cardErro.style.display = "none"; }, 5000);
   }
 </script>
