@@ -21,6 +21,7 @@ var indexRouter   = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
 var medidaRouter  = require("./src/routes/medidas");
 var animeRouter   = require("./src/routes/animes");
+var favoritosRouter = require("./src/routes/favoritos");
 
 
 app.use(express.json());
@@ -33,6 +34,7 @@ app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/medidas", medidaRouter);
 app.use("/animes", animeRouter);
+app.use("/favoritos", favoritosRouter);
 
 
 app.listen(PORTA_APP, function () {

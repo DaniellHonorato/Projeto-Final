@@ -606,3 +606,17 @@ body {
     font-size: 1rem;
 }
 
+.cartao-indicador.favorito {
+    border-top: 3px solid #f43f5e;
+}
+
+.cartao-indicador.favorito .valor {
+    color: #f43f5e;
+    font-size: 1.8rem !important; /* Smaller size for long titles */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    max-width: 100%;
+}
+

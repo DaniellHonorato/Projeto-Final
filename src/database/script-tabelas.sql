@@ -51,3 +51,12 @@ INSERT INTO anime (titulo, imagem, generos, recomendacao, sinopse) VALUES
 ('Attack on Titan', '../assets/imgs/animes/aot.jpg', 'Ação, Drama, Fantasia Sombria', 'Recomendado caso goste de histórias profundas, reviravoltas absurdas e animes que não poupam ninguem.', 'A humanidade vive atrás de enormes muralhas para se proteger dos Titãs, criaturas gigantescas que devoram humanos. Após sua cidade ser destruida, Eren Yeager jura exterminar todos os Titãs e descobrir a verdade sobre o mundo que existe além das muralhas.'),
 ('One Piece', '../assets/imgs/animes/onepiece.jpg', 'Ação, Aventura, Comédia', 'Recomendado caso goste de aventuras epicas, um mundo incrivel e uma das histórias mais longas e apaixonantes do anime.', 'Monkey D. Luffy quer se tornar o Rei dos Piratas encontrando o lendário tesouro One Piece. Junto com sua tripulação cada vez maior, ele navega pelos Mares e enfrenta a Marinha, outros piratas e poderes incríveis, sempre com um sorriso no rosto e a vontade de proteger quem ama.'),
 ('Kimetsu no Yaiba', '../assets/imgs/animes/kimetsu.jpg', 'Ação, Fantasia, Sobrenatural', 'Recomendado caso goste de animação de outro nível, lutas belissimas e personagens que você se apega instantâneamente.', 'Tanjiro Kamado leva uma vida tranquila com sua familia até o dia em que ela é massacrada por um demonônio. Sua irmã Nezuko sobrevive, mas é transformada em demonônio. Determinado a vinga-la e restaurar a humanidade da irmã, Tanjiro torna-se um Matador de Demonios.');
+
+CREATE TABLE favorito (
+	fk_usuario INT,
+	fk_anime INT,
+	data_favoritado TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	FOREIGN KEY (fk_usuario) REFERENCES usuario(id),
+	FOREIGN KEY (fk_anime) REFERENCES anime(id),
+	PRIMARY KEY (fk_usuario, fk_anime)
+);

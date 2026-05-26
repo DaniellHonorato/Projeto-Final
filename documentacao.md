@@ -42,13 +42,14 @@ A aplicação segue a arquitetura **MVC** (Model-View-Controller) recomendada pe
 - **Loading:** GIF animado exibido durante o processamento da requisição.
 
 ### 3.4. Dashboard (Painel do Usuário)
-- **KPIs:** Quantos usuários já assistiram anime e quantos nunca assistiram.
+- **KPIs:** Quantos usuários já assistiram anime, quantos nunca assistiram, total de cadastrados e o **Anime Mais Favoritado da Vila** (com título e contagem de votos buscados do banco).
 - **Gráfico de Rosca (Doughnut):** Proporção do perfil do público cadastrado.
 - **Gráfico de Linha:** Receita global da indústria de animes (2015–2024) em bilhões US$, buscada dinamicamente do banco de dados.
 
 ### 3.5. Recomendações de Animes
 - Grade de 13 animes com modal de detalhes (sinopse, gênero, recomendação).
 - Dados carregados **dinamicamente** via `fetch("/animes/listar")` — a lista vem do banco de dados, não do código-fonte.
+- **Sistema de Favoritos (Relacionamento N:N):** No modal de cada anime, há um botão de coração (❤️) interativo que permite favoritar e desfavoritar o anime em tempo real via Fetch API no banco de dados.
 
 ### 3.6. Linha da Vida
 - Timeline pessoal documentando a jornada com animes desde 2019, com os marcos mais importantes de cada ano.
@@ -63,13 +64,15 @@ A aplicação segue a arquitetura **MVC** (Model-View-Controller) recomendada pe
 | `usuario` | Armazena os usuários cadastrados no site |
 | `anime` | Lista de animes recomendados (migrada do front para o banco) |
 | `crescimento_anime` | Dados históricos da receita global da indústria de animes (2015–2024) |
+| `favorito` | Tabela ponte associativa para gerenciar os favoritos dos usuários |
 
 ### Relacionamentos
-`usuario` e `crescimento_anime` são tabelas independentes. `anime` é independente e serve a lista de recomendações de forma dinâmica.
+- **Relacionamento Relacional N:N (Muitos para Muitos):** Resolvido através da tabela associativa `favorito`, ligando a tabela `usuario` (`fk_usuario` -> `usuario.id`) e `anime` (`fk_anime` -> `anime.id`). Isso garante integridade referencial através de duas chaves estrangeiras.
 
 ### Comandos SQL utilizados
-- `SELECT` com `COUNT`, `WHERE`, `ORDER BY`
-- `INSERT INTO`
+- `SELECT` com `COUNT`, `WHERE`, `ORDER BY`, `LIMIT`
+- `INSERT INTO` e `DELETE` (para favoritar/desfavoritar)
+- `JOIN` e `GROUP BY` (para buscar as estatísticas agregadas e descobrir o anime mais favoritado da vila na KPI)
 
 ---
 
@@ -110,15 +113,18 @@ Projeto-Individual/
     ├── routes/
     │   ├── usuarios.js
     │   ├── medidas.js
-    │   └── animes.js
+    │   ├── animes.js
+    │   └── favoritos.js
     ├── controllers/
     │   ├── usuarioController.js
     │   ├── medidaController.js
-    │   └── animeController.js
+    │   ├── animeController.js
+    │   └── favoritoController.js
     ├── models/
     │   ├── usuarioModel.js
     │   ├── medidaModel.js
-    │   └── animeModel.js
+    │   ├── animeModel.js
+    │   └── favoritoModel.js
     └── database/
         ├── config.js
         └── script-tabelas.sql

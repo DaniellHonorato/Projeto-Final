@@ -80,7 +80,13 @@
       <div class="modal-body">
         <img id="modal_img" src="" alt="Capa do Anime">
         <div class="modal-info">
-          <h2 id="modal_titulo">Título</h2>
+          <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 10px; flex-wrap: wrap;">
+            <h2 id="modal_titulo" style="margin: 0; font-size: 1.8rem; font-weight: 700;">Título</h2>
+            <button id="btn_favorito" onclick="toggleFavorito()" class="btn-favoritar" style="background: transparent; border: none; cursor: pointer; display: flex; align-items: center; gap: 5px; font-family: 'Poppins', sans-serif; font-size: 0.95rem; font-weight: 500; transition: all 0.3s ease; color: #94a3b8; outline: none; padding: 5px 8px; border-radius: 6px;">
+              <svg id="coracao_svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition: all 0.3s ease;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+              <span id="texto_favorito">Favoritar</span>
+            </button>
+          </div>
           <p class="modal-genero"><strong>Gênero:</strong> <span id="modal_generos"></span></p>
           <p class="modal-recomendacao" id="modal_recomendacao"></p>
           <div class="modal-sinopse">
@@ -95,6 +101,7 @@
   <script>
     // Dados dos Animes
     let listaAnimes = [];
+    let idAnimeAtual = null;
 
     function renderizarAnimes() {
       const container = document.getElementById("container_animes");
@@ -130,13 +137,80 @@
 
     function abrirModal(index) {
       const anime = listaAnimes[index];
+      idAnimeAtual = anime.id;
       document.getElementById("modal_img").src = anime.imagem;
       document.getElementById("modal_titulo").innerText = anime.titulo;
       document.getElementById("modal_generos").innerText = anime.generos;
       document.getElementById("modal_recomendacao").innerText = anime.recomendacao;
       document.getElementById("modal_texto_sinopse").innerText = anime.sinopse;
 
+      // Reseta coração para o padrão antes de verificar
+      atualizarVisualCoracao(false);
+
+      const idUsuario = sessionStorage.ID_USUARIO;
+      if (idUsuario && idAnimeAtual) {
+        fetch(`/favoritos/verificar/${idUsuario}/${idAnimeAtual}`)
+          .then(resposta => {
+            if (resposta.ok) {
+              resposta.json().then(dados => {
+                atualizarVisualCoracao(dados.favoritado);
+              });
+            }
+          })
+          .catch(erro => console.error("Erro ao verificar favorito:", erro));
+      }
+
       document.getElementById("modal_anime").style.display = "flex";
+    }
+
+    function atualizarVisualCoracao(favoritado) {
+      const coracao = document.getElementById("coracao_svg");
+      const texto = document.getElementById("texto_favorito");
+      const btn = document.getElementById("btn_favorito");
+      
+      if (favoritado) {
+        coracao.style.fill = "#f43f5e";
+        coracao.style.stroke = "#f43f5e";
+        texto.innerText = "Favoritado!";
+        btn.style.color = "#f43f5e";
+      } else {
+        coracao.style.fill = "none";
+        coracao.style.stroke = "#94a3b8";
+        texto.innerText = "Favoritar";
+        btn.style.color = "#94a3b8";
+      }
+    }
+
+    function toggleFavorito() {
+      const idUsuario = sessionStorage.ID_USUARIO;
+      if (!idUsuario) {
+        alert("Você precisa estar logado para favoritar!");
+        return;
+      }
+      if (!idAnimeAtual) return;
+
+      fetch("/favoritos/toggle", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          idUsuarioServer: idUsuario,
+          idAnimeServer: idAnimeAtual
+        })
+      })
+      .then(resposta => {
+        if (resposta.ok) {
+          resposta.json().then(dados => {
+            atualizarVisualCoracao(dados.favoritado);
+          });
+        } else {
+          console.error("Erro ao alternar favorito");
+        }
+      })
+      .catch(erro => {
+        console.error("Erro ao conectar com servidor para favoritar:", erro);
+      });
     }
 
     function fecharModal() {

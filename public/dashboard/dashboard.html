@@ -84,6 +84,12 @@
         <span class="valor" id="indicador_total">—</span>
         <span class="descricao">Todos os cadastrados na vila</span>
       </div>
+
+      <div class="cartao-indicador favorito">
+        <span class="rotulo">Mais Favoritado da Vila</span>
+        <span class="valor" id="indicador_mais_favoritado" style="font-size: 1.8rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">—</span>
+        <span class="descricao" id="descricao_mais_favoritado">Nenhum voto registrado</span>
+      </div>
     </div>
 
 
@@ -115,6 +121,7 @@
       buscarViram();
       buscarNaoViram();
       buscarTotal();
+      buscarMaisFavoritado();
       obterDadosGrafico();
     }
 
@@ -165,6 +172,30 @@
         .catch(function (erro) {
           console.error("Erro ao buscar total:", erro);
           document.getElementById("indicador_total").innerText = "Erro";
+        });
+    }
+
+    function buscarMaisFavoritado() {
+      fetch("/favoritos/mais-favoritado")
+        .then(function (resposta) {
+          if (resposta.ok) return resposta.json();
+          return null;
+        })
+        .then(function (dados) {
+          if (dados && dados.titulo && dados.total !== undefined) {
+            if (dados.total > 0) {
+              document.getElementById("indicador_mais_favoritado").innerText = dados.titulo;
+              document.getElementById("indicador_mais_favoritado").title = dados.titulo;
+              document.getElementById("descricao_mais_favoritado").innerText = `Favoritado por ${dados.total} ninja(s)`;
+            } else {
+              document.getElementById("indicador_mais_favoritado").innerText = "Nenhum ainda";
+              document.getElementById("descricao_mais_favoritado").innerText = "Sem votos registrados";
+            }
+          }
+        })
+        .catch(function (erro) {
+          console.error("Erro ao buscar mais favoritado:", erro);
+          document.getElementById("indicador_mais_favoritado").innerText = "Erro";
         });
     }
 
