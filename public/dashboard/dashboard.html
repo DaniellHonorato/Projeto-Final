@@ -79,12 +79,6 @@
         <span class="descricao">Ninjas prontos para descobrir esse universo</span>
       </div>
 
-      <div class="cartao-indicador haikyuu">
-        <span class="rotulo">Total de ninjas</span>
-        <span class="valor" id="indicador_total">—</span>
-        <span class="descricao">Todos os cadastrados na vila</span>
-      </div>
-
       <div class="cartao-indicador favorito">
         <span class="rotulo">Mais Favoritado da Vila</span>
         <span class="valor" id="indicador_mais_favoritado" style="font-size: 1.8rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">—</span>
@@ -115,12 +109,10 @@
 
     var qtdViram = 0;
     var qtdNaoViram = 0;
-    var qtdTotal = 0;
 
     function carregarPainel() {
       buscarViram();
       buscarNaoViram();
-      buscarTotal();
       buscarMaisFavoritado();
       obterDadosGrafico();
     }
@@ -159,21 +151,6 @@
         });
     }
 
-    function buscarTotal() {
-      fetch("/usuarios/kpi-total")
-        .then(function (resposta) {
-          if (resposta.ok) return resposta.json();
-          return [];
-        })
-        .then(function (json) {
-          if (json.length > 0) qtdTotal = json[0].qtdUsuarios;
-          document.getElementById("indicador_total").innerText = qtdTotal;
-        })
-        .catch(function (erro) {
-          console.error("Erro ao buscar total:", erro);
-          document.getElementById("indicador_total").innerText = "Erro";
-        });
-    }
 
     function buscarMaisFavoritado() {
       fetch("/favoritos/mais-favoritado")
