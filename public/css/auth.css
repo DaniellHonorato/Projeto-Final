@@ -1,4 +1,4 @@
-﻿:root {
+:root {
     --escuridao: #0f0f11;         
     --cards-escuro: #1c1c21;      
     --textos-principais: #f8fafc; 
@@ -41,7 +41,7 @@ h1 {
     font-size: 1.5rem;
 }
 
-.logotipo a {
+.logo a {
     text-decoration: none;
     color: inherit;
 }
@@ -178,7 +178,7 @@ nav a:hover {
 }
 
 /* --- Alertas e Carregamento --- */
-.div-carregamento {
+.loading-div {
     display: none;
     justify-content: center;
     align-items: center;
@@ -186,7 +186,7 @@ nav a:hover {
 }
 
 /* Spinner CSS puro â€” sem gif */
-.div-carregamento::after {
+.loading-div::after {
     content: '';
     display: block;
     width: 38px;
@@ -198,7 +198,7 @@ nav a:hover {
 }
 
 /* Esconde o img caso ainda exista no HTML */
-.div-carregamento img {
+.loading-div img {
     display: none;
 }
 

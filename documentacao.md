@@ -132,4 +132,15 @@ Projeto-Individual/
 
 ---
 
+## 7. Padronização e Nomenclatura das Classes CSS
+
+O projeto adota um **design híbrido estruturado** para a nomenclatura de classes e seletores CSS em todas as páginas:
+
+1. **Termos Estruturais e Técnicos em Inglês:** Elementos padrão da web e de layout clássico utilizam jargões técnicos consagrados da indústria (como `box`, `sidebar`, `container`, `card`, `grid`, `overlay`, `wrapper`, `modal`, `loading`, `logo`, `btn`, `hero`, `active`). Isso alinha o projeto com as boas práticas profissionais e com os principais frameworks de mercado.
+2. **Termos Semânticos e de Negócio em Português:** Elementos ligados diretamente ao contexto didático e conteúdo do projeto (como `.titulo-secao`, `.heroi-anime`, `.botao-explorar`, `.grade-indicadores`, `.grade-graficos`, etc.) são escritos em português claro. Isso facilita o estudo individual das funções e a explicação clara de cada área na apresentação do projeto.
+
+Essa arquitetura equilibra perfeitamente a legibilidade técnica com a facilidade de aprendizado do código.
+
+---
+
 *Projeto desenvolvido por Daniel Honorato — SPTech, 2026.*

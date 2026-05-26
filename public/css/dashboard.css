@@ -1,7 +1,7 @@
-﻿/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   Painel â€” CaminhoNinja
+/* ==========================================================================
+   Painel — CaminhoNinja
    Cores: Naruto (#FB7D02), Haikyuu (#ffffff), Clover (#5c0410)
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   ========================================================================== */
 
 :root {
     --fundo-principal: #0f0f11;
@@ -30,14 +30,14 @@ body {
     min-height: 100vh;
 }
 
-/* â”€â”€ Layout â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-.painel-container {
+/* ── Layout ────────────────────────────────────────────────────────── */
+.dashboard-container {
     display: flex;
     min-height: 100vh;
 }
 
-/* â”€â”€ Sidebar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-.barra-lateral {
+/* ── Sidebar ───────────────────────────────────────────────────────── */
+.sidebar {
     width: 260px;
     background-color: #121215;
     border-right: 1px solid rgba(255, 255, 255, 0.05);
@@ -49,7 +49,7 @@ body {
     top: 0;
 }
 
-.barra-lateral-usuario {
+.sidebar-user {
     font-size: 1.2rem;
     font-weight: 600;
     color: var(--texto-claro);
@@ -57,17 +57,17 @@ body {
     padding-left: 10px;
 }
 
-.barra-lateral-usuario span {
+.sidebar-user span {
     color: var(--laranja-naruto);
 }
 
-.barra-lateral-divisor {
+.sidebar-divider {
     border: 0;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     margin-bottom: 20px;
 }
 
-.barra-lateral-menu {
+.sidebar-menu {
     list-style: none;
     display: flex;
     flex-direction: column;
@@ -75,7 +75,7 @@ body {
     flex: 1;
 }
 
-.barra-lateral-menu a {
+.sidebar-menu a {
     display: flex;
     align-items: center;
     gap: 15px;
@@ -88,24 +88,24 @@ body {
     transition: all 0.3s ease;
 }
 
-.barra-lateral-menu a:hover {
+.sidebar-menu a:hover {
     background-color: rgba(255, 255, 255, 0.03);
 }
 
-.barra-lateral-menu a.ativo {
+.sidebar-menu a.active {
     background-color: #1a1a1f;
     color: var(--laranja-naruto);
 }
 
-.barra-lateral-menu a.ativo svg {
+.sidebar-menu a.active svg {
     stroke: var(--laranja-naruto);
 }
 
-.barra-lateral-rodape {
+.sidebar-bottom {
     margin-top: auto;
 }
 
-/* â”€â”€ Ãrea principal â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── Área principal ─────────────────────────────────────────────────── */
 .conteudo-painel {
     flex: 1;
     max-width: 100%;
@@ -113,7 +113,7 @@ body {
     overflow-y: auto;
 }
 
-/* â”€â”€ Boas-vindas â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── Boas-vindas ───────────────────────────────────────────────────── */
 .secao-boas-vindas {
     margin-bottom: 35px;
 }
@@ -135,7 +135,7 @@ body {
     margin-top: 4px;
 }
 
-/* â”€â”€ CartÃµes de indicadores â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── Cartões de indicadores ────────────────────────────────────────── */
 .grade-indicadores {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -152,8 +152,6 @@ body {
     flex-direction: column;
     gap: 12px;
 }
-
-
 
 .cartao-indicador .rotulo {
     font-size: 0.85rem;
@@ -199,7 +197,7 @@ body {
     color: var(--branco-haikyuu);
 }
 
-/* â”€â”€ GrÃ¡ficos â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── Gráficos ──────────────────────────────────────────────────────── */
 .grade-graficos {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
@@ -233,7 +231,7 @@ body {
     max-height: 350px;
 }
 
-/* â”€â”€ BotÃ£o Sair â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── Botão Sair ────────────────────────────────────────────────────── */
 .botao-sair {
     width: 100%;
     padding: 12px;
@@ -254,7 +252,7 @@ body {
     color: var(--texto-claro);
 }
 
-/* â”€â”€ Responsivo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── Responsivo ────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
     header {
         padding: 16px 5%;
@@ -272,7 +270,7 @@ body {
     }
 }
 
-/* â”€â”€ PÃ¡gina de RecomendaÃ§Ãµes (Grid 4 colunas) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── Página de Recomendações (Grid 4 colunas) ───────────────────────── */
 .grid-animes {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -280,7 +278,7 @@ body {
     margin-top: 30px;
 }
 
-.cartao-anime {
+.card-anime {
     background-color: var(--fundo-cartao);
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 12px;
@@ -290,17 +288,17 @@ body {
     text-align: center;
 }
 
-.cartao-anime:hover {
+.card-anime:hover {
     transform: translateY(-5px);
     border-color: var(--laranja-naruto);
     box-shadow: 0 8px 25px rgba(251, 125, 2, 0.15);
 }
 
-.cartao-anime {
+.card-anime {
     cursor: pointer;
 }
 
-.capa-envoltorio {
+.capa-wrapper {
     position: relative;
     width: 100%;
     aspect-ratio: 2 / 3;
@@ -309,18 +307,18 @@ body {
     margin-bottom: 12px;
 }
 
-.capa-envoltorio img {
+.capa-wrapper img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.4s ease;
 }
 
-.cartao-anime:hover .capa-envoltorio img {
+.card-anime:hover .capa-wrapper img {
     transform: scale(1.05);
 }
 
-.capa-envoltorio .sobreposicao {
+.capa-wrapper .overlay {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
     background: rgba(15, 15, 17, 0.7);
@@ -331,11 +329,11 @@ body {
     transition: opacity 0.3s ease;
 }
 
-.cartao-anime:hover .capa-envoltorio .sobreposicao {
+.card-anime:hover .capa-wrapper .overlay {
     opacity: 1;
 }
 
-.sobreposicao span {
+.overlay span {
     background: var(--laranja-naruto);
     color: var(--branco-haikyuu);
     padding: 8px 15px;
@@ -344,15 +342,15 @@ body {
     font-weight: 600;
 }
 
-.cartao-anime h3 {
+.card-anime h3 {
     font-size: 0.95rem;
     font-weight: 600;
     color: var(--texto-claro);
     line-height: 1.3;
 }
 
-/* â”€â”€ Modal Detalhes Anime â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-.modal-fundo {
+/* ── Modal Detalhes Anime ──────────────────────────────────────────── */
+.modal-overlay {
     display: none; 
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -363,7 +361,7 @@ body {
     backdrop-filter: blur(5px);
 }
 
-.modal-conteudo {
+.modal-content {
     background-color: var(--fundo-cartao);
     width: 90%;
     max-width: 700px;
@@ -380,7 +378,7 @@ body {
     to { opacity: 1; transform: scale(1); }
 }
 
-.botao-fechar {
+.close-btn {
     position: absolute;
     top: 15px;
     right: 20px;
@@ -390,16 +388,16 @@ body {
     transition: color 0.3s ease;
 }
 
-.botao-fechar:hover {
+.close-btn:hover {
     color: var(--laranja-naruto);
 }
 
-.modal-corpo {
+.modal-body {
     display: flex;
     gap: 25px;
 }
 
-.modal-corpo img {
+.modal-body img {
     width: 220px;
     height: 330px;
     object-fit: cover;
@@ -407,14 +405,14 @@ body {
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
-.modal-informacoes {
+.modal-info {
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-.modal-informacoes h2 {
+.modal-info h2 {
     font-size: 1.6rem;
     color: var(--laranja-naruto);
     font-weight: 700;
@@ -463,15 +461,15 @@ body {
 
 @media (max-width: 768px) {
     .grid-animes { grid-template-columns: repeat(2, 1fr); }
-    .modal-corpo { flex-direction: column; align-items: center; }
-    .modal-corpo img { width: 180px; height: 270px; }
+    .modal-body { flex-direction: column; align-items: center; }
+    .modal-body img { width: 180px; height: 270px; }
 }
 
 @media (max-width: 480px) {
     .grid-animes { grid-template-columns: 1fr; }
 }
 
-/* â”€â”€ Separador de SeÃ§Ãµes â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── Separador de Seções ───────────────────────────────────────────── */
 .secao-divisor {
     display: flex;
     align-items: center;
@@ -490,7 +488,7 @@ body {
     opacity: 0.8;
 }
 
-/* â”€â”€ Linha da Vida Simplificada â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── Linha da Vida Simplificada ────────────────────────────────────── */
 .linha-vida-container {
     padding: 20px 0 40px;
 }
@@ -619,4 +617,3 @@ body {
     display: inline-block;
     max-width: 100%;
 }
-

@@ -1,4 +1,4 @@
-﻿
+
 :root {
     --escuridao: #0f0f11;         
     --cards-escuro: #1c1c21;      
@@ -80,8 +80,8 @@ nav a:hover {
     color: var(--textos-principais); 
 }
 
-/* SESSÃƒO HERO */
-.heroi-anime {
+/* SESSÃO HERO */
+.hero-anime {
     display: flex;            
     align-items: center;      
     justify-content: space-between; 
@@ -90,13 +90,13 @@ nav a:hover {
     gap: 40px;                 
 }
 
-.heroi-imagem {
+.hero-img {
     flex: 1;                 
     display: flex;
     justify-content: center;
 }
 
-.imagem-personagem img {
+.personagem-img img {
     max-width: 100%;          
     height: auto;             
     border-radius: 20px;     
@@ -123,7 +123,7 @@ nav a:hover {
     padding: 80px 10%;
 }
 
-.grade-cards {
+.cards-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
@@ -143,7 +143,7 @@ nav a:hover {
 }
 
 .card-naruto h4, .card-haikyuu h4, .card-clover h4 { 
-    font-size: 16px; /* Tamanho padrÃ£o em px */
+    font-size: 16px; /* Tamanho padrão em px */
     font-weight: 400;
     margin-bottom: 20px; 
     color: var(--botoes);
@@ -164,7 +164,7 @@ nav a:hover {
 
 
 /*  CARDS DE VALORES  */
-.grade-cards {
+.cards-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
@@ -261,7 +261,7 @@ nav a:hover {
 }
 
 /*  ANIME BOXES  */
-.bloco-naruto {
+.naruto-box {
     background-color: var(--cards-escuro);
     margin-bottom: 30px;
     padding: 40px;
@@ -270,24 +270,24 @@ nav a:hover {
     transition: transform 0.3s;
 }
 
-.bloco-naruto:hover {
+.naruto-box:hover {
     transform: scale(1.01);
     box-shadow: (--sombra-naruto);
 }
 
-.bloco-naruto-info h3 {
+.naruto-box-info h3 {
     font-size: 2rem;
     margin-bottom: 15px;
     color: var(--textos-principais);
 }
 
-.bloco-naruto-info p {
+.naruto-box-info p {
     color: var(--textos-sec);
     font-size: 1.1rem;
 }
 
 
-.bloco-haikyuu {
+.haikyuu-box {
     background-color: var(--cards-escuro);
     margin-bottom: 30px;
     padding: 40px;
@@ -296,23 +296,23 @@ nav a:hover {
     transition: transform 0.3s;
 }
 
-.bloco-haikyuu:hover {
+.haikyuu-box:hover {
     transform: scale(1.01);
 }
 
-.bloco-haikyuu-info h3 {
+.haikyuu-box-info h3 {
     font-size: 2rem;
     margin-bottom: 15px;
     color: var(--textos-principais);
 }
 
-.bloco-haikyuu-info p {
+.haikyuu-box-info p {
     color: var(--textos-sec);
     font-size: 1.1rem;
 }
 
 
-.bloco-clover {
+.clover-box {
     background-color: var(--cards-escuro);
     margin-bottom: 30px;
     padding: 40px;
@@ -321,22 +321,22 @@ nav a:hover {
     transition: transform 0.3s;
 }
 
-.bloco-clover:hover {
+.clover-box:hover {
     transform: scale(1.01);
 }
 
-.bloco-clover-info h3 {
+.clover-box-info h3 {
     font-size: 2rem;
     margin-bottom: 15px;
     color: var(--textos-principais);
 }
 
-.bloco-clover-info p {
+.clover-box-info p {
     color: var(--textos-sec);
     font-size: 1.1rem;
 }
 
-/* ÃCONES DOS ANIMES (imagem) â€” seÃ§Ã£o Explorando os Universos */
+/* Ã CONES DOS ANIMES (imagem) â€” seÃ§Ã£o Explorando os Universos */
 .icone-anime {
     width: 42px;
     height: 42px;
@@ -347,7 +347,7 @@ nav a:hover {
     filter: drop-shadow(0 2px 6px rgba(0,0,0,0.45));
 }
 
-/* ÃCONES nas cards de VALORES */
+/* Ã CONES nas cards de VALORES */
 .icone-valor {
     width: 36px;
     height: 36px;
@@ -420,8 +420,8 @@ nav a:hover {
     color: var(--textos-sec);
 }
 
-/* â”€â”€ BotÃ£o "Explore mais universos" â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-.botao-explorar-mais {
+/* ── Botão "Explore mais universos" ─────────────────────── */
+.btn-explore-cta {
     display: inline-block;
     padding: 12px 28px;
     background: linear-gradient(135deg, #FB7D02, #e06d00);
@@ -431,12 +431,12 @@ nav a:hover {
     border-radius: 50px;
     text-decoration: none;
     letter-spacing: 0.5px;
-    box-shadow: 0 4px 18px rgba(251, 125, 2, 0.35);
+    box-shadow: 0 4px 18 rgba(251, 125, 2, 0.35);
     transition: all 0.35s ease;
     animation: pulse-glow 2.5s ease-in-out infinite;
 }
 
-.botao-explorar-mais:hover {
+.btn-explore-cta:hover {
     transform: translateY(-2px) scale(1.04);
     box-shadow: 0 6px 28px rgba(251, 125, 2, 0.55);
     background: linear-gradient(135deg, #ff9933, #FB7D02);
