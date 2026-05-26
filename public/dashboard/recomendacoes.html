@@ -19,18 +19,18 @@
 
 <body onload="validarSessao()">
 
-  <div class="dashboard-container">
+  <div class="painel-container">
     
     <!-- Sidebar -->
-    <nav class="sidebar">
-      <div class="sidebar-logo" style="text-align: center; margin-bottom: 20px;">
+    <nav class="barra-lateral">
+      <div class="barra-lateral-logo" style="text-align: center; margin-bottom: 20px;">
         <a href="../index.html"><img src="../assets/icon/logo.png" alt="Caminho Ninja" style="max-width: 100%; height: auto; max-height: 80px; cursor: pointer; transition: opacity 0.3s;" /></a>
       </div>
-      <div class="sidebar-user">
+      <div class="barra-lateral-usuario">
         Olá, <span id="b_usuario">Ninja</span>!
       </div>
-      <hr class="sidebar-divider">
-      <ul class="sidebar-menu">
+      <hr class="barra-lateral-divisor">
+      <ul class="barra-lateral-menu">
         <li>
           <a href="dashboard.html">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
@@ -38,7 +38,7 @@
           </a>
         </li>
         <li>
-          <a href="recomendacoes.html" class="active">
+          <a href="recomendacoes.html" class="ativo">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
             Recomendações
           </a>
@@ -50,7 +50,7 @@
           </a>
         </li>
       </ul>
-      <div class="sidebar-bottom">
+      <div class="barra-lateral-rodape">
         <button class="botao-sair" onclick="limparSessao()">Sair da vila</button>
       </div>
     </nav>
@@ -74,15 +74,15 @@
 
 
   <!-- Modal de Detalhes -->
-  <div id="modal_anime" class="modal-overlay">
-    <div class="modal-content">
-      <span class="close-btn" onclick="fecharModal()">&times;</span>
-      <div class="modal-body">
+  <div id="modal_anime" class="modal-fundo">
+    <div class="modal-conteudo">
+      <span class="botao-fechar" onclick="fecharModal()">&times;</span>
+      <div class="modal-corpo">
         <img id="modal_img" src="" alt="Capa do Anime">
-        <div class="modal-info">
+        <div class="modal-informacoes">
           <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 10px; flex-wrap: wrap;">
             <h2 id="modal_titulo" style="margin: 0; font-size: 1.8rem; font-weight: 700;">Título</h2>
-            <button id="btn_favorito" onclick="toggleFavorito()" class="btn-favoritar" style="background: transparent; border: none; cursor: pointer; display: flex; align-items: center; gap: 5px; font-family: 'Poppins', sans-serif; font-size: 0.95rem; font-weight: 500; transition: all 0.3s ease; color: #94a3b8; outline: none; padding: 5px 8px; border-radius: 6px;">
+            <button id="btn_favorito" onclick="toggleFavorito()" class="botao-favoritar" style="background: transparent; border: none; cursor: pointer; display: flex; align-items: center; gap: 5px; font-family: 'Poppins', sans-serif; font-size: 0.95rem; font-weight: 500; transition: all 0.3s ease; color: #94a3b8; outline: none; padding: 5px 8px; border-radius: 6px;">
               <svg id="coracao_svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition: all 0.3s ease;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
               <span id="texto_favorito">Favoritar</span>
             </button>
@@ -115,8 +115,8 @@
               container.innerHTML = "";
               listaAnimes.forEach(function (anime, index) {
                 container.innerHTML += `
-                  <div class="card-anime" onclick="abrirModal(${index})">
-                    <div class="capa-wrapper">
+                  <div class="cartao-anime" onclick="abrirModal(${index})">
+                    <div class="capa-envoltorio">
                       <img src="${anime.imagem}" alt="${anime.titulo}">
                     </div>
                     <h3>${anime.titulo}</h3>

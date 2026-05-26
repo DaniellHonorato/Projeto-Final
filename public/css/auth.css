@@ -1,4 +1,4 @@
-:root {
+﻿:root {
     --escuridao: #0f0f11;         
     --cards-escuro: #1c1c21;      
     --textos-principais: #f8fafc; 
@@ -41,7 +41,7 @@ h1 {
     font-size: 1.5rem;
 }
 
-.logo a {
+.logotipo a {
     text-decoration: none;
     color: inherit;
 }
@@ -99,7 +99,7 @@ nav a:hover {
 
 
 
-/* Título de Boas-Vindas */
+/* TÃ­tulo de Boas-Vindas */
 .card-cadastro h2, .card-login h2 {
     text-align: center;
     color: var(--textos-principais);
@@ -108,14 +108,14 @@ nav a:hover {
     font-weight: 700;
 }
 
-/* Espaçamento entre as caixas de texto */
+/* EspaÃ§amento entre as caixas de texto */
 .formulario {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-/* Organização de cada rótulo e caixa de texto */
+/* OrganizaÃ§Ã£o de cada rÃ³tulo e caixa de texto */
 .campo {
     display: flex;
     flex-direction: column;
@@ -152,7 +152,7 @@ nav a:hover {
     color: var(--textos-principais);
 }
 
-/* Estilo do Botão Principal */
+/* Estilo do BotÃ£o Principal */
 .botao {
     background: linear-gradient(90deg, #FB7D02, #e06d00);
     color: #ffffff;
@@ -170,7 +170,7 @@ nav a:hover {
     box-shadow: 0 4px 15px rgba(251, 125, 2, 0.3);
 }
 
-/* Efeito ao passar o rato no botão */
+/* Efeito ao passar o rato no botÃ£o */
 .botao:hover {
     background: linear-gradient(90deg, #ff9933, #FB7D02);
     transform: translateY(-3px);
@@ -178,15 +178,15 @@ nav a:hover {
 }
 
 /* --- Alertas e Carregamento --- */
-.loading-div {
+.div-carregamento {
     display: none;
     justify-content: center;
     align-items: center;
     margin-top: 20px;
 }
 
-/* Spinner CSS puro — sem gif */
-.loading-div::after {
+/* Spinner CSS puro â€” sem gif */
+.div-carregamento::after {
     content: '';
     display: block;
     width: 38px;
@@ -198,7 +198,7 @@ nav a:hover {
 }
 
 /* Esconde o img caso ainda exista no HTML */
-.loading-div img {
+.div-carregamento img {
     display: none;
 }
 

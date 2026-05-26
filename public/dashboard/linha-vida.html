@@ -19,18 +19,18 @@
 
 <body onload="validarSessao()">
 
-  <div class="dashboard-container">
+  <div class="painel-container">
     
     <!-- Sidebar -->
-    <nav class="sidebar">
-      <div class="sidebar-logo" style="text-align: center; margin-bottom: 20px;">
+    <nav class="barra-lateral">
+      <div class="barra-lateral-logo" style="text-align: center; margin-bottom: 20px;">
         <a href="../index.html"><img src="../assets/icon/logo.png" alt="Caminho Ninja" style="max-width: 100%; height: auto; max-height: 80px; cursor: pointer; transition: opacity 0.3s;" /></a>
       </div>
-      <div class="sidebar-user">
+      <div class="barra-lateral-usuario">
         Olá, <span id="b_usuario">Ninja</span>!
       </div>
-      <hr class="sidebar-divider">
-      <ul class="sidebar-menu">
+      <hr class="barra-lateral-divisor">
+      <ul class="barra-lateral-menu">
         <li>
           <a href="dashboard.html">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
@@ -44,13 +44,13 @@
           </a>
         </li>
         <li>
-          <a href="linha-vida.html" class="active">
+          <a href="linha-vida.html" class="ativo">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
             Linha da Vida
           </a>
         </li>
       </ul>
-      <div class="sidebar-bottom">
+      <div class="barra-lateral-rodape">
         <button class="botao-sair" onclick="limparSessao()">Sair da vila</button>
       </div>
     </nav>

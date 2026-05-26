@@ -1,4 +1,4 @@
-
+﻿
 :root {
     --escuridao: #0f0f11;         
     --cards-escuro: #1c1c21;      
@@ -30,7 +30,7 @@ body {
 }
 
 
-.section-title {
+.titulo-secao {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 50px;
@@ -80,8 +80,8 @@ nav a:hover {
     color: var(--textos-principais); 
 }
 
-/* SESSÃO HERO */
-.hero-anime {
+/* SESSÃƒO HERO */
+.heroi-anime {
     display: flex;            
     align-items: center;      
     justify-content: space-between; 
@@ -90,13 +90,13 @@ nav a:hover {
     gap: 40px;                 
 }
 
-.hero-img {
+.heroi-imagem {
     flex: 1;                 
     display: flex;
     justify-content: center;
 }
 
-.personagem-img img {
+.imagem-personagem img {
     max-width: 100%;          
     height: auto;             
     border-radius: 20px;     
@@ -123,7 +123,7 @@ nav a:hover {
     padding: 80px 10%;
 }
 
-.cards-container {
+.grade-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
@@ -143,7 +143,7 @@ nav a:hover {
 }
 
 .card-naruto h4, .card-haikyuu h4, .card-clover h4 { 
-    font-size: 16px; /* Tamanho padrão em px */
+    font-size: 16px; /* Tamanho padrÃ£o em px */
     font-weight: 400;
     margin-bottom: 20px; 
     color: var(--botoes);
@@ -164,7 +164,7 @@ nav a:hover {
 
 
 /*  CARDS DE VALORES  */
-.cards-container {
+.grade-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
@@ -261,7 +261,7 @@ nav a:hover {
 }
 
 /*  ANIME BOXES  */
-.naruto-box {
+.bloco-naruto {
     background-color: var(--cards-escuro);
     margin-bottom: 30px;
     padding: 40px;
@@ -270,24 +270,24 @@ nav a:hover {
     transition: transform 0.3s;
 }
 
-.naruto-box:hover {
+.bloco-naruto:hover {
     transform: scale(1.01);
     box-shadow: (--sombra-naruto);
 }
 
-.naruto-box-info h3 {
+.bloco-naruto-info h3 {
     font-size: 2rem;
     margin-bottom: 15px;
     color: var(--textos-principais);
 }
 
-.naruto-box-info p {
+.bloco-naruto-info p {
     color: var(--textos-sec);
     font-size: 1.1rem;
 }
 
 
-.haikyuu-box {
+.bloco-haikyuu {
     background-color: var(--cards-escuro);
     margin-bottom: 30px;
     padding: 40px;
@@ -296,23 +296,23 @@ nav a:hover {
     transition: transform 0.3s;
 }
 
-.haikyuu-box:hover {
+.bloco-haikyuu:hover {
     transform: scale(1.01);
 }
 
-.haikyuu-box-info h3 {
+.bloco-haikyuu-info h3 {
     font-size: 2rem;
     margin-bottom: 15px;
     color: var(--textos-principais);
 }
 
-.haikyuu-box-info p {
+.bloco-haikyuu-info p {
     color: var(--textos-sec);
     font-size: 1.1rem;
 }
 
 
-.clover-box {
+.bloco-clover {
     background-color: var(--cards-escuro);
     margin-bottom: 30px;
     padding: 40px;
@@ -321,23 +321,23 @@ nav a:hover {
     transition: transform 0.3s;
 }
 
-.clover-box:hover {
+.bloco-clover:hover {
     transform: scale(1.01);
 }
 
-.clover-box-info h3 {
+.bloco-clover-info h3 {
     font-size: 2rem;
     margin-bottom: 15px;
     color: var(--textos-principais);
 }
 
-.clover-box-info p {
+.bloco-clover-info p {
     color: var(--textos-sec);
     font-size: 1.1rem;
 }
 
-/* ÍCONES DOS ANIMES (imagem) — seção Explorando os Universos */
-.anime-icon-img {
+/* ÃCONES DOS ANIMES (imagem) â€” seÃ§Ã£o Explorando os Universos */
+.icone-anime {
     width: 42px;
     height: 42px;
     object-fit: contain;
@@ -347,8 +347,8 @@ nav a:hover {
     filter: drop-shadow(0 2px 6px rgba(0,0,0,0.45));
 }
 
-/* ÍCONES nas cards de VALORES */
-.valor-icon-img {
+/* ÃCONES nas cards de VALORES */
+.icone-valor {
     width: 36px;
     height: 36px;
     object-fit: contain;
@@ -358,13 +358,13 @@ nav a:hover {
     filter: drop-shadow(0 1px 3px rgba(0,0,0,0.35));
 }
 
-/* H4 cores temáticas nos cards de valor */
+/* H4 cores temÃ¡ticas nos cards de valor */
 .card-naruto h4 { color: #FB7D02 !important; }
 .card-haikyuu h4 { color: #e8e8e8 !important; }
 .card-clover h4 { color: #e60000 !important; }
 
-/* BOTÕES "EXPLORAR UNIVERSO" */
-.btn-explorar {
+/* BOTÃ•ES "EXPLORAR UNIVERSO" */
+.botao-explorar {
     display: inline-block;
     margin-top: 28px;
     padding: 10px 24px;
@@ -377,36 +377,36 @@ nav a:hover {
     border: 2px solid transparent;
 }
 
-.btn-explorar-naruto {
+.botao-explorar-naruto {
     color: #FB7D02;
     border-color: #FB7D02;
     background: rgba(251, 125, 2, 0.08);
 }
-.btn-explorar-naruto:hover {
+.botao-explorar-naruto:hover {
     background: #FB7D02;
     color: #0f0f11;
     box-shadow: 0 0 20px rgba(251, 125, 2, 0.4);
     transform: translateX(4px);
 }
 
-.btn-explorar-haikyuu {
+.botao-explorar-haikyuu {
     color: #e8e8e8;
     border-color: #e8e8e8;
     background: rgba(232, 232, 232, 0.06);
 }
-.btn-explorar-haikyuu:hover {
+.botao-explorar-haikyuu:hover {
     background: #e8e8e8;
     color: #0f0f11;
     box-shadow: 0 0 20px rgba(232, 232, 232, 0.3);
     transform: translateX(4px);
 }
 
-.btn-explorar-clover {
+.botao-explorar-clover {
     color: #e60000;
     border-color: #e60000;
     background: rgba(230, 0, 0, 0.08);
 }
-.btn-explorar-clover:hover {
+.botao-explorar-clover:hover {
     background: #e60000;
     color: #fff;
     box-shadow: 0 0 20px rgba(230, 0, 0, 0.4);
@@ -420,8 +420,8 @@ nav a:hover {
     color: var(--textos-sec);
 }
 
-/* ── Botão "Explore mais universos" ─────────────────────── */
-.btn-explore-cta {
+/* â”€â”€ BotÃ£o "Explore mais universos" â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.botao-explorar-mais {
     display: inline-block;
     padding: 12px 28px;
     background: linear-gradient(135deg, #FB7D02, #e06d00);
@@ -436,7 +436,7 @@ nav a:hover {
     animation: pulse-glow 2.5s ease-in-out infinite;
 }
 
-.btn-explore-cta:hover {
+.botao-explorar-mais:hover {
     transform: translateY(-2px) scale(1.04);
     box-shadow: 0 6px 28px rgba(251, 125, 2, 0.55);
     background: linear-gradient(135deg, #ff9933, #FB7D02);
@@ -445,4 +445,4 @@ nav a:hover {
 @keyframes pulse-glow {
     0%, 100% { box-shadow: 0 4px 18px rgba(251, 125, 2, 0.35); }
     50% { box-shadow: 0 4px 28px rgba(251, 125, 2, 0.6); }
-}
+}
