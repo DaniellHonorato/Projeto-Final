@@ -100,8 +100,9 @@
 
   <script>
     // Dados dos Animes
-    let listaAnimes = [];
-    let idAnimeAtual = null;
+    var listaAnimes = [];
+    var idAnimeAtual = 0;
+    var favoritado = 0;
 
     function renderizarAnimes() {
       var container = document.getElementById("container_animes");
@@ -113,102 +114,90 @@
             resposta.json().then(function (animesBanco) {
               listaAnimes = animesBanco;
               container.innerHTML = "";
-              listaAnimes.forEach(function (anime, index) {
-                container.insertAdjacentHTML('beforeend', `
-                  <div class="card-anime" onclick="abrirModal(${index})">
+              for (var i = 0; i < listaAnimes.length; i++) {
+                container.innerHTML += `
+                  <div class="card-anime" onclick="abrirModal(${i})">
                     <div class="capa-wrapper">
-                      <img src="${anime.imagem}" alt="${anime.titulo}">
+                      <img src="${listaAnimes[i].imagem}" alt="${listaAnimes[i].titulo}">
                     </div>
-                    <h3>${anime.titulo}</h3>
+                    <h3>${listaAnimes[i].titulo}</h3>
                   </div>
-                `);
-              });
+                `;
+              }
             });
           } else {
-            console.error("Nenhum dado encontrado ou erro na API");
             container.innerHTML = "Falha ao carregar as recomendações.";
           }
         })
-        .catch(function (error) {
-          console.error("Erro na obtenção dos animes: " + error.message);
+        .catch(function (erro) {
           container.innerHTML = "Erro ao conectar com o servidor.";
         });
     }
 
     function abrirModal(index) {
       var anime = listaAnimes[index];
-      idAnimeAtual = parseInt(anime.id);
+      idAnimeAtual = anime.id;
 
-      // Referencia todos os elementos do modal de uma vez
-      var imgModal       = document.getElementById("modal_img");
-      var tituloModal    = document.getElementById("modal_titulo");
-      var generosModal   = document.getElementById("modal_generos");
-      var recomModal     = document.getElementById("modal_recomendacao");
-      var sinopseModal   = document.getElementById("modal_texto_sinopse");
-      var overlayModal   = document.getElementById("modal_anime");
+      document.getElementById("modal_img").src = anime.imagem;
+      document.getElementById("modal_titulo").innerHTML = anime.titulo;
+      document.getElementById("modal_generos").innerHTML = anime.generos;
+      document.getElementById("modal_recomendacao").innerHTML = anime.recomendacao;
+      document.getElementById("modal_texto_sinopse").innerHTML = anime.sinopse;
 
-      // Preenche o modal com os dados do anime
-      imgModal.src            = anime.imagem;
-      tituloModal.innerHTML   = anime.titulo;
-      generosModal.innerHTML  = anime.generos;
-      recomModal.innerHTML    = anime.recomendacao;
-      sinopseModal.innerHTML  = anime.sinopse;
+      // Reseta para não favoritado (0)
+      favoritado = 0;
+      atualizarBotaoFavorito();
 
-      // Reseta coração para o padrão antes de verificar
-      atualizarVisualCoracao(false);
+      // Verifica se já está favoritado no banco
+      var idUsuario = sessionStorage.ID_USUARIO;
 
-      var idUsuario = parseInt(sessionStorage.ID_USUARIO);
-      console.log("[Favorito] Abrindo modal — idUsuario:", idUsuario, "| idAnime:", idAnimeAtual);
-
-      if (idUsuario && idAnimeAtual) {
+      if (idUsuario != undefined && idAnimeAtual != undefined) {
         fetch("/favoritos/verificar/" + idUsuario + "/" + idAnimeAtual)
           .then(function (resposta) {
-            console.log("[Favorito] Verificar status HTTP:", resposta.status);
             if (resposta.ok) {
               resposta.json().then(function (dados) {
-                console.log("[Favorito] Já favoritado?", dados.favoritado);
-                atualizarVisualCoracao(dados.favoritado);
+                if (dados.favoritado == true) {
+                  favoritado = 1;
+                } else {
+                  favoritado = 0;
+                }
+                atualizarBotaoFavorito();
               });
-            } else {
-              console.error("[Favorito] Erro ao verificar — status:", resposta.status);
             }
-          })
-          .catch(function (erro) {
-            console.error("[Favorito] Erro de conexão ao verificar:", erro);
           });
-      } else {
-        console.warn("[Favorito] Sem sessão ou id de anime inválido. idUsuario:", idUsuario, "idAnime:", idAnimeAtual);
       }
 
-      overlayModal.style.display = "flex";
+      document.getElementById("modal_anime").style.display = "flex";
     }
 
-    function atualizarVisualCoracao(favoritado) {
-      var icone = document.getElementById("icone_favorito");
+    function atualizarBotaoFavorito() {
+      var botao = document.getElementById("btn_favorito");
       var texto = document.getElementById("texto_favorito");
-      var btn   = document.getElementById("btn_favorito");
 
-      if (favoritado) {
-        btn.classList.add("btn-favoritar--ativo");
+      if (favoritado == 1) {
+        botao.style.borderColor = "#f43f5e";
+        botao.style.color = "#f43f5e";
+        botao.style.backgroundColor = "rgba(244, 63, 94, 0.08)";
         texto.innerHTML = "Favoritado!";
       } else {
-        btn.classList.remove("btn-favoritar--ativo");
+        botao.style.borderColor = "#94a3b8";
+        botao.style.color = "#94a3b8";
+        botao.style.backgroundColor = "transparent";
         texto.innerHTML = "Favoritar";
       }
     }
 
     function toggleFavorito() {
-      var idUsuario = parseInt(sessionStorage.ID_USUARIO);
-      if (!idUsuario || isNaN(idUsuario)) {
+      var idUsuario = sessionStorage.ID_USUARIO;
+
+      if (idUsuario == undefined) {
         alert("Você precisa estar logado para favoritar!");
         return;
       }
-      if (!idAnimeAtual || isNaN(idAnimeAtual)) {
-        console.error("[Favorito] ID do anime inválido:", idAnimeAtual);
+
+      if (idAnimeAtual == undefined || idAnimeAtual == 0) {
         return;
       }
-
-      console.log("[Favorito] Enviando toggle — idUsuario:", idUsuario, "| idAnime:", idAnimeAtual);
 
       fetch("/favoritos/toggle", {
         method: "POST",
@@ -217,27 +206,26 @@
         },
         body: JSON.stringify({
           idUsuarioServer: idUsuario,
-          idAnimeServer:   idAnimeAtual
+          idAnimeServer: idAnimeAtual
         })
       })
-      .then(function (resposta) {
-        console.log("[Favorito] Toggle status HTTP:", resposta.status);
-        if (resposta.ok) {
-          resposta.json().then(function (dados) {
-            console.log("[Favorito] Novo estado favoritado:", dados.favoritado);
-            atualizarVisualCoracao(dados.favoritado);
-          });
-        } else {
-          resposta.text().then(function (texto) {
-            console.error("[Favorito] Erro ao alternar favorito:", texto);
+        .then(function (resposta) {
+          if (resposta.ok) {
+            resposta.json().then(function (dados) {
+              if (dados.favoritado == true) {
+                favoritado = 1;
+              } else {
+                favoritado = 0;
+              }
+              atualizarBotaoFavorito();
+            });
+          } else {
             alert("Erro ao favoritar. Tente novamente.");
-          });
-        }
-      })
-      .catch(function (erro) {
-        console.error("[Favorito] Erro de conexão:", erro);
-        alert("Erro de conexão ao favoritar.");
-      });
+          }
+        })
+        .catch(function (erro) {
+          alert("Erro de conexão ao favoritar.");
+        });
     }
 
     function fecharModal() {
@@ -245,14 +233,12 @@
     }
 
     // Fechar ao clicar fora do conteúdo
-    window.onclick = function(event) {
+    window.onclick = function (event) {
       var modal = document.getElementById("modal_anime");
       if (event.target == modal) {
         modal.style.display = "none";
       }
     }
-
-    // A função renderizarAnimes() é chamada pelo onload do body
   </script>
 </body>
 
