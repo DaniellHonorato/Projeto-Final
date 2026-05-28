@@ -137,7 +137,7 @@
 
     function abrirModal(index) {
       var anime = listaAnimes[index];
-      idAnimeAtual = anime.id;
+      idAnimeAtual = parseInt(anime.id);
 
       // Referencia todos os elementos do modal de uma vez
       var imgModal       = document.getElementById("modal_img");
@@ -157,19 +157,27 @@
       // Reseta coração para o padrão antes de verificar
       atualizarVisualCoracao(false);
 
-      var idUsuario = sessionStorage.ID_USUARIO;
+      var idUsuario = parseInt(sessionStorage.ID_USUARIO);
+      console.log("[Favorito] Abrindo modal — idUsuario:", idUsuario, "| idAnime:", idAnimeAtual);
+
       if (idUsuario && idAnimeAtual) {
         fetch("/favoritos/verificar/" + idUsuario + "/" + idAnimeAtual)
           .then(function (resposta) {
+            console.log("[Favorito] Verificar status HTTP:", resposta.status);
             if (resposta.ok) {
               resposta.json().then(function (dados) {
+                console.log("[Favorito] Já favoritado?", dados.favoritado);
                 atualizarVisualCoracao(dados.favoritado);
               });
+            } else {
+              console.error("[Favorito] Erro ao verificar — status:", resposta.status);
             }
           })
           .catch(function (erro) {
-            console.error("Erro ao verificar favorito:", erro);
+            console.error("[Favorito] Erro de conexão ao verificar:", erro);
           });
+      } else {
+        console.warn("[Favorito] Sem sessão ou id de anime inválido. idUsuario:", idUsuario, "idAnime:", idAnimeAtual);
       }
 
       overlayModal.style.display = "flex";
@@ -190,12 +198,17 @@
     }
 
     function toggleFavorito() {
-      var idUsuario = sessionStorage.ID_USUARIO;
-      if (!idUsuario) {
+      var idUsuario = parseInt(sessionStorage.ID_USUARIO);
+      if (!idUsuario || isNaN(idUsuario)) {
         alert("Você precisa estar logado para favoritar!");
         return;
       }
-      if (!idAnimeAtual) return;
+      if (!idAnimeAtual || isNaN(idAnimeAtual)) {
+        console.error("[Favorito] ID do anime inválido:", idAnimeAtual);
+        return;
+      }
+
+      console.log("[Favorito] Enviando toggle — idUsuario:", idUsuario, "| idAnime:", idAnimeAtual);
 
       fetch("/favoritos/toggle", {
         method: "POST",
@@ -208,16 +221,22 @@
         })
       })
       .then(function (resposta) {
+        console.log("[Favorito] Toggle status HTTP:", resposta.status);
         if (resposta.ok) {
           resposta.json().then(function (dados) {
+            console.log("[Favorito] Novo estado favoritado:", dados.favoritado);
             atualizarVisualCoracao(dados.favoritado);
           });
         } else {
-          console.error("Erro ao alternar favorito");
+          resposta.text().then(function (texto) {
+            console.error("[Favorito] Erro ao alternar favorito:", texto);
+            alert("Erro ao favoritar. Tente novamente.");
+          });
         }
       })
       .catch(function (erro) {
-        console.error("Erro ao conectar com servidor para favoritar:", erro);
+        console.error("[Favorito] Erro de conexão:", erro);
+        alert("Erro de conexão ao favoritar.");
       });
     }
 
