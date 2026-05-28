@@ -17,7 +17,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
-<body onload="validarSessao()">
+<body onload="validarSessao(); renderizarAnimes()">
 
   <div class="dashboard-container">
     
@@ -33,19 +33,19 @@
       <ul class="sidebar-menu">
         <li>
           <a href="dashboard.html">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            <img src="../assets/icon/bandana.png" width="20" height="20" alt="Ícone Dashboard">
             Dashboard
           </a>
         </li>
         <li>
           <a href="recomendacoes.html" class="active">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <img src="../assets/icon/grimorio.png" width="20" height="20" alt="Ícone Recomendações">
             Recomendações
           </a>
         </li>
         <li>
           <a href="linha-vida.html">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+            <img src="../assets/icon/haikyuu.png" width="20" height="20" alt="Ícone Linha da Vida">
             Linha da Vida
           </a>
         </li>
@@ -114,14 +114,14 @@
               listaAnimes = animesBanco;
               container.innerHTML = "";
               listaAnimes.forEach(function (anime, index) {
-                container.innerHTML += `
+                container.insertAdjacentHTML('beforeend', `
                   <div class="card-anime" onclick="abrirModal(${index})">
                     <div class="capa-wrapper">
                       <img src="${anime.imagem}" alt="${anime.titulo}">
                     </div>
                     <h3>${anime.titulo}</h3>
                   </div>
-                `;
+                `);
               });
             });
           } else {
@@ -237,8 +237,7 @@
       }
     }
 
-    // Chama a renderização quando carrega o script
-    renderizarAnimes();
+    // A função renderizarAnimes() é chamada pelo onload do body
   </script>
 </body>
 
