@@ -80,10 +80,10 @@
       <div class="modal-body">
         <img id="modal_img" src="" alt="Capa do Anime">
         <div class="modal-info">
-          <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 10px; flex-wrap: wrap;">
-            <h2 id="modal_titulo" style="margin: 0; font-size: 1.8rem; font-weight: 700;">Título</h2>
-            <button id="btn_favorito" onclick="toggleFavorito()" class="btn-favoritar" style="background: transparent; border: none; cursor: pointer; display: flex; align-items: center; gap: 5px; font-family: 'Poppins', sans-serif; font-size: 0.95rem; font-weight: 500; transition: all 0.3s ease; color: #94a3b8; outline: none; padding: 5px 8px; border-radius: 6px;">
-              <svg id="coracao_svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition: all 0.3s ease;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+          <div class="modal-titulo-linha">
+            <h2 id="modal_titulo">Título</h2>
+            <button id="btn_favorito" class="btn-favoritar" onclick="toggleFavorito()">
+              <span id="icone_favorito">♥</span>
               <span id="texto_favorito">Favoritar</span>
             </button>
           </div>
@@ -176,20 +176,16 @@
     }
 
     function atualizarVisualCoracao(favoritado) {
-      var coracao = document.getElementById("coracao_svg");
-      var texto   = document.getElementById("texto_favorito");
-      var btn     = document.getElementById("btn_favorito");
-      
+      var icone = document.getElementById("icone_favorito");
+      var texto = document.getElementById("texto_favorito");
+      var btn   = document.getElementById("btn_favorito");
+
       if (favoritado) {
-        coracao.style.fill   = "#f43f5e";
-        coracao.style.stroke = "#f43f5e";
-        texto.innerHTML      = "Favoritado!";
-        btn.style.color      = "#f43f5e";
+        btn.classList.add("btn-favoritar--ativo");
+        texto.innerHTML = "Favoritado!";
       } else {
-        coracao.style.fill   = "none";
-        coracao.style.stroke = "#94a3b8";
-        texto.innerHTML      = "Favoritar";
-        btn.style.color      = "#94a3b8";
+        btn.classList.remove("btn-favoritar--ativo");
+        texto.innerHTML = "Favoritar";
       }
     }
 

@@ -617,3 +617,42 @@ body {
     display: inline-block;
     max-width: 100%;
 }
+
+/* ── Botão Favoritar ────────────────────────────────────────────────── */
+.modal-titulo-linha {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.modal-titulo-linha h2 {
+    margin: 0;
+}
+
+.btn-favoritar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    border: 1px solid var(--texto-secundario);
+    border-radius: 6px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--texto-secundario);
+    transition: all 0.3s ease;
+}
+
+.btn-favoritar:hover {
+    border-color: #f43f5e;
+    color: #f43f5e;
+}
+
+.btn-favoritar--ativo {
+    border-color: #f43f5e;
+    color: #f43f5e;
+    background: rgba(244, 63, 94, 0.08);
+}
