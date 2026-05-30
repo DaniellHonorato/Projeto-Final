@@ -137,22 +137,5 @@ Projeto-Individual/
 
 ---
 
-## 7. Padronização e Nomenclatura das Classes CSS
-
-O projeto adota um **design híbrido estruturado** para a nomenclatura de classes e seletores CSS em todas as páginas:
-
-1. **Termos Estruturais e Técnicos em Inglês:** Elementos padrão da web e de layout clássico utilizam jargões técnicos consagrados da indústria (como `box`, `sidebar`, `container`, `card`, `grid`, `overlay`, `wrapper`, `modal`, `loading`, `logo`, `btn`, `hero`, `active`). Isso alinha o projeto com as boas práticas profissionais e com os principais frameworks de mercado.
-2. **Termos Semânticos e de Negócio em Português:** Elementos ligados diretamente ao contexto didático e conteúdo do projeto (como `.titulo-secao`, `.heroi-anime`, `.botao-explorar`, `.grade-indicadores`, `.grade-graficos`, etc.) são escritos em português claro. Isso facilita o estudo individual das funções e a explicação clara de cada área na apresentação do projeto.
-
-Essa arquitetura equilibra perfeitamente a legibilidade técnica com a facilidade de aprendizado do código.
-
----
-
-## 8. Estratégia de Layout de Tela Fixo (Não Responsivo)
-Para assegurar a máxima estabilidade e consistência visual durante a apresentação de defesa perante a banca examinadora, todas as regras de mídia responsiva (`@media`) foram propositalmente desativadas e removidas de todos os arquivos CSS. 
-
-Isso garante que a interface se comporte com um layout fixed-width ideal de desktop em qualquer projetor ou monitor da banca, eliminando qualquer risco de quebras visuais inesperadas e mantendo 100% da integridade do design premium e da diagramação planejada.
-
----
 
 *Projeto desenvolvido por Daniel Honorato — SPTech, 2026.*
