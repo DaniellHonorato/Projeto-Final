@@ -1,4 +1,4 @@
-// sessão
+// ── Validar Sessão ─────────────────────────────────────────────────
 function validarSessao() {
     var email    = sessionStorage.EMAIL_USUARIO;
     var nome     = sessionStorage.NOME_USUARIO;
@@ -11,20 +11,21 @@ function validarSessao() {
     }
 }
 
+// ── Limpar Sessão ──────────────────────────────────────────────────
 function limparSessao() {
     sessionStorage.clear();
     window.location = "../index.html";
 }
 
-// carregamento (loading)
+// ── Loading / Aguardar ─────────────────────────────────────────────
 function aguardar() {
     var divAguardar = document.getElementById("div_aguardar");
     divAguardar.style.display = "flex";
 }
 
 function finalizarAguardar(texto) {
-    var divAguardar    = document.getElementById("div_aguardar");
-    var divErrosLogin  = document.getElementById("div_erros_login");
+    var divAguardar   = document.getElementById("div_aguardar");
+    var divErrosLogin = document.getElementById("div_erros_login");
 
     divAguardar.style.display = "none";
 
@@ -33,4 +34,3 @@ function finalizarAguardar(texto) {
         divErrosLogin.innerHTML     = texto;
     }
 }
-

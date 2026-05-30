@@ -1,5 +1,6 @@
 var favoritoModel = require("../models/favoritoModel");
 
+// ── Verificar ──────────────────────────────────────────────────────
 function verificar(req, res) {
     var idUsuario = req.params.idUsuario;
     var idAnime = req.params.idAnime;
@@ -22,6 +23,7 @@ function verificar(req, res) {
     }
 }
 
+// ── Toggle Favorito ────────────────────────────────────────────────
 function toggleFavorito(req, res) {
     var idUsuario = req.body.idUsuarioServer;
     var idAnime = req.body.idAnimeServer;
@@ -35,7 +37,6 @@ function toggleFavorito(req, res) {
             .then(function (resultado) {
                 var jaFavoritado = resultado.length > 0 && resultado[0].favoritado > 0;
                 if (jaFavoritado) {
-                    // Desfavoritar
                     favoritoModel.desfavoritar(idUsuario, idAnime)
                         .then(function () {
                             res.status(200).json({ favoritado: false, mensagem: "Removido dos favoritos!" });
@@ -45,7 +46,6 @@ function toggleFavorito(req, res) {
                             res.status(500).json({ mensagem: "Erro ao remover dos favoritos." });
                         });
                 } else {
-                    // Favoritar
                     favoritoModel.favoritar(idUsuario, idAnime)
                         .then(function () {
                             res.status(200).json({ favoritado: true, mensagem: "Adicionado aos favoritos!" });
@@ -64,6 +64,7 @@ function toggleFavorito(req, res) {
     }
 }
 
+// ── Mais Favoritado ────────────────────────────────────────────────
 function obterMaisFavoritado(req, res) {
     favoritoModel.obterMaisFavoritado()
         .then(function (resultado) {
@@ -80,8 +81,28 @@ function obterMaisFavoritado(req, res) {
         });
 }
 
+// ── Listar Favoritos do Usuário ────────────────────────────────────
+function listarFavoritos(req, res) {
+    var idUsuario = req.params.idUsuario;
+
+    if (idUsuario == undefined) {
+        res.status(400).send("idUsuario está undefined!");
+    } else {
+        favoritoModel.listarFavoritosPorUsuario(idUsuario)
+            .then(function (resultado) {
+                res.status(200).json(resultado);
+            })
+            .catch(function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao listar favoritos: ", erro.sqlMessage);
+                res.status(500).json({ mensagem: "Erro interno ao listar favoritos." });
+            });
+    }
+}
+
 module.exports = {
     verificar,
     toggleFavorito,
-    obterMaisFavoritado
+    obterMaisFavoritado,
+    listarFavoritos
 };

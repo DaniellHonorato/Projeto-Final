@@ -1,7 +1,6 @@
-/* ==========================================
-   UNIVERSO.CSS — Páginas de Universo dos Animes
-   ========================================== */
-
+/* ==========================================================================
+   CONFIGURAÇÕES GERAIS E VARIÁVEIS
+   ========================================================================== */
 :root {
   --bg: #0a0a0c;
   --card: #141418;
@@ -24,7 +23,9 @@ body {
   line-height: 1.7;
 }
 
-/* ── HEADER ─────────────────────── */
+/* ==========================================================================
+   CABEÇALHO E HERO (INTRODUÇÃO)
+   ========================================================================== */
 .universo-header {
   display: flex;
   align-items: center;
@@ -52,11 +53,11 @@ body {
   padding: 8px 0;
   border: none;
 }
+
 .voltar-btn:hover {
   color: var(--text);
 }
 
-/* ── HERO ───────────────────────── */
 .universo-hero {
   position: relative;
   padding: 80px 6% 60px;
@@ -102,11 +103,9 @@ body {
   max-width: 560px;
 }
 
-.hero-accent {
-  display: none; /* Fundo colorido removido a pedido */
-}
-
-/* ── TEMAS ──────────────────────── */
+/* ==========================================================================
+   TEMAS ESPECÍFICOS POR ANIME
+   ========================================================================== */
 .tema-naruto .hero-badge { border-color: rgba(251,125,2,0.4); color: #FB7D02; }
 .tema-naruto .bloco-label { color: #FB7D02; }
 .tema-naruto .citacao { border-left-color: #FB7D02; }
@@ -122,14 +121,15 @@ body {
 .tema-clover .citacao { border-left-color: #e60000; }
 .tema-clover .filosofia-frase::before { color: #e60000; }
 
-/* ── CONTEÚDO PRINCIPAL ──────────── */
+/* ==========================================================================
+   CONTEÚDO PRINCIPAL E LAYOUT DE COLUNAS
+   ========================================================================== */
 .universo-conteudo {
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 4% 80px;
 }
 
-/* LAYOUT 3 COLUNAS: anime | protagonista | filosofias */
 .conteudo-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -173,7 +173,7 @@ body {
 
 .bloco-anime p:last-of-type { margin-bottom: 0; }
 
-/* ── INFO GRID ──────────────────── */
+/* Grade de Informações */
 .info-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -205,7 +205,7 @@ body {
   color: var(--text);
 }
 
-/* ── PERSONAGEM ──────────────── */
+/* Personagem e Citação */
 .personagem-header {
   display: flex;
   align-items: center;
@@ -229,7 +229,6 @@ body {
   font-style: italic;
 }
 
-/* ── CITAÇÃO PRINCIPAL ──────────── */
 .citacao {
   border-left: 3px solid var(--text-sec);
   margin: 22px 0 18px;
@@ -250,48 +249,7 @@ body {
   font-weight: 600;
 }
 
-/* ── ATRIBUTOS ──────────────────── */
-.atributos {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 6px;
-}
-
-.atributo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.atributo-nome {
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--text-sec);
-  min-width: 140px;
-  text-align: right;
-  flex-shrink: 0;
-}
-
-.atributo-barra {
-  flex: 1;
-  height: 6px;
-  background: rgba(255,255,255,0.06);
-  border-radius: 99px;
-  overflow: hidden;
-}
-
-.atributo-fill {
-  height: 100%;
-  border-radius: 99px;
-  animation: fillBar 1.2s ease forwards;
-}
-
-@keyframes fillBar {
-  from { width: 0 !important; }
-}
-
-/* ── FILOSOFIAS (3ª coluna) ──────── */
+/* Filosofias e Frases */
 .bloco-filosofias h2 {
   font-size: 1.3rem;
 }
@@ -340,7 +298,9 @@ body {
 .tema-haikyuu .filosofia-frase::before { color: #c8c8c8; }
 .tema-clover .filosofia-frase::before { color: #c9365a; }
 
-/* ── FOOTER ──────────────────── */
+/* ==========================================================================
+   RODAPÉ E CONFIGURAÇÕES RESPONSIVAS
+   ========================================================================== */
 .universo-footer {
   text-align: center;
   padding: 32px;
@@ -349,24 +309,3 @@ body {
   font-size: 0.85rem;
 }
 
-/* ── RESPONSIVO ──────────────── */
-@media (max-width: 1100px) {
-  .conteudo-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-  .bloco-filosofias {
-    grid-column: 1 / -1;
-  }
-}
-
-@media (max-width: 700px) {
-  .conteudo-grid {
-    grid-template-columns: 1fr;
-  }
-  .universo-hero { padding: 60px 5% 50px; }
-  .universo-conteudo { padding: 0 5% 60px; }
-  .bloco-anime, .bloco-personagem, .bloco-filosofias { padding: 26px 20px; }
-  .personagem-header { flex-direction: column; align-items: flex-start; }
-  .atributo-nome { min-width: 110px; font-size: 0.75rem; }
-  .info-grid { grid-template-columns: 1fr; }
-}

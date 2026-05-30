@@ -22,7 +22,7 @@
 <body onload="validarSessao(); carregarPainel()">
 
   <div class="dashboard-container">
-    
+
     <!-- Sidebar -->
     <nav class="sidebar">
       <div class="sidebar-logo" style="text-align: center; margin-bottom: 20px;">
@@ -65,51 +65,51 @@
         <p>Aqui estão os dados da comunidade CaminhoNinja.</p>
       </div>
 
+      <!-- KPIs -->
+      <div class="grade-indicadores">
+        <div class="cartao-indicador naruto">
+          <span class="rotulo">Já assistiram anime</span>
+          <span class="valor" id="indicador_viram">—</span>
+          <span class="descricao">Ninjas que já entraram no mundo dos animes</span>
+        </div>
 
-    <div class="grade-indicadores">
-      <div class="cartao-indicador naruto">
-        <span class="rotulo">Já assistiram anime</span>
-        <span class="valor" id="indicador_viram">—</span>
-        <span class="descricao">Ninjas que já entraram no mundo dos animes</span>
-      </div>
+        <div class="cartao-indicador clover">
+          <span class="rotulo">Nunca assistiram</span>
+          <span class="valor" id="indicador_nao_viram">—</span>
+          <span class="descricao">Ninjas prontos para descobrir esse universo</span>
+        </div>
 
-      <div class="cartao-indicador clover">
-        <span class="rotulo">Nunca assistiram</span>
-        <span class="valor" id="indicador_nao_viram">—</span>
-        <span class="descricao">Ninjas prontos para descobrir esse universo</span>
-      </div>
-
-      <div class="cartao-indicador favorito">
-        <span class="rotulo">Mais Favoritado da Vila</span>
-        <span class="valor" id="indicador_mais_favoritado" style="font-size: 1.8rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">—</span>
-        <span class="descricao" id="descricao_mais_favoritado">Nenhum voto registrado</span>
-      </div>
-    </div>
-
-
-    <div class="grade-graficos">
-      <div class="cartao-grafico">
-        <h3>Proporção — Já assistiu anime?</h3>
-        <div class="area-grafico">
-          <canvas id="grafico_pizza"></canvas>
+        <div class="cartao-indicador favorito">
+          <span class="rotulo">Mais Favoritado da Vila</span>
+          <span class="valor" id="indicador_mais_favoritado" style="font-size: 1.8rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">—</span>
+          <span class="descricao" id="descricao_mais_favoritado">Nenhum voto registrado</span>
         </div>
       </div>
-      <div class="cartao-grafico">
-        <h3>Crescimento da indústria de anime no mundo (em bilhões US$)</h3>
-        <div class="area-grafico">
-          <canvas id="grafico_crescimento"></canvas>
+
+      <!-- Gráficos -->
+      <div class="grade-graficos">
+        <div class="cartao-grafico">
+          <h3>Proporção — Já assistiu anime?</h3>
+          <div class="area-grafico">
+            <canvas id="grafico_pizza"></canvas>
+          </div>
         </div>
+        <div class="cartao-grafico">
+          <h3>Crescimento da indústria de anime no mundo (em bilhões US$)</h3>
+          <div class="area-grafico">
+            <canvas id="grafico_crescimento"></canvas>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
-  </div>
-
-
 
   <script>
-
-    var qtdViram = 0;
+    var qtdViram    = 0;
     var qtdNaoViram = 0;
 
+    // ── Carregar Painel ────────────────────────────────────────────────
     function carregarPainel() {
       buscarViram();
       buscarNaoViram();
@@ -117,6 +117,7 @@
       obterDadosGrafico();
     }
 
+    // ── KPI: Já Viram Anime ────────────────────────────────────────────
     function buscarViram() {
       fetch("/usuarios/kpi-animes")
         .then(function (resposta) {
@@ -134,6 +135,7 @@
         });
     }
 
+    // ── KPI: Nunca Viram Anime ─────────────────────────────────────────
     function buscarNaoViram() {
       fetch("/usuarios/kpi-sem-anime")
         .then(function (resposta) {
@@ -151,7 +153,7 @@
         });
     }
 
-
+    // ── KPI: Mais Favoritado ───────────────────────────────────────────
     function buscarMaisFavoritado() {
       var spanFavoritado = document.getElementById("indicador_mais_favoritado");
       var spanDescricao  = document.getElementById("descricao_mais_favoritado");
@@ -179,6 +181,7 @@
         });
     }
 
+    // ── Gráfico de Pizza ───────────────────────────────────────────────
     var dadosProntos = 0;
     function tentarMontarGraficos() {
       dadosProntos++;
@@ -194,7 +197,7 @@
       new Chart(ctx, {
         type: "doughnut",
         data: {
-         vetor: ["Já assistiram", "Nunca assistiram"],
+          labels: ["Já assistiram", "Nunca assistiram"],
           datasets: [{
             data: [qtdViram, qtdNaoViram],
             backgroundColor: ["#FB7D02", "#5c0410"],
@@ -209,7 +212,7 @@
           plugins: {
             legend: {
               position: "bottom",
-             vetor: {
+              labels: {
                 color: "#94a3b8",
                 font: { family: "Poppins", size: 13 },
                 padding: 20
@@ -220,28 +223,27 @@
       });
     }
 
-
-
+    // ── Gráfico de Linha: Crescimento da Indústria ─────────────────────
     function obterDadosGrafico() {
-      fetch(`/medidas/ultimas`, { cache: 'no-store' }).then(function (response) {
-        if (response.ok) {
-          response.json().then(function (resposta) {
-            plotarGrafico(resposta);
-          });
-        } else {
-          console.error('Nenhum dado encontrado ou erro na API');
-        }
-      })
-      .catch(function (error) {
-        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-      });
+      fetch("/medidas/ultimas", { cache: "no-store" })
+        .then(function (resposta) {
+          if (resposta.ok) {
+            resposta.json().then(function (dados) {
+              plotarGrafico(dados);
+            });
+          } else {
+            console.error("Nenhum dado encontrado ou erro na API");
+          }
+        })
+        .catch(function (erro) {
+          console.error("Erro na obtenção dos dados do gráfico:", erro.message);
+        });
     }
 
     function plotarGrafico(resposta) {
-
-      let vetor = [];
-      let dados = {
-       vetor: vetor,
+      var vetor = [];
+      var dados = {
+        labels: vetor,
         datasets: [{
           label: "Receita global (bilhões US$)",
           data: [],
@@ -263,8 +265,8 @@
         dados.datasets[0].data.push(registro.receita);
       }
 
-      const config = {
-        type: 'line',
+      var config = {
+        type: "line",
         data: dados,
         options: {
           responsive: true,
@@ -292,7 +294,7 @@
           },
           plugins: {
             legend: {
-             vetor: {
+              labels: {
                 color: "#94a3b8",
                 font: { family: "Poppins", size: 13 }
               }
@@ -313,6 +315,7 @@
       new Chart(ctx, config);
     }
   </script>
+
 </body>
 
 </html>

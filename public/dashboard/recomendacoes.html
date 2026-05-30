@@ -63,6 +63,11 @@
         <p>Explore nossa seleção de 10 grandes animes que todo ninja deve assistir!</p>
       </div>
 
+      <!-- Barra de Filtros -->
+      <div class="barra-filtros">
+        <button id="btn_filtro_favoritos" class="btn-filtro" onclick="toggleFiltroFavoritos()">⭐ Meus Favoritos</button>
+      </div>
+
       <!-- Grid de Animes -->
       <div class="grid-animes" id="container_animes">
         <!-- Os animes serão injetados aqui via JavaScript -->
@@ -99,11 +104,12 @@
   </div>
 
   <script>
-    // Dados dos Animes
     var listaAnimes = [];
     var idAnimeAtual = 0;
     var favoritado = 0;
+    var filtroAtivo = 0;
 
+    // ── Carregar Animes ────────────────────────────────────────────
     function renderizarAnimes() {
       var container = document.getElementById("container_animes");
       container.innerHTML = "Carregando recomendações da vila...";
@@ -113,17 +119,7 @@
           if (resposta.ok) {
             resposta.json().then(function (animesBanco) {
               listaAnimes = animesBanco;
-              container.innerHTML = "";
-              for (var i = 0; i < listaAnimes.length; i++) {
-                container.innerHTML += `
-                  <div class="card-anime" onclick="abrirModal(${i})">
-                    <div class="capa-wrapper">
-                      <img src="${listaAnimes[i].imagem}" alt="${listaAnimes[i].titulo}">
-                    </div>
-                    <h3>${listaAnimes[i].titulo}</h3>
-                  </div>
-                `;
-              }
+              renderizarGrid(listaAnimes);
             });
           } else {
             container.innerHTML = "Falha ao carregar as recomendações.";
@@ -134,6 +130,81 @@
         });
     }
 
+    // ── Renderizar Grid ────────────────────────────────────────────
+    function renderizarGrid(lista) {
+      var container = document.getElementById("container_animes");
+      container.innerHTML = "";
+
+      if (lista.length == 0) {
+        container.innerHTML = '<div class="filtro-vazio"><span>⭐</span>Você ainda não tem favoritos. Favorite um anime e volte aqui!</div>';
+        return;
+      }
+
+      for (var i = 0; i < lista.length; i++) {
+        var indiceReal = listaAnimes.indexOf(lista[i]);
+        container.innerHTML += `
+          <div class="card-anime" onclick="abrirModal(${indiceReal})">
+            <div class="capa-wrapper">
+              <img src="${lista[i].imagem}" alt="${lista[i].titulo}">
+            </div>
+            <h3>${lista[i].titulo}</h3>
+          </div>
+        `;
+      }
+    }
+
+    // ── Filtro de Favoritos ────────────────────────────────────────
+    function toggleFiltroFavoritos() {
+      var botao = document.getElementById("btn_filtro_favoritos");
+
+      if (filtroAtivo == 0) {
+        filtroAtivo = 1;
+        botao.classList.add("ativo");
+        botao.innerHTML = "⭐ Meus Favoritos (ativo)";
+        buscarFavoritos();
+      } else {
+        filtroAtivo = 0;
+        botao.classList.remove("ativo");
+        botao.innerHTML = "⭐ Meus Favoritos";
+        renderizarGrid(listaAnimes);
+      }
+    }
+
+    function buscarFavoritos() {
+      var idUsuario = sessionStorage.ID_USUARIO;
+      var container = document.getElementById("container_animes");
+      container.innerHTML = "Carregando seus favoritos...";
+
+      fetch("/favoritos/listar/" + idUsuario)
+        .then(function (resposta) {
+          if (resposta.ok) {
+            resposta.json().then(function (animeFavoritos) {
+              aplicarFiltro(animeFavoritos);
+            });
+          } else {
+            container.innerHTML = "Erro ao buscar favoritos.";
+          }
+        })
+        .catch(function (erro) {
+          container.innerHTML = "Erro ao conectar com o servidor.";
+        });
+    }
+
+    function aplicarFiltro(animeFavoritos) {
+      var listaFiltrada = [];
+
+      for (var i = 0; i < listaAnimes.length; i++) {
+        for (var j = 0; j < animeFavoritos.length; j++) {
+          if (listaAnimes[i].id == animeFavoritos[j].id) {
+            listaFiltrada[listaFiltrada.length] = listaAnimes[i];
+          }
+        }
+      }
+
+      renderizarGrid(listaFiltrada);
+    }
+
+    // ── Abrir Modal ────────────────────────────────────────────────
     function abrirModal(index) {
       var anime = listaAnimes[index];
       idAnimeAtual = anime.id;
@@ -144,11 +215,9 @@
       document.getElementById("modal_recomendacao").innerHTML = anime.recomendacao;
       document.getElementById("modal_texto_sinopse").innerHTML = anime.sinopse;
 
-      // Reseta para não favoritado (0)
       favoritado = 0;
       atualizarBotaoFavorito();
 
-      // Verifica se já está favoritado no banco
       var idUsuario = sessionStorage.ID_USUARIO;
 
       if (idUsuario != undefined && idAnimeAtual != undefined) {
@@ -170,6 +239,7 @@
       document.getElementById("modal_anime").style.display = "flex";
     }
 
+    // ── Botão Favoritar ────────────────────────────────────────────
     function atualizarBotaoFavorito() {
       var botao = document.getElementById("btn_favorito");
       var texto = document.getElementById("texto_favorito");
@@ -201,9 +271,7 @@
 
       fetch("/favoritos/toggle", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           idUsuarioServer: idUsuario,
           idAnimeServer: idAnimeAtual
@@ -228,11 +296,11 @@
         });
     }
 
+    // ── Fechar Modal ───────────────────────────────────────────────
     function fecharModal() {
       document.getElementById("modal_anime").style.display = "none";
     }
 
-    // Fechar ao clicar fora do conteúdo
     window.onclick = function (event) {
       var modal = document.getElementById("modal_anime");
       if (event.target == modal) {

@@ -1,8 +1,7 @@
-/* ==========================================================================
-   Painel — CaminhoNinja
+/*
+   CONFIGURAÇÕES GERAIS E VARIÁVEIS
    Cores: Naruto (#FB7D02), Haikyuu (#ffffff), Clover (#5c0410)
-   ========================================================================== */
-
+*/
 :root {
     --fundo-principal: #0f0f11;
     --fundo-cartao: #1c1c21;
@@ -30,13 +29,14 @@ body {
     min-height: 100vh;
 }
 
-/* ── Layout ────────────────────────────────────────────────────────── */
+/*
+   LAYOUT E SIDEBAR (NAVEGAÇÃO)
+*/
 .dashboard-container {
     display: flex;
     min-height: 100vh;
 }
 
-/* ── Sidebar ───────────────────────────────────────────────────────── */
 .sidebar {
     width: 260px;
     background-color: #121215;
@@ -105,7 +105,26 @@ body {
     margin-top: auto;
 }
 
-/* ── Área principal ─────────────────────────────────────────────────── */
+.botao-sair {
+    width: 100%;
+    padding: 12px;
+    background-color: transparent;
+    color: var(--texto-secundario);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.botao-sair:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--texto-claro);
+}
+
 .conteudo-painel {
     flex: 1;
     max-width: 100%;
@@ -113,7 +132,9 @@ body {
     overflow-y: auto;
 }
 
-/* ── Boas-vindas ───────────────────────────────────────────────────── */
+/*
+   SEÇÃO BOAS-VINDAS E INDICADORES (KPIs)
+*/
 .secao-boas-vindas {
     margin-bottom: 35px;
 }
@@ -135,7 +156,6 @@ body {
     margin-top: 4px;
 }
 
-/* ── Cartões de indicadores ────────────────────────────────────────── */
 .grade-indicadores {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -197,16 +217,29 @@ body {
     color: var(--branco-haikyuu);
 }
 
-/* ── Gráficos ──────────────────────────────────────────────────────── */
-.grade-graficos {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
-    gap: 24px;
-    margin-bottom: 35px;
+/* Indicador Especial de Favoritos */
+.cartao-indicador.favorito {
+    border-top: 3px solid #f43f5e;
 }
 
+.cartao-indicador.favorito .valor {
+    color: #f43f5e;
+    font-size: 1.8rem !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    max-width: 100%;
+}
+
+/*
+   SEÇÃO DE GRÁFICOS ANALÍTICOS
+*/
 .grade-graficos {
+    display: grid;
     grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 35px;
 }
 
 .cartao-grafico {
@@ -231,46 +264,44 @@ body {
     max-height: 350px;
 }
 
-/* ── Botão Sair ────────────────────────────────────────────────────── */
-.botao-sair {
-    width: 100%;
-    padding: 12px;
-    background-color: transparent;
-    color: var(--texto-secundario);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+/*
+   SEÇÃO DE RECOMENDAÇÕES DE ANIMES
+*/
+.barra-filtros {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.btn-filtro {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 8px;
+    padding: 8px 16px;
     cursor: pointer;
-    font-size: 0.9rem;
-    font-weight: 500;
     font-family: 'Poppins', sans-serif;
-    transition: all 0.3s ease;
-    text-align: center;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--texto-secundario);
+    transition: all 0.25s ease;
 }
 
-.botao-sair:hover {
-    background-color: rgba(255, 255, 255, 0.05);
-    color: var(--texto-claro);
+.btn-filtro:hover {
+    border-color: var(--laranja-naruto);
+    color: var(--laranja-naruto);
 }
 
-/* ── Responsivo ────────────────────────────────────────────────────── */
-@media (max-width: 768px) {
-    header {
-        padding: 16px 5%;
-        flex-direction: column;
-        gap: 12px;
-    }
-
-    .grade-graficos,
-    .grade-graficos.dois-graficos {
-        grid-template-columns: 1fr;
-    }
-
-    .secao-boas-vindas h2 {
-        font-size: 1.4rem;
-    }
+.btn-filtro.ativo {
+    background: rgba(251, 125, 2, 0.12);
+    border-color: var(--laranja-naruto);
+    color: var(--laranja-naruto);
+    font-weight: 600;
 }
 
-/* ── Página de Recomendações (Grid 4 colunas) ───────────────────────── */
 .grid-animes {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -292,10 +323,6 @@ body {
     transform: translateY(-5px);
     border-color: var(--laranja-naruto);
     box-shadow: 0 8px 25px rgba(251, 125, 2, 0.15);
-}
-
-.card-anime {
-    cursor: pointer;
 }
 
 .capa-wrapper {
@@ -349,7 +376,134 @@ body {
     line-height: 1.3;
 }
 
-/* ── Modal Detalhes Anime ──────────────────────────────────────────── */
+.filtro-vazio {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--texto-secundario);
+    font-size: 0.95rem;
+}
+
+.filtro-vazio span {
+    display: block;
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+}
+
+/*
+   SEÇÃO DA LINHA DA VIDA (TIMELINE)
+*/
+.secao-divisor {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin: 70px 0 30px;
+}
+
+.divisor-linha {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(251, 125, 2, 0.35), transparent);
+}
+
+.divisor-icone {
+    font-size: 1.8rem;
+    opacity: 0.8;
+}
+
+.linha-vida-container {
+    padding: 20px 0 40px;
+}
+
+.linha-vida-item {
+    margin-bottom: 25px;
+}
+
+.linha-vida-card {
+    background: var(--fundo-cartao);
+    border: 1px solid rgba(255, 165, 0, 0.12);
+    border-left: 4px solid var(--laranja-naruto);
+    border-radius: 12px;
+    padding: 24px 26px;
+    max-width: 100%;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.linha-vida-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--laranja-naruto);
+    box-shadow: 0 8px 30px rgba(251, 125, 2, 0.12);
+}
+
+.linha-vida-ano {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--laranja-naruto);
+    margin-bottom: 8px;
+    background: rgba(251, 125, 2, 0.1);
+    padding: 3px 10px;
+    border-radius: 20px;
+}
+
+.linha-vida-card h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--texto-claro);
+    margin-bottom: 8px;
+}
+
+.linha-vida-card p {
+    font-size: 0.88rem;
+    color: var(--texto-secundario);
+    line-height: 1.7;
+}
+
+.linha-vida-fim {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 40px 20px 20px;
+    gap: 20px;
+    position: relative;
+}
+
+.linha-vida-ponto-fim {
+    font-size: 2rem;
+    background: rgba(251, 125, 2, 0.12);
+    border: 2px solid var(--laranja-naruto);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 20px rgba(251, 125, 2, 0.35);
+    position: relative;
+    z-index: 2;
+}
+
+.linha-vida-mensagem-final {
+    font-size: 0.95rem;
+    color: var(--texto-secundario);
+    line-height: 1.9;
+    max-width: 600px;
+    border: 1px solid rgba(251, 125, 2, 0.2);
+    background: linear-gradient(135deg, rgba(251, 125, 2, 0.05), rgba(28, 28, 33, 0.8));
+    border-radius: 16px;
+    padding: 28px 32px;
+}
+
+.linha-vida-mensagem-final strong {
+    color: var(--texto-claro);
+    font-size: 1rem;
+}
+
+/*
+   MODAIS, BOTÕES E COMPONENTES DE INTERAÇÃO
+*/
 .modal-overlay {
     display: none; 
     position: fixed;
@@ -419,206 +573,6 @@ body {
     line-height: 1.2;
 }
 
-.modal-genero {
-    font-size: 0.9rem;
-    color: var(--texto-secundario);
-}
-
-.modal-genero span {
-    color: var(--texto-claro);
-    background: rgba(255, 255, 255, 0.05);
-    padding: 3px 8px;
-    border-radius: 4px;
-}
-
-.modal-recomendacao {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--texto-claro);
-    background: rgba(251, 125, 2, 0.1);
-    border-left: 3px solid var(--laranja-naruto);
-    padding: 10px 15px;
-    border-radius: 0 6px 6px 0;
-}
-
-.modal-sinopse strong {
-    display: block;
-    margin-bottom: 5px;
-    color: var(--texto-claro);
-}
-
-.modal-sinopse p {
-    font-size: 0.9rem;
-    color: var(--texto-secundario);
-    line-height: 1.6;
-    text-align: justify;
-}
-
-/* Responsivo para o grid de animes e modal */
-@media (max-width: 1024px) {
-    .grid-animes { grid-template-columns: repeat(3, 1fr); }
-}
-
-@media (max-width: 768px) {
-    .grid-animes { grid-template-columns: repeat(2, 1fr); }
-    .modal-body { flex-direction: column; align-items: center; }
-    .modal-body img { width: 180px; height: 270px; }
-}
-
-@media (max-width: 480px) {
-    .grid-animes { grid-template-columns: 1fr; }
-}
-
-/* ── Separador de Seções ───────────────────────────────────────────── */
-.secao-divisor {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin: 70px 0 30px;
-}
-
-.divisor-linha {
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(to right, transparent, rgba(251, 125, 2, 0.35), transparent);
-}
-
-.divisor-icone {
-    font-size: 1.8rem;
-    opacity: 0.8;
-}
-
-/* ── Linha da Vida Simplificada ────────────────────────────────────── */
-.linha-vida-container {
-    padding: 20px 0 40px;
-}
-
-.linha-vida-item {
-    margin-bottom: 25px;
-}
-
-.linha-vida-card {
-    background: var(--fundo-cartao);
-    border: 1px solid rgba(255, 165, 0, 0.12);
-    border-left: 4px solid var(--laranja-naruto);
-    border-radius: 12px;
-    padding: 24px 26px;
-    max-width: 100%;
-    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.linha-vida-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--laranja-naruto);
-    box-shadow: 0 8px 30px rgba(251, 125, 2, 0.12);
-}
-
-.linha-vida-ano {
-    display: inline-block;
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--laranja-naruto);
-    margin-bottom: 8px;
-    background: rgba(251, 125, 2, 0.1);
-    padding: 3px 10px;
-    border-radius: 20px;
-}
-
-.linha-vida-card h3 {
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: var(--texto-claro);
-    margin-bottom: 8px;
-}
-
-.linha-vida-card p {
-    font-size: 0.88rem;
-    color: var(--texto-secundario);
-    line-height: 1.7;
-}
-
-@media (max-width: 768px) {
-    .linha-vida-trilha { left: 20px; }
-    .linha-vida-item.lado-esquerdo,
-    .linha-vida-item.lado-direito {
-        flex-direction: row;
-        padding-left: 0;
-        padding-right: 0;
-        padding-left: 50px;
-    }
-    .linha-vida-ponto { left: 11px; }
-    .linha-vida-card {
-        max-width: 100%;
-        text-align: left;
-        margin-left: 20px;
-        margin-right: 0;
-    }
-    .linha-vida-item.lado-esquerdo .linha-vida-card {
-        text-align: left;
-        margin-right: 0;
-        margin-left: 20px;
-    }
-}
-
-/* Bloco final da timeline */
-.linha-vida-fim {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 40px 20px 20px;
-    gap: 20px;
-    position: relative;
-}
-
-.linha-vida-ponto-fim {
-    font-size: 2rem;
-    background: rgba(251, 125, 2, 0.12);
-    border: 2px solid var(--laranja-naruto);
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 0 20px rgba(251, 125, 2, 0.35);
-    position: relative;
-    z-index: 2;
-}
-
-.linha-vida-mensagem-final {
-    font-size: 0.95rem;
-    color: var(--texto-secundario);
-    line-height: 1.9;
-    max-width: 600px;
-    border: 1px solid rgba(251, 125, 2, 0.2);
-    background: linear-gradient(135deg, rgba(251, 125, 2, 0.05), rgba(28, 28, 33, 0.8));
-    border-radius: 16px;
-    padding: 28px 32px;
-}
-
-.linha-vida-mensagem-final strong {
-    color: var(--texto-claro);
-    font-size: 1rem;
-}
-
-.cartao-indicador.favorito {
-    border-top: 3px solid #f43f5e;
-}
-
-.cartao-indicador.favorito .valor {
-    color: #f43f5e;
-    font-size: 1.8rem !important; /* Smaller size for long titles */
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: inline-block;
-    max-width: 100%;
-}
-
-/* ── Botão Favoritar ────────────────────────────────────────────────── */
 .modal-titulo-linha {
     display: flex;
     align-items: center;
@@ -656,3 +610,40 @@ body {
     color: #f43f5e;
     background: rgba(244, 63, 94, 0.08);
 }
+
+.modal-genero {
+    font-size: 0.9rem;
+    color: var(--texto-secundario);
+}
+
+.modal-genero span {
+    color: var(--texto-claro);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 3px 8px;
+    border-radius: 4px;
+}
+
+.modal-recomendacao {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--texto-claro);
+    background: rgba(251, 125, 2, 0.1);
+    border-left: 3px solid var(--laranja-naruto);
+    padding: 10px 15px;
+    border-radius: 0 6px 6px 0;
+}
+
+.modal-sinopse strong {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--texto-claro);
+}
+
+.modal-sinopse p {
+    font-size: 0.9rem;
+    color: var(--texto-secundario);
+    line-height: 1.6;
+    text-align: justify;
+}
+
+

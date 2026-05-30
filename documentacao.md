@@ -7,9 +7,9 @@ O sistema conta com um Front-End rico e responsivo (HTML, CSS e JS Vanilla) e um
 
 ### Objetivos de Desenvolvimento Sustentável (ODS) da ONU
 O projeto se conecta diretamente a três ODS:
-- **ODS 3 (Saúde e Bem-Estar):** Aborda a saúde mental do programador iniciante, usando hobbies e valores de animes como ferramenta de resiliência emocional.
-- **ODS 4 (Educação de Qualidade):** Promove a ideia de que dedicação e esforço contínuo superam barreiras educacionais, inspirado na história do Asta (Black Clover).
-- **ODS 8 (Trabalho Decente e Crescimento Econômico):** Fomenta profissionais colaborativos e resilientes, valores essenciais para um mercado de trabalho de TI saudável.
+- **ODS 3 (Saúde e Bem-Estar):** Aborda a saúde mental e emocional do programador iniciante, mostrando como hobbies e as filosofias inspiradoras de resiliência e foco mental dos animes servem de suporte para enfrentar os desafios de aprendizagem e frustrações comuns na área de tecnologia.
+- **ODS 8 (Trabalho Decente e Crescimento Econômico):** Estimula a formação de profissionais com fortes valores de trabalho em equipe (colaboração inspirada em Haikyuu!!) e resiliência, gerando programadores mais bem-preparados emocionalmente e produtivos para contribuir de forma saudável com o mercado de TI.
+- **ODS 16 (Paz, Justiça e Instituições Eficazes):** Alinha-se perfeitamente com os enredos das obras retratadas (como a busca incessante por paz e alianças de Naruto, e a luta de Asta contra as injustiças sociais e de classe em Black Clover). A nível técnico, a aplicação promove a justiça digital, a segurança e a integridade de dados do usuário através de fortes mecanismos de validação, segurança de senhas e do CAPTCHA matemático/binário.
 
 ---
 
@@ -33,13 +33,18 @@ A aplicação segue a arquitetura **MVC** (Model-View-Controller) recomendada pe
 - **Call-to-Action:** Botão animado "Explore mais universos" direcionando para o cadastro.
 
 ### 3.2. Páginas de Universo (Naruto, Haikyuu!!, Black Clover)
-- Layout de 3 colunas: informações do anime, protagonista com barras de atributos animadas e frases filosóficas com contexto.
+- Layout de 3 colunas: informações do anime, informações e filosofia do protagonista (seção antiga de estatísticas/barras de atributos removida para maior foco no conteúdo teórico) e frases filosóficas com contexto.
 
 ### 3.3. Autenticação (Login e Cadastro)
-- **Cadastro:** Validação de campos em branco, verificação de senhas iguais e anti-duplicidade (nome/email já cadastrado).
-- **CAPTCHA Matemático/Binário:** O sistema gera uma multiplicação aleatória. O usuário responde em decimal, e o JavaScript converte ambos os valores para **Binário** (`toString(2)`) para comparar — aplicação direta de lógica computacional e operações matemáticas.
-- **Login com Sessão:** Dados do usuário (id, nome, email) armazenados em `sessionStorage` para proteger as rotas da Dashboard.
-- **Loading:** GIF animado exibido durante o processamento da requisição.
+- **Design Espelhado (Split-Screen):** Tanto o login quanto o cadastro utilizam a mesma estrutura harmonizada de duas colunas (45% com imagem dos protagonistas na esquerda e 55% com os formulários na direita), garantindo uma transição extremamente suave e visual estável.
+- **Recepção Neutra e Temática:** Acolhimento neutro de gênero com o título imersivo **"Inicie sua jornada!"** (cadastro) e **"De volta à vila?"** (login).
+- **Cadastro:** Disposto de forma organizada em **3 linhas e 2 colunas** (Nome/E-mail, Senha/Confirmar, Pergunta/CAPTCHA). Possui validação de campos vazios e anti-duplicidade.
+- **Validação de Senha de Dois Modos:**
+  * *Validação Simples:* Ativa por padrão (`senhaVar != confirmacaoSenhaVar`) para facilitar cadastros rápidos na apresentação.
+  * *Verificação Completa (Comentada em bloco `/* ... */`):* Validação robusta de segurança pronta para ser ativada na hora da apresentação (verifica comprimento mínimo de 8 caracteres via `.length` e presença de caracteres especiais usando um **vetor** de caracteres especiais percorrido via `.indexOf()`).
+- **CAPTCHA Matemático/Binário:** O sistema gera uma multiplicação aleatória. O usuário responde em decimal, e o JavaScript converte ambos os valores para **Binário** (`toString(2)`) para comparar — aplicação direta de lógica computacional.
+- **Login com Sessão:** Armazenado em `sessionStorage` para proteção de rotas da Dashboard.
+- **Loading:** Carregador circular de alta performance feito em CSS puro (na cor laranja da identidade visual), garantindo suavidade e leveza em relação a GIFs.
 
 ### 3.4. Dashboard (Painel do Usuário)
 - **KPIs:** Quantos usuários já assistiram anime, quantos nunca assistiram, total de cadastrados e o **Anime Mais Favoritado da Vila** (com título e contagem de votos buscados do banco).
@@ -140,6 +145,13 @@ O projeto adota um **design híbrido estruturado** para a nomenclatura de classe
 2. **Termos Semânticos e de Negócio em Português:** Elementos ligados diretamente ao contexto didático e conteúdo do projeto (como `.titulo-secao`, `.heroi-anime`, `.botao-explorar`, `.grade-indicadores`, `.grade-graficos`, etc.) são escritos em português claro. Isso facilita o estudo individual das funções e a explicação clara de cada área na apresentação do projeto.
 
 Essa arquitetura equilibra perfeitamente a legibilidade técnica com a facilidade de aprendizado do código.
+
+---
+
+## 8. Estratégia de Layout de Tela Fixo (Não Responsivo)
+Para assegurar a máxima estabilidade e consistência visual durante a apresentação de defesa perante a banca examinadora, todas as regras de mídia responsiva (`@media`) foram propositalmente desativadas e removidas de todos os arquivos CSS. 
+
+Isso garante que a interface se comporte com um layout fixed-width ideal de desktop em qualquer projetor ou monitor da banca, eliminando qualquer risco de quebras visuais inesperadas e mantendo 100% da integridade do design premium e da diagramação planejada.
 
 ---
 

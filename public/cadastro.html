@@ -31,82 +31,90 @@
     </nav>
   </header>
 
+  <div class="alerta_erro">
+    <div class="card_erro" id="cardErro">
+      <span id="mensagem_erro"></span>
+    </div>
+  </div>
+
+  <!-- Página de Cadastro -->
   <div class="pagina-cadastro">
 
-    <!-- Coluna Esquerda — Branding e Protagonistas -->
+    <!-- Coluna Esquerda — Imagem dos Protagonistas -->
     <div class="coluna-esquerda">
       <img
         class="imagem-protagonistas"
-        src="./assets/imgs/protagonistas-cadastro.png"
+        src="./assets/imgs/img-cad.png"
         alt="Naruto, Hinata e Asta"
       />
-      <div class="texto-branding">
-        <h1>Caminho <span>Ninja</span></h1>
-        <p>"Resiliência, dedicação e trabalho em equipe.<br>Esses são os valores que nos trouxeram até aqui."</p>
-      </div>
-      <div class="faixa-laranja">
-        <span></span><span></span><span></span>
-      </div>
     </div>
 
     <!-- Coluna Direita — Formulário -->
     <div class="coluna-direita">
-      <div class="alerta_erro">
-        <div class="card_erro" id="cardErro">
-          <span id="mensagem_erro"></span>
-        </div>
+
+      <div class="cadastro-titulo">
+        <h2>Inicie sua jornada!</h2>
+        <p>Crie sua conta e entre para a vila</p>
       </div>
-      <div class="container">
-        <div class="card card-cadastro">
-          <h2>Bem-vindo!</h2>
-          <div class="formulario">
 
-            <div class="campo">
-              <span>Nome:</span>
-              <input id="nome_input" type="text" placeholder="Seu nome" />
-            </div>
-            <div class="campo">
-              <span>E-mail:</span>
-              <input id="email_input" type="text" placeholder="meuemail@provedor.com" />
-            </div>
-            <div class="campo">
-              <span>Senha:</span>
-              <input id="senha_input" type="password" placeholder="******" />
-            </div>
-            <div class="campo">
-              <span>Confirmação da Senha:</span>
-              <input id="confirmacao_senha_input" type="password" placeholder="******" />
-            </div>
-            <div class="campo">
-              <span>Você já assistiu algum anime antes?</span>
-              <select id="ipt_anime">
-                <option value="">-- Selecione --</option>
-                <option value="1">Sim</option>
-                <option value="0">Não</option>
-              </select>
-            </div>
+      <!-- Formulário em Grade (3 linhas com 2 colunas) -->
+      <div class="formulario-grade">
 
-            <!-- CAPTCHA: usuário digita em decimal, JS converte para binário e valida -->
-            <div class="campo">
-              <span id="captcha_pergunta">Carregando...</span>
-              <input id="captcha_input" type="number" placeholder="Digite o resultado" />
-            </div>
-
-            <button class="botao" onclick="cadastrar()">Cadastrar</button>
-
-            <p style="text-align: center; margin-top: 18px; font-size: 0.88rem; color: #94a3b8;">
-              Já tem conta?
-              <a href="login.html" style="color: #FB7D02; font-weight: 600; text-decoration: none;">Faça login</a>
-            </p>
+        <!-- Linha 1: Nome e E-mail -->
+        <div class="linha-formulario">
+          <div class="campo">
+            <span>Nome</span>
+            <input id="nome_input" type="text" placeholder="Seu nome" />
           </div>
-
-          <div id="div_aguardar" class="loading-div">
-            <img src="./assets/imgs/circle-loading.gif" id="loading-gif" />
+          <div class="campo">
+            <span>E-mail</span>
+            <input id="email_input" type="text" placeholder="meuemail@provedor.com" />
           </div>
-
-          <div id="div_erros_login"></div>
         </div>
+
+        <!-- Linha 2: Senha e Confirmação de Senha -->
+        <div class="linha-formulario">
+          <div class="campo">
+            <span>Senha</span>
+            <input id="senha_input" type="password" placeholder="••••••" />
+          </div>
+          <div class="campo">
+            <span>Confirmação de Senha</span>
+            <input id="confirmacao_senha_input" type="password" placeholder="••••••" />
+          </div>
+        </div>
+
+        <!-- Linha 3: Já assistiu anime e CAPTCHA -->
+        <div class="linha-formulario">
+          <div class="campo">
+            <span>Você já assistiu algum anime antes?</span>
+            <select id="ipt_anime">
+              <option value="">— Selecione —</option>
+              <option value="1">Sim</option>
+              <option value="0">Não</option>
+            </select>
+          </div>
+          <div class="campo">
+            <span id="captcha_pergunta">Carregando verificação...</span>
+            <input id="captcha_input" type="number" placeholder="Digite o resultado" />
+          </div>
+        </div>
+
       </div>
+
+      <button class="botao" onclick="cadastrar()">Cadastrar</button>
+
+      <p class="link-login">
+        Já tem conta?
+        <a href="login.html">Faça login</a>
+      </p>
+
+      <div id="div_aguardar" class="loading-div">
+        <img src="./assets/icon/loading.png" id="loading-gif" />
+      </div>
+
+      <div id="div_erros_login"></div>
+
     </div>
 
   </div>
@@ -118,6 +126,7 @@
 <script>
   var captchaRespostaDecimal = 0;
 
+  //  Gerar CAPTCHA
   function gerarCaptcha() {
     var a = Math.floor(Math.random() * 10) + 1;
     var b = Math.floor(Math.random() * 10) + 1;
@@ -127,11 +136,11 @@
       `Verificação: quanto é ${a} x ${b}?`;
   }
 
+  //  Validar CAPTCHA
   function validarCaptcha() {
-    var inputCaptcha     = document.getElementById("captcha_input");
-    var respostaUsuario  = Number(inputCaptcha.value);
+    var inputCaptcha    = document.getElementById("captcha_input");
+    var respostaUsuario = Number(inputCaptcha.value);
 
-    
     var respostaUsuarioBinario = respostaUsuario.toString(2);
     var gabaritoBinario        = captchaRespostaDecimal.toString(2);
 
@@ -142,8 +151,8 @@
     return respostaUsuarioBinario === gabaritoBinario;
   }
 
+  //  Cadastrar
   function cadastrar() {
-    // Referencia todos os inputs de uma vez
     var inputNome      = document.getElementById("nome_input");
     var inputEmail     = document.getElementById("email_input");
     var inputSenha     = document.getElementById("senha_input");
@@ -157,19 +166,36 @@
     var confirmacaoSenhaVar = inputConfSenha.value;
     var jaViuAnimeVar       = inputAnime.value;
 
-    // Campos em branco
     if (!nomeVar || !emailVar || !senhaVar || !confirmacaoSenhaVar || !jaViuAnimeVar) {
       exibirErro("Por favor, preencha todos os campos antes de continuar.");
       return false;
     }
-
-    // Senhas
-    if (senhaVar !== confirmacaoSenhaVar) {
+/*
+    // Validação simples de senha
+    if (senhaVar != confirmacaoSenhaVar) {
       exibirErro("As senhas não coincidem. Verifique e tente novamente.");
       return false;
     }
+*/
+    
+    // Verificação de senha completa
+    var senhaSemEspaco = senhaVar.trim();
+    var caracteresEspeciais = ['@', '#', '$', '%', '&', '*', '!', '?'];
+    var temEspecial = false;
 
-    // Captcha
+    for (var i = 0; i < caracteresEspeciais.length; i++) {
+        if (senhaSemEspaco.indexOf(caracteresEspeciais[i]) != -1) {
+            temEspecial = true;
+            break;
+        }
+    }
+
+    if (senhaSemEspaco.length < 8 || temEspecial == false) {
+        exibirErro("A senha deve ter pelo menos 8 caracteres e conter pelo menos um caractere especial.");
+        return false;
+    }
+    
+
     if (!validarCaptcha()) {
       exibirErro("Resposta incorreta. Tente novamente.");
       gerarCaptcha();
@@ -177,7 +203,6 @@
       return false;
     }
 
-    // Envio
     fetch("/usuarios/cadastrar", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -195,8 +220,8 @@
           limparFormulario(inputNome, inputEmail, inputSenha, inputConfSenha, inputAnime, inputCaptcha);
         } else {
           return resposta.text().then(function (texto) {
-              console.error(texto);
-              throw texto.replace(/\"/g, '');
+            console.error(texto);
+            throw texto.replace(/\"/g, '');
           });
         }
       })
@@ -208,11 +233,11 @@
     return false;
   }
 
-  // ── Helpers ───────────────────────────────────────────────
+  // ── Helpers────────
   function exibirErro(mensagem, tipo) {
     var cardErro     = document.getElementById("cardErro");
     var mensagemErro = document.getElementById("mensagem_erro");
-    
+
     if (tipo === "sucesso") {
       cardErro.classList.remove("card_erro");
       cardErro.classList.add("card_sucesso");
@@ -220,9 +245,9 @@
       cardErro.classList.remove("card_sucesso");
       cardErro.classList.add("card_erro");
     }
-    
-    cardErro.style.display  = "block";
-    mensagemErro.innerHTML  = mensagem;
+
+    cardErro.style.display = "block";
+    mensagemErro.innerHTML = mensagem;
     setTimeout(function () { cardErro.style.display = "none"; }, 5000);
   }
 
