@@ -37,6 +37,15 @@ CREATE TABLE anime (
 	sinopse TEXT
 );
 
+CREATE TABLE favorito (
+	fk_usuario INT,
+	fk_anime INT,
+	data_favoritado TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	FOREIGN KEY (fk_usuario) REFERENCES usuario(id),
+	FOREIGN KEY (fk_anime) REFERENCES anime(id),
+	PRIMARY KEY (fk_usuario, fk_anime)
+);
+
 INSERT INTO anime (titulo, imagem, generos, recomendacao, sinopse) VALUES
 ('Wistoria: Wand and Sword', '../assets/imgs/animes/wistoria.jpg', 'Ação, Fantasia, Aventura', 'Recomendado caso goste de lutas, magia e superação.', 'Will Serfort ingressa na Academia de Magia Rigarden para cumprir uma promessa feita a uma amiga de infância. O único problema é que ele não possui nenhuma aptidão para magia. Em um mundo onde magia é tudo, ele precisará usar sua espada e força física para subir até o topo e se tornar uma Magia Vande.'),
 ('Haikyu!!', '../assets/imgs/animes/haikyuu.jpg', 'Esportes, Comédia, Drama', 'Recomendado caso goste de torneios, espírito de equipe e desenvolvimento de personagens.', 'Shoyo Hinata quer provar que no vôlei não é preciso ser alto para voar. Ele entra no clube da escola Karasuno e precisa aprender a trabalhar em equipe, fazendo dupla com seu antigo rival, o gênio levantador Tobio Kageyama.'),
@@ -52,11 +61,3 @@ INSERT INTO anime (titulo, imagem, generos, recomendacao, sinopse) VALUES
 ('One Piece', '../assets/imgs/animes/onepiece.jpg', 'Ação, Aventura, Comédia', 'Recomendado caso goste de aventuras epicas, um mundo incrivel e uma das histórias mais longas e apaixonantes do anime.', 'Monkey D. Luffy quer se tornar o Rei dos Piratas encontrando o lendário tesouro One Piece. Junto com sua tripulação cada vez maior, ele navega pelos Mares e enfrenta a Marinha, outros piratas e poderes incríveis, sempre com um sorriso no rosto e a vontade de proteger quem ama.'),
 ('Kimetsu no Yaiba', '../assets/imgs/animes/kimetsu.jpg', 'Ação, Fantasia, Sobrenatural', 'Recomendado caso goste de animação de outro nível, lutas belissimas e personagens que você se apega instantâneamente.', 'Tanjiro Kamado leva uma vida tranquila com sua familia até o dia em que ela é massacrada por um demonônio. Sua irmã Nezuko sobrevive, mas é transformada em demonônio. Determinado a vinga-la e restaurar a humanidade da irmã, Tanjiro torna-se um Matador de Demonios.');
 
-CREATE TABLE favorito (
-	fk_usuario INT,
-	fk_anime INT,
-	data_favoritado TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	FOREIGN KEY (fk_usuario) REFERENCES usuario(id),
-	FOREIGN KEY (fk_anime) REFERENCES anime(id),
-	PRIMARY KEY (fk_usuario, fk_anime)
-);

@@ -194,7 +194,7 @@
       new Chart(ctx, {
         type: "doughnut",
         data: {
-          labels: ["Já assistiram", "Nunca assistiram"],
+         vetor: ["Já assistiram", "Nunca assistiram"],
           datasets: [{
             data: [qtdViram, qtdNaoViram],
             backgroundColor: ["#FB7D02", "#5c0410"],
@@ -209,7 +209,7 @@
           plugins: {
             legend: {
               position: "bottom",
-              labels: {
+             vetor: {
                 color: "#94a3b8",
                 font: { family: "Poppins", size: 13 },
                 padding: 20
@@ -239,9 +239,9 @@
 
     function plotarGrafico(resposta) {
 
-      let labels = [];
+      let vetor = [];
       let dados = {
-        labels: labels,
+       vetor: vetor,
         datasets: [{
           label: "Receita global (bilhões US$)",
           data: [],
@@ -259,7 +259,7 @@
 
       for (var i = 0; i < resposta.length; i++) {
         var registro = resposta[i];
-        labels.push(registro.momento_grafico);
+        vetor.push(registro.momento_grafico);
         dados.datasets[0].data.push(registro.receita);
       }
 
@@ -292,7 +292,7 @@
           },
           plugins: {
             legend: {
-              labels: {
+             vetor: {
                 color: "#94a3b8",
                 font: { family: "Poppins", size: 13 }
               }
